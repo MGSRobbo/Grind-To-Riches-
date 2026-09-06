@@ -1,1 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1220">
+<title>Grind to Riches STL</title>
 
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(180deg,#0b1220,#172033);
+color:white;
+min-height:100vh;
+}
+
+.app{
+max-width:520px;
+margin:auto;
+padding:16px;
+}
+
+header{
+text-align:center;
+padding:10px 0 18px;
+}
+
+h1{
+font-size:32px;
+margin:0;
+}
+
+.subtitle{
+color:#9ca3af;
+margin-top:5px;
+}
+
+.card{
+background:#111827;
+border:1px solid #26344d;
+border-radius:20px;
+padding:18px;
+margin-bottom:14px;
+box-shadow:0 8px 25px #0005;
+}
+
+.cash{
+text-align:center;
+}
+
+.label{
+font-size:11px;
+letter-spacing:2px;
+color:#9ca3af;
+}
+
+.money{
+font-size:44px;
+font-weight:900;
+margin:4px 0;
+}
+
+.rate{
+color:#4ade80;
+font-weight:bold;
+}
+
+button{
+border:0;
+border-radius:14px;
+padding:14px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.work{
+width:100%;
+margin-top:14px;
+background:#facc15;
+color:#111827;
+font-size:18px;
+}
+
+.work:active{
+transform:scale(.98);
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+}
+
+.stat{
+background:#0b1220;
+padding:12px 5px;
+border-radius:12px;
+text-align:center;
+}
+
+.stat b{
+display:block;
+font-size:18px;
+}
+
+.stat span{
+font-size:10px;
+color:#9ca3af;
+}
+
+h2{
+font-size:20px;
+margin-top:0;
+}
+
+.business{
+display:flex;
+align-items:center;
+gap:10px;
+background:#172236;
+border:1px solid #2b3b58;
+border-radius:15px;
+padding:12px;
+margin-bottom:10px;
+}
+
+.icon{
+font-size:30px;
+width:42px;
+text-align:center;
+}
+
+.info{
+flex:1;
+}
+
+.name{
+font-weight:bold;
+font-size:16px;
+}
+
+.desc{
+font-size:12px;
+color:#9ca3af;
+margin-top:3px;
+}
+
+.owned{
+font-size:12px;
+color:#d1d5db;
+margin-top:4px;
+}
+
+.buy{
+background:#2563eb;
+color:white;
+padding:10px;
+font-size:13px;
+min-width:105px;
+}
+
+.buy:disabled{
+background:#374151;
+color:#9ca3af;
+}
+
+.prestige{
+width:100%;
+background:#9333ea;
+color:white;
+}
+
+.reset{
+width:100%;
+background:#374151;
+color:white;
+margin-top:10px;
+}
+
+.milestone{
+height:8px;
+background:#0b1220;
+border-radius:20px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.progress{
+height:100%;
+width:0%;
+background:#4ade80;
+}
+
+.toast{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+color:#111827;
+padding:11px 18px;
+border-radius:30px;
+font-weight:bold;
+display:none;
+z-index:999;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+<h1>💰 Grind to Riches</h1>
+<div class="subtitle">St. Louis Edition 🌆</div>
+</header>
+
+<div class="card cash">
+
+<div class="label">CASH</div>
+
+<div class="money" id="cash">$100</div>
+
+<div class="rate" id="income">$0 / second</div>
+
+<button class="work" onclick="work()">
+💪 WORK +$10
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>📊 Empire</h2>
+
+<div class="stats">
+
+<div class="stat">
+<b id="total">$100</b>
+<span>TOTAL EARNED</span>
+</div>
+
+<div class="stat">
+<b id="owned">0</b>
+<span>BUSINESSES</span>
+</div>
+
+<div class="stat">
+<b id="multiplier">1x</b>
+<span>MULTIPLIER</span>
+</div>
+
+</div>
+
+<div class="milestone">
+<div class="progress" id="progress"></div>
+</div>
+
+<p id="goal" style="color:#9ca3af;font-size:12px;">
+Next milestone: $1,000
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>🏙️ St. Louis Businesses</h2>
+
+<div id="businesses"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🔄 Prestige</h2>
+
+<p style="color:#9ca3af;font-size:13px;">
+Reach $100,000 total earnings to restart your empire and gain a permanent income multiplier.
+</p>
+
+<button class="prestige" onclick="prestige()">
+🔄 Prestige
+</button>
+
+</div>
+
+
+<div class="card">
+
+<button class="reset" onclick="resetGame()">
+Reset Game
+</button>
+
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+const businesses = [
+
+{
+name:"Lemonade Stand",
+icon:"🍋",
+cost:50,
+income:1
+},
+
+{
+name:"Food Truck",
+icon:"🍔",
+cost:500,
+income:10
+},
+
+{
+name:"Curb Store",
+icon:"🏪",
+cost:5000,
+income:100
+},
+
+{
+name:"STL Restaurant",
+icon:"🍗",
+cost:25000,
+income:500
+},
+
+{
+name:"Downtown Building",
+icon:"🏢",
+cost:100000,
+income:2000
+},
+
+{
+name:"Factory",
+icon:"🏭",
+cost:500000,
+income:10000
+},
+
+{
+name:"STL Corporation",
+icon:"🌆",
+cost:2500000,
+income:50000
+}
+
+];
+
+
+let game = {
+
+cash:100,
+
+total:100,
+
+owned:Array(businesses.length).fill(0),
+
+prestige:0
+
+};
+
+
+function loadGame(){
+
+const saved = localStorage.getItem("grindToRichesSTL");
+
+if(saved){
+
+try{
+
+game = JSON.parse(saved);
+
+if(!Array.isArray(game.owned) ||
+game.owned.length !== businesses.length){
+
+game.owned = Array(businesses.length).fill(0);
+
+}
+
+}catch(e){}
+
+}
+
+}
+
+
+function saveGame(){
+
+localStorage.setItem(
+"grindToRichesSTL",
+JSON.stringify(game)
+);
+
+}
+
+
+function multiplier(){
+
+return 1 + (game.prestige * 0.5);
+
+}
+
+
+function businessCost(index){
+
+return Math.floor(
+
+businesses[index].cost *
+
+Math.pow(1.15,game.owned[index])
+
+);
+
+}
+
+
+function incomePerSecond(){
+
+let total = 0;
+
+for(let i=0;i<businesses.length;i++){
+
+total +=
+businesses[i].income *
+game.owned[i];
+
+}
+
+return total * multiplier();
+
+}
+
+
+function money(value){
+
+return "$" +
+Math.floor(value).toLocaleString();
+
+}
+
+
+function work(){
+
+game.cash += 10 * multiplier();
+
+game.total += 10 * multiplier();
+
+saveGame();
+
+render();
+
+}
+
+
+function buy(index){
+
+const cost = businessCost(index);
+
+if(game.cash < cost){
+
+showToast("Not enough cash!");
+
+return;
+
+}
+
+game.cash -= cost;
+
+game.owned[index]++;
+
+saveGame();
+
+render();
+
+showToast(
+businesses[index].name + " purchased!"
+);
+
+}
+
+
+function prestige(){
+
+if(game.total < 100000){
+
+showToast("You need $100,000 total earnings!");
+
+return;
+
+}
+
+game.cash = 100;
+
+game.total = 100;
+
+game.owned =
+Array(businesses.length).fill(0);
+
+game.prestige++;
+
+saveGame();
+
+render();
+
+showToast(
+"Prestige complete! +" +
+(game.prestige * .5).toFixed(1) +
+"x multiplier!"
+);
+
+}
+
+
+function render(){
+
+document.getElementById("cash").innerText =
+money(game.cash);
+
+document.getElementById("total").innerText =
+money(game.total);
+
+document.getElementById("income").innerText =
+"+" + money(incomePerSecond()) + " / second";
+
+document.getElementById("multiplier").innerText =
+multiplier().toFixed(1) + "x";
+
+let count = 0;
+
+game.owned.forEach(x => count += x);
+
+document.getElementById("owned").innerText =
+count;
+
+
+let next = 1000;
+
+while(next <= game.total){
+
+next *= 10;
+
+}
+
+document.getElementById("goal").innerText =
+"Next milestone: " + money(next);
+
+
+let previous = next / 10;
+
+let percent =
+((game.total - previous) /
+(next - previous)) * 100;
+
+document.getElementById("progress").style.width =
+Math.min(100,Math.max(0,percent)) + "%";
+
+
+let container =
+document.getElementById("businesses");
+
+container.innerHTML = "";
+
+
+businesses.forEach((business,index)=>{
+
+const cost = businessCost(index);
+
+const div =
+document.createElement("div");
+
+div.className = "business";
+
+div.innerHTML = `
+
+<div class="icon">
+${business.icon}
+</div>
+
+<div class="info">
+
+<div class="name">
+${business.name}
+</div>
+
+<div class="desc">
++${
+business.income *
+multiplier()
+} / second
+</div>
+
+<div class="owned">
+Owned: ${game.owned[index]}
+</div>
+
+</div>
+
+<button
+class="buy"
+onclick="buy(${index})"
+${game.cash < cost ? "disabled" : ""}
+>
+Buy ${money(cost)}
+</button>
+
+`;
+
+container.appendChild(div);
+
+});
+
+}
+
+
+function showToast(message){
+
+const toast =
+document.getElementById("toast");
+
+toast.innerText = message;
+
+toast.style.display = "block";
+
+clearTimeout(window.toastTimer);
+
+window.toastTimer =
+setTimeout(()=>{
+
+toast.style.display = "none";
+
+},1500);
+
+}
+
+
+function resetGame(){
+
+if(!confirm(
+"Are you sure you want to erase your empire?"
+)) return;
+
+game = {
+
+cash:100,
+
+total:100,
+
+owned:Array(businesses.length).fill(0),
+
+prestige:0
+
+};
+
+saveGame();
+
+render();
+
+showToast("Empire reset.");
+
+}
+
+
+loadGame();
+
+render();
+
+
+setInterval(()=>{
+
+const income =
+incomePerSecond();
+
+if(income > 0){
+
+game.cash += income;
+
+game.total += income;
+
+saveGame();
+
+render();
+
+}
+
+},1000);
+
+</script>
+
+</body>
+</html>
