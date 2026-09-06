@@ -2,704 +2,874 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b1220">
-<title>Grind to Riches STL</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#080d18">
+<title>Grind to Riches STL — V2</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-
 body{
 margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(180deg,#0b1220,#172033);
-color:white;
-min-height:100vh;
+background:linear-gradient(180deg,#080d18,#17233a);
+color:#fff;
+font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+min-height:100vh
 }
-
 .app{
-max-width:520px;
+max-width:540px;
 margin:auto;
-padding:16px;
+padding:14px 14px 35px
 }
-
 header{
 text-align:center;
-padding:10px 0 18px;
+padding:8px 0 14px
 }
-
 h1{
-font-size:32px;
 margin:0;
+font-size:31px
 }
-
-.subtitle{
+header p{
+margin:4px 0;
 color:#9ca3af;
-margin-top:5px;
+font-size:13px
 }
-
 .card{
-background:#111827;
-border:1px solid #26344d;
-border-radius:20px;
-padding:18px;
-margin-bottom:14px;
-box-shadow:0 8px 25px #0005;
+background:#111a2b;
+border:1px solid #2a3a56;
+border-radius:19px;
+padding:15px;
+margin:11px 0;
+box-shadow:0 9px 25px #0005
 }
-
-.cash{
-text-align:center;
-}
-
 .label{
 font-size:11px;
-letter-spacing:2px;
+letter-spacing:1.5px;
 color:#9ca3af;
+font-weight:800
 }
-
 .money{
-font-size:44px;
+font-size:43px;
 font-weight:900;
-margin:4px 0;
+text-align:center;
+margin:3px 0
 }
-
 .rate{
+text-align:center;
 color:#4ade80;
-font-weight:bold;
+font-weight:800
 }
-
 button{
 border:0;
-border-radius:14px;
-padding:14px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
+border-radius:13px;
+min-height:48px;
+font:inherit;
+font-weight:850;
+cursor:pointer
 }
-
 .work{
 width:100%;
-margin-top:14px;
+margin-top:12px;
 background:#facc15;
 color:#111827;
-font-size:18px;
+font-size:18px
 }
-
 .work:active{
-transform:scale(.98);
+transform:scale(.98)
 }
-
+h2{
+font-size:19px;
+margin:2px 0 11px
+}
 .stats{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:8px;
+gap:7px
 }
-
 .stat{
 background:#0b1220;
-padding:12px 5px;
 border-radius:12px;
-text-align:center;
+padding:10px 4px;
+text-align:center
 }
-
 .stat b{
 display:block;
-font-size:18px;
+font-size:18px
 }
-
 .stat span{
-font-size:10px;
+font-size:9px;
+color:#9ca3af
+}
+.barbg{
+height:8px;
+background:#080e1a;
+border-radius:99px;
+overflow:hidden;
+margin-top:11px
+}
+.bar{
+height:100%;
+width:0;
+background:#4ade80;
+transition:width .2s
+}
+.hint{
+font-size:11px;
 color:#9ca3af;
+margin:7px 0 0
 }
-
-h2{
-font-size:20px;
-margin-top:0;
-}
-
-.business{
+.biz{
 display:flex;
 align-items:center;
-gap:10px;
-background:#172236;
-border:1px solid #2b3b58;
+gap:9px;
+background:#172338;
+border:1px solid #2a3a56;
 border-radius:15px;
-padding:12px;
-margin-bottom:10px;
+padding:11px;
+margin:8px 0
 }
-
 .icon{
-font-size:30px;
-width:42px;
-text-align:center;
+font-size:29px;
+width:40px;
+text-align:center
 }
-
 .info{
 flex:1;
+min-width:0
 }
-
 .name{
-font-weight:bold;
-font-size:16px;
+font-weight:900
 }
-
-.desc{
-font-size:12px;
-color:#9ca3af;
-margin-top:3px;
-}
-
+.desc,
 .owned{
-font-size:12px;
-color:#d1d5db;
-margin-top:4px;
+font-size:11px;
+color:#9ca3af;
+margin-top:2px
 }
-
 .buy{
 background:#2563eb;
-color:white;
-padding:10px;
-font-size:13px;
+color:#fff;
+padding:9px 10px;
 min-width:105px;
+font-size:12px
 }
-
 .buy:disabled{
-background:#374151;
-color:#9ca3af;
+background:#354156;
+color:#8b95a5
 }
-
-.prestige{
-width:100%;
+.up{
+display:grid;
+grid-template-columns:1fr auto;
+gap:8px;
+align-items:center;
+background:#0d1626;
+border-radius:13px;
+padding:10px;
+margin-top:8px
+}
+.up button{
+background:#16a34a;
+color:white;
+padding:9px 11px;
+font-size:12px
+}
+.up button:disabled{
+background:#354156;
+color:#8b95a5
+}
+.mission{
+background:#0d1626;
+border-radius:13px;
+padding:11px;
+margin:8px 0
+}
+.mission b{
+display:block
+}
+.mission span{
+font-size:11px;
+color:#9ca3af
+}
+.claim{
+float:right;
+background:#f59e0b;
+color:#111827;
+padding:7px 10px;
+font-size:12px
+}
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px
+}
+.secondary{
+background:#334155;
+color:white
+}
+.purple{
 background:#9333ea;
-color:white;
+color:white
 }
-
-.reset{
-width:100%;
-background:#374151;
-color:white;
-margin-top:10px;
+.danger{
+background:#3b1f2a;
+color:#fca5a5
 }
-
-.milestone{
-height:8px;
-background:#0b1220;
-border-radius:20px;
-overflow:hidden;
-margin-top:10px;
-}
-
-.progress{
-height:100%;
-width:0%;
-background:#4ade80;
-}
-
 .toast{
 position:fixed;
-bottom:25px;
 left:50%;
-transform:translateX(-50%);
-background:white;
+bottom:20px;
+transform:translate(-50%,20px);
+opacity:0;
+transition:.2s;
+background:#fff;
 color:#111827;
-padding:11px 18px;
-border-radius:30px;
-font-weight:bold;
-display:none;
-z-index:999;
+border-radius:99px;
+padding:10px 16px;
+font-weight:800;
+z-index:10;
+white-space:nowrap
+}
+.toast.show{
+opacity:1;
+transform:translate(-50%,0)
 }
 </style>
 </head>
-
 <body>
-
-<div class="app">
-
+<main class="app">
 <header>
 <h1>💰 Grind to Riches</h1>
-<div class="subtitle">St. Louis Edition 🌆</div>
+<p>St. Louis Edition 🌆 • Version 2</p>
 </header>
-
-<div class="card cash">
-
+<section class="card">
 <div class="label">CASH</div>
-
-<div class="money" id="cash">$100</div>
-
-<div class="rate" id="income">$0 / second</div>
-
-<button class="work" onclick="work()">
-💪 WORK +$10
-</button>
-
+<div id="cash" class="money">$100</div>
+<div id="rate" class="rate">
++$0/sec
 </div>
-
-
-<div class="card">
-
+<button id="work" class="work">
+💪 WORK +$10 XP +1
+</button>
+</section>
+<section class="card">
 <h2>📊 Empire</h2>
-
 <div class="stats">
-
 <div class="stat">
 <b id="total">$100</b>
 <span>TOTAL EARNED</span>
 </div>
-
 <div class="stat">
-<b id="owned">0</b>
-<span>BUSINESSES</span>
+<b id="level">1</b>
+<span>LEVEL</span>
 </div>
-
 <div class="stat">
-<b id="multiplier">1x</b>
+<b id="mult">1.0x</b>
 <span>MULTIPLIER</span>
 </div>
-
 </div>
-
-<div class="milestone">
-<div class="progress" id="progress"></div>
+<div class="barbg">
+<div id="xpbar" class="bar"></div>
 </div>
-
-<p id="goal" style="color:#9ca3af;font-size:12px;">
-Next milestone: $1,000
+<p id="xptext" class="hint">
+XP: 0 / 100
 </p>
-
-</div>
-
-
-<div class="card">
-
+</section>
+<section class="card">
 <h2>🏙️ St. Louis Businesses</h2>
-
 <div id="businesses"></div>
-
-</div>
-
-
-<div class="card">
-
+</section>
+<section class="card">
+<h2>⬆️ Upgrades</h2>
+<div id="upgrades"></div>
+</section>
+<section class="card">
+<h2>🎯 Missions</h2>
+<div id="missions"></div>
+</section>
+<section class="card">
 <h2>🔄 Prestige</h2>
-
-<p style="color:#9ca3af;font-size:13px;">
-Reach $100,000 total earnings to restart your empire and gain a permanent income multiplier.
+<p class="hint">
+Reach $100,000 total earned. Prestige resets your businesses and cash but permanently adds +0.5x income.
 </p>
-
-<button class="prestige" onclick="prestige()">
-🔄 Prestige
+<button
+id="prestige"
+class="purple"
+style="width:100%;margin-top:10px">
+Prestige
 </button>
-
-</div>
-
-
-<div class="card">
-
-<button class="reset" onclick="resetGame()">
-Reset Game
+</section>
+<section class="card">
+<div class="actions">
+<button id="save" class="secondary">
+💾 Save
 </button>
-
+<button id="reset" class="danger">
+Reset
+</button>
 </div>
-
-</div>
-
-<div class="toast" id="toast"></div>
-
-
+</section>
+</main>
+<div id="toast" class="toast"></div>
 <script>
-
+"use strict";
+const KEY = "gtr_stl_v2";
 const businesses = [
-
 {
 name:"Lemonade Stand",
 icon:"🍋",
-cost:50,
+base:50,
 income:1
 },
-
 {
 name:"Food Truck",
 icon:"🍔",
-cost:500,
+base:500,
 income:10
 },
-
 {
 name:"Curb Store",
 icon:"🏪",
-cost:5000,
+base:5000,
 income:100
 },
-
 {
 name:"STL Restaurant",
 icon:"🍗",
-cost:25000,
+base:25000,
 income:500
 },
-
 {
 name:"Downtown Building",
 icon:"🏢",
-cost:100000,
+base:100000,
 income:2000
 },
-
 {
 name:"Factory",
 icon:"🏭",
-cost:500000,
+base:500000,
 income:10000
 },
-
 {
 name:"STL Corporation",
 icon:"🌆",
-cost:2500000,
+base:2500000,
 income:50000
 }
-
 ];
-
-
-let game = {
-
+const upgrades = [
+{
+name:"Hard Worker",
+desc:"+$5 to every manual WORK",
+cost:250,
+level:0
+},
+{
+name:"Better Business",
+desc:"+25% business income",
+cost:2500,
+level:0
+},
+{
+name:"Street Hustle",
+desc:"+1x income multiplier",
+cost:50000,
+level:0
+}
+];
+const missionData = [
+{
+id:"work10",
+title:"First Hustle",
+desc:"Work 10 times",
+goal:10,
+reward:100,
+type:"works"
+},
+{
+id:"own1",
+title:"First Business",
+desc:"Own 1 business",
+goal:1,
+reward:150,
+type:"owned"
+},
+{
+id:"earn1k",
+title:"First $1K",
+desc:"Earn $1,000 total",
+goal:1000,
+reward:500,
+type:"total"
+},
+{
+id:"earn10k",
+title:"Getting Serious",
+desc:"Earn $10,000 total",
+goal:10000,
+reward:2500,
+type:"total"
+}
+];
+let g = {
 cash:100,
-
 total:100,
-
-owned:Array(businesses.length).fill(0),
-
-prestige:0
-
+xp:0,
+level:1,
+prestige:0,
+works:0,
+owned:Array(7).fill(0),
+up:Array(3).fill(0),
+claimed:[]
 };
-
-
-function loadGame(){
-
-const saved = localStorage.getItem("grindToRichesSTL");
-
-if(saved){
-
+function load(){
 try{
-
-game = JSON.parse(saved);
-
-if(!Array.isArray(game.owned) ||
-game.owned.length !== businesses.length){
-
-game.owned = Array(businesses.length).fill(0);
-
+const saved =
+JSON.parse(localStorage.getItem(KEY));
+if(saved && Array.isArray(saved.owned)){
+g = {...g,...saved};
+g.owned =
+Array.from(
+{length:7},
+(_,i)=>Number(g.owned[i] || 0)
+);
 }
-
 }catch(e){}
-
 }
-
-}
-
-
-function saveGame(){
-
+function save(){
+try{
 localStorage.setItem(
-"grindToRichesSTL",
-JSON.stringify(game)
+KEY,
+JSON.stringify(g)
 );
-
+}catch(e){}
 }
-
-
-function multiplier(){
-
-return 1 + (game.prestige * 0.5);
-
-}
-
-
-function businessCost(index){
-
-return Math.floor(
-
-businesses[index].cost *
-
-Math.pow(1.15,game.owned[index])
-
-);
-
-}
-
-
-function incomePerSecond(){
-
-let total = 0;
-
-for(let i=0;i<businesses.length;i++){
-
-total +=
-businesses[i].income *
-game.owned[i];
-
-}
-
-return total * multiplier();
-
-}
-
-
-function money(value){
-
+function fmt(n){
 return "$" +
-Math.floor(value).toLocaleString();
-
+Math.floor(n).toLocaleString("en-US");
 }
-
-
+function mult(){
+return 1 +
+g.prestige * .5 +
+g.up[2] * 1;
+}
+function bizMultiplier(){
+return mult() *
+(1 + g.up[1] * .25);
+}
+function income(){
+return businesses.reduce(
+(sum,b,i)=>
+sum + b.income * g.owned[i],
+0
+) * bizMultiplier();
+}
+function cost(i){
+return Math.floor(
+businesses[i].base *
+Math.pow(1.15,g.owned[i])
+);
+}
+function xpNeed(){
+return g.level * 100;
+}
+function addXP(n){
+g.xp += n;
+while(g.xp >= xpNeed()){
+g.xp -= xpNeed();
+g.level++;
+toast(
+"Level up! You are level " +
+g.level + "!"
+);
+}
+}
 function work(){
-
-game.cash += 10 * multiplier();
-
-game.total += 10 * multiplier();
-
-saveGame();
-
+const gain =
+10 + g.up[0] * 5;
+const amount =
+gain * mult();
+g.cash += amount;
+g.total += amount;
+g.works++;
+addXP(1);
+save();
 render();
-
 }
-
-
-function buy(index){
-
-const cost = businessCost(index);
-
-if(game.cash < cost){
-
-showToast("Not enough cash!");
-
+function buy(i){
+const c = cost(i);
+if(g.cash < c){
+toast("Not enough cash!");
 return;
-
 }
-
-game.cash -= cost;
-
-game.owned[index]++;
-
-saveGame();
-
+g.cash -= c;
+g.owned[i]++;
+addXP(5);
+save();
 render();
-
-showToast(
-businesses[index].name + " purchased!"
+toast(
+businesses[i].name +
+" purchased!"
 );
-
 }
-
-
+function upgrade(i){
+const u = upgrades[i];
+const c =
+Math.floor(
+u.cost *
+Math.pow(3,u.level)
+);
+if(g.cash < c){
+toast("Not enough cash!");
+return;
+}
+g.cash -= c;
+g.up[i]++;
+addXP(15);
+save();
+render();
+toast(
+u.name +
+" upgraded!"
+);
+}
+function missionValue(m){
+if(m.type === "works")
+return g.works;
+if(m.type === "owned")
+return g.owned.reduce(
+(a,b)=>a+b,
+0
+);
+return g.total;
+}
+function claimMission(i){
+const m =
+missionData[i];
+if(
+g.claimed.includes(m.id) ||
+missionValue(m) < m.goal
+)
+return;
+g.claimed.push(m.id);
+g.cash += m.reward;
+g.total += m.reward;
+addXP(20);
+save();
+render();
+toast(
+"Mission complete! +" +
+fmt(m.reward)
+);
+}
 function prestige(){
-
-if(game.total < 100000){
-
-showToast("You need $100,000 total earnings!");
-
-return;
-
-}
-
-game.cash = 100;
-
-game.total = 100;
-
-game.owned =
-Array(businesses.length).fill(0);
-
-game.prestige++;
-
-saveGame();
-
-render();
-
-showToast(
-"Prestige complete! +" +
-(game.prestige * .5).toFixed(1) +
-"x multiplier!"
+if(g.total < 100000){
+toast(
+"Need $100,000 total earned!"
 );
-
+return;
 }
-
-
+g.cash = 100;
+g.total = 100;
+g.xp = 0;
+g.level = 1;
+g.owned =
+Array(7).fill(0);
+g.up =
+Array(3).fill(0);
+g.prestige++;
+save();
+render();
+toast(
+"Prestige complete!"
+);
+}
 function render(){
-
-document.getElementById("cash").innerText =
-money(game.cash);
-
-document.getElementById("total").innerText =
-money(game.total);
-
-document.getElementById("income").innerText =
-"+" + money(incomePerSecond()) + " / second";
-
-document.getElementById("multiplier").innerText =
-multiplier().toFixed(1) + "x";
-
-let count = 0;
-
-game.owned.forEach(x => count += x);
-
-document.getElementById("owned").innerText =
-count;
-
-
-let next = 1000;
-
-while(next <= game.total){
-
-next *= 10;
-
-}
-
-document.getElementById("goal").innerText =
-"Next milestone: " + money(next);
-
-
-let previous = next / 10;
-
-let percent =
-((game.total - previous) /
-(next - previous)) * 100;
-
-document.getElementById("progress").style.width =
-Math.min(100,Math.max(0,percent)) + "%";
-
-
-let container =
-document.getElementById("businesses");
-
-container.innerHTML = "";
-
-
-businesses.forEach((business,index)=>{
-
-const cost = businessCost(index);
-
-const div =
+document.getElementById(
+"cash"
+).textContent =
+fmt(g.cash);
+document.getElementById(
+"total"
+).textContent =
+fmt(g.total);
+document.getElementById(
+"rate"
+).textContent =
+"+" +
+fmt(income()) +
+"/sec";
+document.getElementById(
+"level"
+).textContent =
+g.level;
+document.getElementById(
+"mult"
+).textContent =
+mult().toFixed(1) +
+"x";
+document.getElementById(
+"xpbar"
+).style.width =
+Math.min(
+100,
+g.xp / xpNeed() * 100
+) + "%";
+document.getElementById(
+"xptext"
+).textContent =
+"XP: " +
+Math.floor(g.xp) +
+" / " +
+xpNeed() +
+" • " +
+g.prestige +
+" prestige";
+const bc =
+document.getElementById(
+"businesses"
+);
+bc.innerHTML = "";
+businesses.forEach(
+(b,i)=>{
+const c = cost(i);
+const d =
 document.createElement("div");
-
-div.className = "business";
-
-div.innerHTML = `
-
-<div class="icon">
-${business.icon}
-</div>
-
-<div class="info">
-
-<div class="name">
-${business.name}
-</div>
-
-<div class="desc">
-+${
-business.income *
-multiplier()
-} / second
-</div>
-
-<div class="owned">
-Owned: ${game.owned[index]}
-</div>
-
-</div>
-
-<button
-class="buy"
-onclick="buy(${index})"
-${game.cash < cost ? "disabled" : ""}
->
-Buy ${money(cost)}
-</button>
-
-`;
-
-container.appendChild(div);
-
-});
-
+d.className = "biz";
+d.innerHTML =
+'<div class="icon">' +
+b.icon +
+'</div>' +
+'<div class="info">' +
+'<div class="name">' +
+b.name +
+'</div>' +
+'<div class="desc">+' +
+fmt(
+b.income *
+bizMultiplier()
+) +
+'/sec each</div>' +
+'<div class="owned">Owned: ' +
+g.owned[i] +
+'</div>' +
+'</div>' +
+'<button class="buy" ' +
+(g.cash < c ?
+"disabled" :
+"") +
+' data-buy="' +
+i +
+'">' +
+"Buy " +
+fmt(c) +
+"</button>";
+bc.appendChild(d);
 }
-
-
-function showToast(message){
-
-const toast =
-document.getElementById("toast");
-
-toast.innerText = message;
-
-toast.style.display = "block";
-
-clearTimeout(window.toastTimer);
-
-window.toastTimer =
-setTimeout(()=>{
-
-toast.style.display = "none";
-
-},1500);
-
+);
+const uc =
+document.getElementById(
+"upgrades"
+);
+uc.innerHTML = "";
+upgrades.forEach(
+(u,i)=>{
+const c =
+Math.floor(
+u.cost *
+Math.pow(
+3,
+g.up[i]
+)
+);
+const d =
+document.createElement(
+"div"
+);
+d.className = "up";
+d.innerHTML =
+'<div>' +
+"<b>" +
+u.name +
+" Lv." +
+g.up[i] +
+"</b>" +
+'<div class="desc">' +
+u.desc +
+"</div>" +
+"</div>" +
+'<button ' +
+(g.cash < c ?
+"disabled" :
+"") +
+' data-up="' +
+i +
+'">' +
+"Upgrade " +
+fmt(c) +
+"</button>";
+uc.appendChild(d);
 }
-
-
-function resetGame(){
-
-if(!confirm(
-"Are you sure you want to erase your empire?"
-)) return;
-
-game = {
-
-cash:100,
-
-total:100,
-
-owned:Array(businesses.length).fill(0),
-
-prestige:0
-
+);
+const mc =
+document.getElementById(
+"missions"
+);
+mc.innerHTML = "";
+missionData.forEach(
+(m,i)=>{
+const done =
+g.claimed.includes(m.id);
+const value =
+Math.min(
+m.goal,
+missionValue(m)
+);
+const d =
+document.createElement(
+"div"
+);
+d.className = "mission";
+d.innerHTML =
+'<button class="claim" ' +
+(done ||
+value < m.goal ?
+"disabled" :
+"") +
+' data-mission="' +
+i +
+'">' +
+(
+done ?
+"Claimed" :
+value >= m.goal ?
+"Claim" :
+"Locked"
+) +
+"</button>" +
+"<b>" +
+m.title +
+"</b>" +
+"<span>" +
+m.desc +
+" • " +
+Math.floor(value).toLocaleString() +
+"/" +
+m.goal.toLocaleString() +
+" • Reward " +
+fmt(m.reward) +
+"</span>";
+mc.appendChild(d);
+}
+);
+}
+function toast(s){
+const t =
+document.getElementById(
+"toast"
+);
+t.textContent = s;
+t.classList.add("show");
+clearTimeout(
+window.tt
+);
+window.tt =
+setTimeout(
+()=>{
+t.classList.remove(
+"show"
+);
+},
+1500
+);
+}
+document.getElementById(
+"work"
+).onclick = work;
+document.getElementById(
+"save"
+).onclick = ()=>{
+save();
+toast("Game saved!");
 };
-
-saveGame();
-
-render();
-
-showToast("Empire reset.");
-
+document.getElementById(
+"prestige"
+).onclick = prestige;
+document.getElementById(
+"reset"
+).onclick = ()=>{
+if(
+confirm(
+"Erase all progress?"
+)
+){
+localStorage.removeItem(
+KEY
+);
+location.reload();
 }
-
-
-loadGame();
-
+};
+document.getElementById(
+"businesses"
+).onclick = e=>{
+const b =
+e.target.closest(
+"[data-buy]"
+);
+if(b)
+buy(
+Number(b.dataset.buy)
+);
+};
+document.getElementById(
+"upgrades"
+).onclick = e=>{
+const b =
+e.target.closest(
+"[data-up]"
+);
+if(b)
+upgrade(
+Number(b.dataset.up)
+);
+};
+document.getElementById(
+"missions"
+).onclick = e=>{
+const b =
+e.target.closest(
+"[data-mission]"
+);
+if(b)
+claimMission(
+Number(b.dataset.mission)
+);
+};
+load();
 render();
-
-
-setInterval(()=>{
-
-const income =
-incomePerSecond();
-
-if(income > 0){
-
-game.cash += income;
-
-game.total += income;
-
-saveGame();
-
+setInterval(
+()=>{
+const x =
+income();
+if(x > 0){
+g.cash += x;
+g.total += x;
+addXP(.1);
+save();
 render();
-
 }
-
-},1000);
-
+},
+1000
+);
+document.addEventListener(
+"visibilitychange",
+()=>{
+if(
+document.visibilityState ===
+"hidden"
+){
+save();
+}
+}
+);
 </script>
-
 </body>
 </html>
