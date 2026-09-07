@@ -1,381 +1,751 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#07111f">
-<title>Grind to Riches — St. Louis Edition V3.1</title>
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<meta
+name="theme-color"
+content="#07111f"
+>
+
+<title>
+Grind to Riches — St. Louis Edition
+</title>
+
 
 <style>
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+
+/* =========================
+   BASE
+========================= */
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html {
-  background: #050b14;
-  scroll-behavior: smooth;
+html{
+  background:#050b14;
+  scroll-behavior:smooth;
 }
 
-body {
-  margin: 0;
+body{
+  margin:0;
   background:
-    radial-gradient(circle at 50% -10%, #183858, #050b14 48%);
-  color: #f5f7fb;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  min-height: 100vh;
+    radial-gradient(
+      circle at 50% -10%,
+      #183858,
+      #050b14 48%
+    );
+  color:#f5f7fb;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  min-height:100vh;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  -webkit-appearance: none;
+button{
+  font-family:inherit;
+  cursor:pointer;
+  -webkit-appearance:none;
 }
 
-button:disabled {
-  opacity: .45;
-  cursor: not-allowed;
+button:disabled{
+  opacity:.4;
+  cursor:not-allowed;
 }
 
-.app {
-  max-width: 620px;
-  margin: auto;
-  padding-bottom: 95px;
+
+/* =========================
+   APP
+========================= */
+
+.app{
+  width:100%;
+  max-width:620px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:95px;
 }
 
-.top {
-  padding: 18px 14px 8px;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  background: #07111fe8;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+
+/* =========================
+   HEADER
+========================= */
+
+.top{
+  padding:18px 14px 10px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:#07111fe8;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 }
 
-.brand {
-  font-weight: 950;
-  letter-spacing: 2px;
-  font-size: 22px;
+.brand{
+  font-weight:950;
+  letter-spacing:2px;
+  font-size:22px;
 }
 
-.edition {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #f5c451;
-  font-weight: 800;
+.edition{
+  font-size:10px;
+  letter-spacing:2px;
+  color:#f5c451;
+  font-weight:800;
 }
 
-.version {
-  float: right;
-  margin-top: -27px;
-  border: 1px solid #35516d;
-  border-radius: 8px;
-  padding: 4px 7px;
-  font-size: 9px;
-  color: #a9bfd6;
+.version{
+  float:right;
+  margin-top:-27px;
+  border:1px solid #35516d;
+  border-radius:9px;
+  padding:5px 8px;
+  font-size:9px;
+  color:#a9bfd6;
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 7px;
-  margin-top: 12px;
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin-top:12px;
 }
 
-.stat {
-  background: #0c1929;
-  border: 1px solid #203650;
-  border-radius: 13px;
-  padding: 8px;
+.stat{
+  background:#0c1929;
+  border:1px solid #203650;
+  border-radius:13px;
+  padding:9px;
 }
 
-.stat small {
-  font-size: 8px;
-  color: #839ab3;
-  text-transform: uppercase;
+.stat small{
+  font-size:8px;
+  color:#839ab3;
+  text-transform:uppercase;
 }
 
-.stat b {
-  display: block;
-  font-size: 13px;
-  margin-top: 3px;
-  white-space: nowrap;
-  overflow: hidden;
+.stat b{
+  display:block;
+  font-size:13px;
+  margin-top:3px;
+  white-space:nowrap;
+  overflow:hidden;
 }
 
-.hero {
-  margin: 7px 12px 13px;
-  height: 170px;
-  border: 1px solid #2b4c6c;
-  border-radius: 22px;
-  overflow: hidden;
-  position: relative;
-  background: linear-gradient(#173b5e,#091422);
+
+/* =========================
+   SCREENS
+========================= */
+
+.screen{
+  display:none;
+  min-height:calc(100vh - 160px);
+  animation:screenIn .18s ease;
 }
 
-.hero:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(transparent 45%,#06101c 100%);
+.screen.active{
+  display:block;
 }
 
-.skyline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 68px;
-  background: #071321;
-  clip-path: polygon(
-    0 30%,8% 30%,8% 8%,15% 8%,15% 42%,
-    23% 42%,23% 18%,31% 18%,31% 48%,
-    39% 48%,39% 4%,45% 4%,45% 38%,
-    53% 38%,53% 0,58% 0,58% 45%,
-    66% 45%,66% 15%,75% 15%,75% 50%,
-    84% 50%,84% 10%,91% 10%,91% 35%,
-    100% 35%,100% 100%,0 100%
+@keyframes screenIn{
+
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+
+/* =========================
+   HOME HERO
+========================= */
+
+.hero{
+  margin:7px 12px 13px;
+  height:170px;
+  border:1px solid #2b4c6c;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  background:
+    linear-gradient(
+      #173b5e,
+      #091422
+    );
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      transparent 45%,
+      #06101c 100%
+    );
+}
+
+.skyline{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:68px;
+  background:#071321;
+
+  clip-path:polygon(
+    0 30%,
+    8% 30%,
+    8% 8%,
+    15% 8%,
+    15% 42%,
+    23% 42%,
+    23% 18%,
+    31% 18%,
+    31% 48%,
+    39% 48%,
+    39% 4%,
+    45% 4%,
+    45% 38%,
+    53% 38%,
+    53% 0,
+    58% 0,
+    58% 45%,
+    66% 45%,
+    66% 15%,
+    75% 15%,
+    75% 50%,
+    84% 50%,
+    84% 10%,
+    91% 10%,
+    91% 35%,
+    100% 35%,
+    100% 100%,
+    0 100%
   );
 }
 
-.heroText {
-  position: relative;
-  z-index: 3;
-  padding: 20px 17px;
+.heroText{
+  position:relative;
+  z-index:3;
+  padding:20px 17px;
 }
 
-.hero h1 {
-  margin: 0;
-  font-size: 25px;
+.hero h1{
+  margin:0;
+  font-size:25px;
 }
 
-.hero p {
-  margin: 4px 0;
-  color: #b7c8da;
-  font-size: 12px;
+.hero p{
+  margin:4px 0;
+  color:#b7c8da;
+  font-size:12px;
 }
 
-.goal {
-  display: inline-block;
-  margin-top: 14px;
-  background: #071321dd;
-  border: 1px solid #365473;
-  border-radius: 9px;
-  padding: 7px 9px;
-  font-size: 10px;
+.goal{
+  display:inline-block;
+  margin-top:14px;
+  background:#071321dd;
+  border:1px solid #365473;
+  border-radius:9px;
+  padding:7px 9px;
+  font-size:10px;
 }
 
-.gold {
-  color: #f5c451;
+.gold{
+  color:#f5c451;
 }
 
-.work {
-  width: calc(100% - 24px);
-  margin: 0 12px;
-  border: 0;
-  border-radius: 16px;
-  padding: 15px;
-  background: linear-gradient(135deg,#d3a12d,#f8d86d);
-  font-weight: 950;
-  color: #08111b;
-  font-size: 14px;
-  transition: transform .1s;
+
+/* =========================
+   WORK
+========================= */
+
+.work{
+  width:calc(100% - 24px);
+  margin:0 12px;
+  border:0;
+  border-radius:16px;
+  padding:15px;
+  background:
+    linear-gradient(
+      135deg,
+      #d3a12d,
+      #f8d86d
+    );
+  font-weight:950;
+  color:#08111b;
+  font-size:14px;
+  transition:transform .1s;
 }
 
-h2 {
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin: 18px 13px 8px;
+.work:active{
+  transform:scale(.98);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 8px;
-  padding: 0 12px;
+
+/* =========================
+   HOME EMPIRE GRID
+========================= */
+
+.homeTitle{
+  font-size:14px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin:18px 13px 8px;
 }
 
-.tile {
-  min-height: 105px;
-  text-align: left;
-  color: #fff;
-  background: linear-gradient(145deg,#11253b,#0a1524);
-  border: 1px solid #213954;
-  border-radius: 16px;
-  padding: 10px 8px;
-  transition: transform .1s;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  padding:0 12px;
 }
 
-.tile:active,
-.work:active,
-.btn:active {
-  transform: scale(.98);
+.tile{
+  min-height:105px;
+  text-align:left;
+  color:#fff;
+  background:
+    linear-gradient(
+      145deg,
+      #11253b,
+      #0a1524
+    );
+  border:1px solid #213954;
+  border-radius:16px;
+  padding:10px 8px;
+  transition:transform .1s;
 }
 
-.tile strong {
-  display: block;
-  font-size: 10px;
-  margin-top: 5px;
+.tile:active{
+  transform:scale(.97);
 }
 
-.tile span {
-  display: block;
-  color: #8299b1;
-  font-size: 8px;
-  margin-top: 3px;
+.tile strong{
+  display:block;
+  font-size:10px;
+  margin-top:5px;
 }
 
-.icon {
-  display: block;
-  height: 43px;
+.tile span{
+  display:block;
+  color:#8299b1;
+  font-size:8px;
+  margin-top:3px;
 }
 
-.icon svg {
-  width: 52px;
-  height: 43px;
+.icon{
+  display:block;
+  height:43px;
 }
 
-.cards {
-  display: grid;
-  gap: 8px;
-  padding: 0 12px;
+.icon svg{
+  width:52px;
+  height:43px;
 }
 
-.card {
-  background: #0c1929;
-  border: 1px solid #203650;
-  border-radius: 15px;
-  padding: 12px;
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.pageHeader{
+  padding:18px 14px 8px;
 }
 
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+.back{
+  border:1px solid #365473;
+  background:#0d1d30;
+  color:#cbd8e5;
+  border-radius:10px;
+  padding:8px 12px;
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:13px;
 }
 
-.row b {
-  font-size: 12px;
+.pageTitle{
+  margin:0;
+  font-size:24px;
+  letter-spacing:.5px;
 }
 
-.sub {
-  font-size: 9px;
-  color: #849ab1;
-  margin-top: 4px;
-  line-height: 1.5;
+.pageSub{
+  color:#8299b1;
+  font-size:11px;
+  margin-top:5px;
 }
 
-.btn {
-  background: #142a43;
-  border: 1px solid #365473;
-  color: #fff;
-  border-radius: 9px;
-  padding: 8px 10px;
-  font-weight: 800;
-  font-size: 9px;
-  white-space: nowrap;
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+  display:grid;
+  gap:8px;
+  padding:0 12px;
 }
 
-.buy {
-  background: #173b34;
-  border-color: #2c725d;
+.card{
+  background:#0c1929;
+  border:1px solid #203650;
+  border-radius:15px;
+  padding:12px;
 }
 
-.bar {
-  height: 6px;
-  background: #18283c;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-top: 7px;
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
 }
 
-.bar i {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg,#54a9ff,#47d18c);
-  transition: width .25s ease;
+.row b{
+  font-size:12px;
 }
 
-.bottom {
-  position: fixed;
-  z-index: 10;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(100%,620px);
-  height: 68px;
-  padding-bottom: env(safe-area-inset-bottom);
-  background: #07111fee;
-  border-top: 1px solid #203650;
-  display: grid;
-  grid-template-columns: repeat(6,1fr);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+.sub{
+  font-size:9px;
+  color:#849ab1;
+  margin-top:4px;
+  line-height:1.5;
 }
 
-.nav {
-  border: 0;
-  background: none;
-  color: #71869e;
-  font-size: 8px;
+.btn{
+  background:#142a43;
+  border:1px solid #365473;
+  color:#fff;
+  border-radius:9px;
+  padding:8px 10px;
+  font-weight:800;
+  font-size:9px;
+  white-space:nowrap;
 }
 
-.nav.active {
-  color: #f5c451;
+.buy{
+  background:#173b34;
+  border-color:#2c725d;
 }
 
-.nav svg {
-  display: block;
-  margin: auto auto 3px;
-  width: 20px;
-  height: 20px;
+
+/* =========================
+   PAGE BANNERS
+========================= */
+
+.pageBanner{
+  margin:8px 12px 14px;
+  padding:16px;
+  border:1px solid #294867;
+  border-radius:16px;
+  background:
+    linear-gradient(
+      135deg,
+      #10263e,
+      #091522
+    );
 }
 
-.toast {
-  position: fixed;
-  z-index: 20;
-  top: 16px;
-  left: 50%;
-  transform: translate(-50%,-130px);
-  background: #102238;
-  border: 1px solid #3a5877;
-  border-radius: 10px;
-  padding: 9px 13px;
-  font-size: 11px;
-  transition: transform .25s ease;
-  pointer-events: none;
-  max-width: calc(100% - 30px);
-  text-align: center;
+.pageBanner b{
+  display:block;
+  font-size:15px;
 }
 
-.toast.show {
-  transform: translate(-50%,0);
+.pageBanner span{
+  display:block;
+  margin-top:5px;
+  color:#8299b1;
+  font-size:10px;
+  line-height:1.5;
 }
 
-.sectionIntro {
-  margin: 0 13px 8px;
-  color: #71869e;
-  font-size: 9px;
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.bar{
+  height:7px;
+  background:#18283c;
+  border-radius:8px;
+  overflow:hidden;
+  margin-top:8px;
 }
 
-@media(max-width:390px) {
-  .grid {
-    grid-template-columns: repeat(2,1fr);
+.bar i{
+  display:block;
+  height:100%;
+  background:
+    linear-gradient(
+      90deg,
+      #54a9ff,
+      #47d18c
+    );
+  transition:width .25s ease;
+}
+
+
+/* =========================
+   BIG STATS
+========================= */
+
+.bigStats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+  padding:0 12px;
+}
+
+.bigStat{
+  background:#0c1929;
+  border:1px solid #203650;
+  border-radius:15px;
+  padding:15px;
+}
+
+.bigStat small{
+  color:#8299b1;
+  font-size:9px;
+  text-transform:uppercase;
+}
+
+.bigStat b{
+  display:block;
+  margin-top:5px;
+  font-size:19px;
+}
+
+
+/* =========================
+   MAP
+========================= */
+
+.mapBox{
+  margin:0 12px;
+  height:380px;
+  border:1px solid #294867;
+  border-radius:20px;
+  background:
+    linear-gradient(
+      145deg,
+      #102d42,
+      #071522
+    );
+  position:relative;
+  overflow:hidden;
+}
+
+.mapRiver{
+  position:absolute;
+  top:-30px;
+  right:35%;
+  width:95px;
+  height:460px;
+  background:#153f62;
+  transform:rotate(9deg);
+  border-radius:50%;
+}
+
+.mapRoad{
+  position:absolute;
+  background:#34536d;
+  height:3px;
+  width:110%;
+  left:-5%;
+  transform:rotate(-20deg);
+}
+
+.r1{
+  top:90px;
+}
+
+.r2{
+  top:175px;
+  transform:rotate(17deg);
+}
+
+.r3{
+  top:260px;
+  transform:rotate(-8deg);
+}
+
+.archGraphic{
+  position:absolute;
+  left:50%;
+  top:105px;
+  transform:translateX(-50%);
+  width:115px;
+  height:145px;
+  border:10px solid #d7dce1;
+  border-top:0;
+  border-radius:0 0 65px 65px;
+}
+
+.mapLabel{
+  position:absolute;
+  background:#091827e8;
+  border:1px solid #385873;
+  padding:7px 9px;
+  border-radius:9px;
+  font-size:9px;
+}
+
+.label1{
+  top:40px;
+  left:25px;
+}
+
+.label2{
+  top:70px;
+  right:20px;
+}
+
+.label3{
+  bottom:70px;
+  left:25px;
+}
+
+.label4{
+  bottom:35px;
+  right:30px;
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  z-index:100;
+  top:16px;
+  left:50%;
+  transform:translate(-50%,-130px);
+  background:#102238;
+  border:1px solid #3a5877;
+  border-radius:10px;
+  padding:9px 13px;
+  font-size:11px;
+  transition:transform .25s ease;
+  pointer-events:none;
+  max-width:calc(100% - 30px);
+  text-align:center;
+}
+
+.toast.show{
+  transform:translate(-50%,0);
+}
+
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom{
+  position:fixed;
+  z-index:90;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(100%,620px);
+  min-height:68px;
+  padding-bottom:env(safe-area-inset-bottom);
+  background:#07111fee;
+  border-top:1px solid #203650;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+
+.nav{
+  border:0;
+  background:none;
+  color:#71869e;
+  font-size:8px;
+}
+
+.nav.active{
+  color:#f5c451;
+}
+
+.nav svg{
+  display:block;
+  margin:auto auto 3px;
+  width:20px;
+  height:20px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:390px){
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .stats {
-    grid-template-columns: repeat(2,1fr);
+  .stats{
+    grid-template-columns:repeat(2,1fr);
   }
+
 }
+
+
+/* =========================
+   SAFE AREA
+========================= */
+
+@supports(padding:max(0px)){
+
+  .top{
+    padding-top:max(
+      18px,
+      env(safe-area-inset-top)
+    );
+  }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="app">
+
+
+<!-- =====================================================
+     GLOBAL HEADER
+===================================================== -->
 
 <header class="top">
 
@@ -388,8 +758,9 @@ ST. LOUIS EDITION
 </div>
 
 <div class="version">
-VERSION 3.1
+VERSION 4
 </div>
+
 
 <div class="stats">
 
@@ -414,10 +785,22 @@ VERSION 3.1
 </div>
 
 </div>
+
 </header>
 
 
-<section class="hero">
+
+<!-- =====================================================
+     HOME SCREEN
+===================================================== -->
+
+<section
+class="screen active"
+id="homeScreen"
+>
+
+
+<div class="hero">
 
 <div class="skyline"></div>
 
@@ -432,31 +815,45 @@ Start from the grind. Build a St. Louis empire.
 </p>
 
 <div class="goal">
+
 NEXT GOAL:
-<b class="gold" id="goal">
+
+<b
+class="gold"
+id="goal"
+>
 $1,000 CASH
 </b>
+
+</div>
+
 </div>
 
 </div>
 
-</section>
 
-
-<button class="work" onclick="work()">
+<button
+class="work"
+onclick="work()"
+>
 WORK +$10
 </button>
 
 
-<h2>
+<div class="homeTitle">
 Empire
-</h2>
+</div>
 
 
 <div class="grid">
 
 
-<button class="tile" onclick="openCars()">
+<!-- CARS -->
+
+<button
+class="tile"
+onclick="openScreen('carsScreen')"
+>
 
 <i class="icon">
 
@@ -464,23 +861,27 @@ Empire
 
 <path
 d="M8 34h8l5-14h39l11 14h3v12H8z"
-fill="#397eae"/>
+fill="#397eae"
+/>
 
 <path
 d="M24 25h28l8 9H18z"
-fill="#79b9e3"/>
+fill="#79b9e3"
+/>
 
 <circle
 cx="23"
 cy="46"
 r="6"
-fill="#dce5ed"/>
+fill="#dce5ed"
+/>
 
 <circle
 cx="59"
 cy="46"
 r="6"
-fill="#dce5ed"/>
+fill="#dce5ed"
+/>
 
 </svg>
 
@@ -497,7 +898,13 @@ Build your fleet
 </button>
 
 
-<button class="tile" onclick="openHouses()">
+
+<!-- HOUSES -->
+
+<button
+class="tile"
+onclick="openScreen('housesScreen')"
+>
 
 <i class="icon">
 
@@ -505,21 +912,25 @@ Build your fleet
 
 <path
 d="M8 29 40 5l32 24v23H8z"
-fill="#a9603a"/>
+fill="#a9603a"
+/>
 
 <path
 d="m13 29 27-20 27 20"
 fill="none"
 stroke="#f0bd67"
-stroke-width="5"/>
+stroke-width="5"
+/>
 
 <path
 d="M34 52V34h12v18"
-fill="#15263a"/>
+fill="#15263a"
+/>
 
 <path
 d="M17 35h11v10H17zM52 35h11v10H52z"
-fill="#69a9d7"/>
+fill="#69a9d7"
+/>
 
 </svg>
 
@@ -536,7 +947,13 @@ Own property
 </button>
 
 
-<button class="tile" onclick="msg('Jobs')">
+
+<!-- JOBS -->
+
+<button
+class="tile"
+onclick="openScreen('jobsScreen')"
+>
 
 <i class="icon">
 
@@ -548,24 +965,28 @@ y="18"
 width="62"
 height="33"
 rx="6"
-fill="#345675"/>
+fill="#345675"
+/>
 
 <path
 d="M28 18v-7h24v7"
 fill="none"
 stroke="#8db9df"
-stroke-width="5"/>
+stroke-width="5"
+/>
 
 <path
 d="M9 31h62"
 stroke="#47d18c"
-stroke-width="5"/>
+stroke-width="5"
+/>
 
 <circle
 cx="40"
 cy="31"
 r="5"
-fill="#f5c451"/>
+fill="#f5c451"
+/>
 
 </svg>
 
@@ -582,7 +1003,13 @@ Level up skills
 </button>
 
 
-<button class="tile" onclick="msg('Empire Stats')">
+
+<!-- STATS -->
+
+<button
+class="tile"
+onclick="openScreen('statsScreen')"
+>
 
 <i class="icon">
 
@@ -590,12 +1017,14 @@ Level up skills
 
 <path
 d="M10 51V26h16v25M32 51V13h16v38M54 51V5h16v46"
-fill="#32658e"/>
+fill="#32658e"
+/>
 
 <path
 d="M14 32h8M36 21h8M58 14h8M58 24h8M36 31h8M14 41h8"
 stroke="#f5c451"
-stroke-width="3"/>
+stroke-width="3"
+/>
 
 </svg>
 
@@ -612,7 +1041,13 @@ Track your rise
 </button>
 
 
-<button class="tile" onclick="scrollToSection('businesses')">
+
+<!-- BUSINESSES -->
+
+<button
+class="tile"
+onclick="openScreen('businessScreen')"
+>
 
 <i class="icon">
 
@@ -620,20 +1055,24 @@ Track your rise
 
 <path
 d="M9 22h62v30H9z"
-fill="#7d4c35"/>
+fill="#7d4c35"
+/>
 
 <path
 d="M7 22 14 9h52l7 13"
-fill="#d48b42"/>
+fill="#d48b42"
+/>
 
 <path
 d="M16 29h48v13H16z"
-fill="#5aa4c9"/>
+fill="#5aa4c9"
+/>
 
 <path
 d="M31 29v13M47 29v13"
 stroke="#d7edf7"
-stroke-width="3"/>
+stroke-width="3"
+/>
 
 </svg>
 
@@ -650,7 +1089,13 @@ Businesses
 </button>
 
 
-<button class="tile" onclick="msg('Investments')">
+
+<!-- INVESTMENTS -->
+
+<button
+class="tile"
+onclick="openScreen('investmentsScreen')"
+>
 
 <i class="icon">
 
@@ -660,18 +1105,21 @@ Businesses
 d="M8 45 25 31l11 7 27-27"
 fill="none"
 stroke="#47d18c"
-stroke-width="6"/>
+stroke-width="6"
+/>
 
 <path
 d="M54 11h13v13"
 fill="none"
 stroke="#47d18c"
-stroke-width="5"/>
+stroke-width="5"
+/>
 
 <path
 d="M8 49h64"
 stroke="#38516c"
-stroke-width="3"/>
+stroke-width="3"
+/>
 
 </svg>
 
@@ -688,7 +1136,13 @@ Grow your money
 </button>
 
 
-<button class="tile" onclick="msg('Rare Businesses')">
+
+<!-- RARE -->
+
+<button
+class="tile"
+onclick="openScreen('rareScreen')"
+>
 
 <i class="icon">
 
@@ -696,11 +1150,13 @@ Grow your money
 
 <path
 d="m40 5 27 17-27 28L13 22z"
-fill="#d9a938"/>
+fill="#d9a938"
+/>
 
 <path
 d="m40 5 8 17-8 28-8-28z"
-fill="#fff0a8"/>
+fill="#fff0a8"
+/>
 
 </svg>
 
@@ -717,7 +1173,13 @@ Legendary assets
 </button>
 
 
-<button class="tile" onclick="msg('St. Louis Map')">
+
+<!-- MAP -->
+
+<button
+class="tile"
+onclick="openScreen('mapScreen')"
+>
 
 <i class="icon">
 
@@ -725,12 +1187,14 @@ Legendary assets
 
 <path
 d="M7 10 28 5l24 6 21-6v40l-21 5-24-6-21 6z"
-fill="#295b57"/>
+fill="#295b57"
+/>
 
 <path
 d="M28 5v39M52 11v39"
 stroke="#8bd1ae"
-stroke-width="3"/>
+stroke-width="3"
+/>
 
 </svg>
 
@@ -747,7 +1211,13 @@ Explore districts
 </button>
 
 
-<button class="tile" onclick="scrollToSection('missions')">
+
+<!-- MISSIONS -->
+
+<button
+class="tile"
+onclick="openScreen('missionsScreen')"
+>
 
 <i class="icon">
 
@@ -759,7 +1229,8 @@ cy="27"
 r="21"
 fill="none"
 stroke="#e45e63"
-stroke-width="7"/>
+stroke-width="7"
+/>
 
 <circle
 cx="40"
@@ -767,12 +1238,14 @@ cy="27"
 r="10"
 fill="none"
 stroke="#f5c451"
-stroke-width="5"/>
+stroke-width="5"
+/>
 
 <path
 d="M40 27 59 10"
 stroke="#fff"
-stroke-width="4"/>
+stroke-width="4"
+/>
 
 </svg>
 
@@ -789,7 +1262,13 @@ Complete goals
 </button>
 
 
-<button class="tile" onclick="msg('Achievements')">
+
+<!-- ACHIEVEMENTS -->
+
+<button
+class="tile"
+onclick="openScreen('achievementsScreen')"
+>
 
 <i class="icon">
 
@@ -797,13 +1276,15 @@ Complete goals
 
 <path
 d="M26 9h28v22a14 14 0 0 1-28 0z"
-fill="#f5c451"/>
+fill="#f5c451"
+/>
 
 <path
 d="M26 14H13v7a13 13 0 0 0 13 13M54 14h13v7a13 13 0 0 1-13 13M40 45v7M29 52h22"
 fill="none"
 stroke="#f5c451"
-stroke-width="5"/>
+stroke-width="5"
+/>
 
 </svg>
 
@@ -820,7 +1301,13 @@ Achievements
 </button>
 
 
-<button class="tile" onclick="daily()">
+
+<!-- DAILY -->
+
+<button
+class="tile"
+onclick="openScreen('dailyScreen')"
+>
 
 <i class="icon">
 
@@ -832,16 +1319,19 @@ y="10"
 width="54"
 height="40"
 rx="6"
-fill="#a44e55"/>
+fill="#a44e55"
+/>
 
 <path
 d="M13 21h54M28 5v10M52 5v10"
 stroke="#f0b7bc"
-stroke-width="4"/>
+stroke-width="4"
+/>
 
 <path
 d="m40 28 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"
-fill="#f5c451"/>
+fill="#f5c451"
+/>
 
 </svg>
 
@@ -858,7 +1348,13 @@ Claim daily
 </button>
 
 
-<button class="tile" onclick="msg('Character Upgrades')">
+
+<!-- CHARACTER -->
+
+<button
+class="tile"
+onclick="openScreen('characterScreen')"
+>
 
 <i class="icon">
 
@@ -868,15 +1364,18 @@ Claim daily
 cx="40"
 cy="18"
 r="12"
-fill="#d99a72"/>
+fill="#d99a72"
+/>
 
 <path
 d="M20 52q3-21 20-21t20 21"
-fill="#345f87"/>
+fill="#345f87"
+/>
 
 <path
 d="M29 12q5-12 22-4l2 8q-13-8-24-1z"
-fill="#1c2430"/>
+fill="#1c2430"
+/>
 
 </svg>
 
@@ -892,55 +1391,182 @@ Upgrade your grind
 
 </button>
 
+
 </div>
 
+</section>
 
-<h2 id="carsSection">
+
+
+<!-- =====================================================
+     CARS SCREEN
+===================================================== -->
+
+<section
+class="screen"
+id="carsScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
 Cars & Vehicles
-</h2>
+</h1>
 
-<div class="sectionIntro">
-Build your fleet and create another stream of passive income.
+<div class="pageSub">
+Build your fleet and create passive income.
 </div>
 
-<div class="cards" id="cars"></div>
+</div>
 
 
-<h2 id="housesSection">
+<div class="pageBanner">
+
+<b>
+Your Vehicle Fleet
+</b>
+
+<span>
+Every vehicle you own generates income every second.
+Higher-tier vehicles require higher levels.
+</span>
+
+</div>
+
+
+<div
+class="cards"
+id="carsList"
+></div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOUSES SCREEN
+===================================================== -->
+
+<section
+class="screen"
+id="housesScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
 Houses & Properties
-</h2>
+</h1>
 
-<div class="sectionIntro">
+<div class="pageSub">
 Build a property empire across St. Louis.
 </div>
 
-<div class="cards" id="houses"></div>
+</div>
 
 
-<h2 id="businesses">
+<div class="pageBanner">
+
+<b>
+Property Portfolio
+</b>
+
+<span>
+Properties generate passive income and become more powerful as your empire grows.
+</span>
+
+</div>
+
+
+<div
+class="cards"
+id="housesList"
+></div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BUSINESSES SCREEN
+===================================================== -->
+
+<section
+class="screen"
+id="businessScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
 Businesses
-</h2>
+</h1>
 
-<div class="cards" id="businessList"></div>
+<div class="pageSub">
+Build your St. Louis business empire.
+</div>
 
-
-<h2>
-Upgrades
-</h2>
-
-<div class="cards" id="upgrades"></div>
+</div>
 
 
-<h2 id="missions">
-Mission Progress
-</h2>
+<div
+class="cards"
+id="businessList"
+></div>
 
-<div class="cards" id="missionList"></div>
+</section>
 
 
-<h2>
-Prestige
-</h2>
+
+<!-- =====================================================
+     JOBS SCREEN
+===================================================== -->
+
+<section
+class="screen"
+id="jobsScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+Jobs
+</h1>
+
+<div class="pageSub">
+Your grind starts here.
+</div>
+
+</div>
+
 
 <div class="cards">
 
@@ -951,16 +1577,863 @@ Prestige
 <div>
 
 <b>
-St. Louis Legend
+Warehouse Worker
 </b>
 
 <div class="sub">
-Reach $100K total earnings to reset and gain a permanent income multiplier.
+Basic job. Builds your experience.
 </div>
 
 </div>
 
-<button class="btn" onclick="prestige()">
+<button
+class="btn buy"
+onclick="jobReward(25)"
+>
+WORK
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+Press Operator
+</b>
+
+<div class="sub">
+Operate production equipment.
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="jobReward(75)"
+>
+WORK
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+Business Manager
+</b>
+
+<div class="sub">
+Manage multiple income streams.
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="jobReward(200)"
+>
+WORK
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+CEO
+</b>
+
+<div class="sub">
+Run your entire empire.
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="jobReward(500)"
+>
+WORK
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STATS SCREEN
+===================================================== -->
+
+<section
+class="screen"
+id="statsScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+Empire Stats
+</h1>
+
+<div class="pageSub">
+Track everything you've built.
+</div>
+
+</div>
+
+
+<div
+class="bigStats"
+id="bigStats"
+></div>
+
+
+<div class="pageBanner">
+
+<b>
+Empire Progress
+</b>
+
+<span id="statsSummary">
+Building your empire...
+</span>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     INVESTMENTS SCREEN
+===================================================== -->
+
+<section
+class="screen"
+id="investmentsScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+Investments
+</h1>
+
+<div class="pageSub">
+Put your money to work.
+</div>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+STL Index Fund
+</b>
+
+<div class="sub">
+Entry: $5,000<br>
+Passive return: +$100/s
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="buyInvestment(5000,100,'STL Index Fund')"
+>
+$5K
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+Downtown Development
+</b>
+
+<div class="sub">
+Entry: $25,000<br>
+Passive return: +$600/s
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="buyInvestment(25000,600,'Downtown Development')"
+>
+$25K
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+St. Louis Market Fund
+</b>
+
+<div class="sub">
+Entry: $100,000<br>
+Passive return: +$3,000/s
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="buyInvestment(100000,3000,'St. Louis Market Fund')"
+>
+$100K
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RARE BUSINESSES
+===================================================== -->
+
+<section
+class="screen"
+id="rareScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+Rare Businesses
+</h1>
+
+<div class="pageSub">
+Legendary assets for serious players.
+</div>
+
+</div>
+
+
+<div class="pageBanner">
+
+<b>
+Rare Asset Market
+</b>
+
+<span>
+These businesses are expensive, powerful and difficult to obtain.
+</span>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+Gold District Business
+</b>
+
+<div class="sub">
+Cost: $500,000<br>
+Income: +$8,000/s
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="buyRare(500000,8000,'Gold District Business')"
+>
+$500K
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+Diamond Corporation
+</b>
+
+<div class="sub">
+Cost: $2,500,000<br>
+Income: +$50,000/s
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="buyRare(2500000,50000,'Diamond Corporation')"
+>
+$2.5M
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+STL Legacy Holdings
+</b>
+
+<div class="sub">
+Cost: $10,000,000<br>
+Income: +$250,000/s
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="buyRare(10000000,250000,'STL Legacy Holdings')"
+>
+$10M
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAP SCREEN
+===================================================== -->
+
+<section
+class="screen"
+id="mapScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+St. Louis Map
+</h1>
+
+<div class="pageSub">
+Explore the city and unlock new districts.
+</div>
+
+</div>
+
+
+<div class="mapBox">
+
+<div class="mapRiver"></div>
+
+<div class="mapRoad r1"></div>
+<div class="mapRoad r2"></div>
+<div class="mapRoad r3"></div>
+
+<div class="archGraphic"></div>
+
+<div class="mapLabel label1">
+NORTH CITY
+</div>
+
+<div class="mapLabel label2">
+DOWNTOWN
+</div>
+
+<div class="mapLabel label3">
+SOUTH CITY
+</div>
+
+<div class="mapLabel label4">
+WEST COUNTY
+</div>
+
+</div>
+
+
+<div class="cards" style="margin-top:10px;">
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+Downtown District
+</b>
+
+<div class="sub">
+Current empire headquarters.
+</div>
+
+</div>
+
+<button
+class="btn"
+onclick="showMessage('Downtown already unlocked')"
+>
+UNLOCKED
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+North City
+</b>
+
+<div class="sub">
+Unlock requirement: Level 10.
+</div>
+
+</div>
+
+<button
+class="btn"
+onclick="unlockDistrict(10,'North City')"
+>
+LEVEL 10
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+South City
+</b>
+
+<div class="sub">
+Unlock requirement: Level 15.
+</div>
+
+</div>
+
+<button
+class="btn"
+onclick="unlockDistrict(15,'South City')"
+>
+LEVEL 15
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+West County
+</b>
+
+<div class="sub">
+Unlock requirement: Level 20.
+</div>
+
+</div>
+
+<button
+class="btn"
+onclick="unlockDistrict(20,'West County')"
+>
+LEVEL 20
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MISSIONS
+===================================================== -->
+
+<section
+class="screen"
+id="missionsScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+Missions
+</h1>
+
+<div class="pageSub">
+Complete milestones as you build your empire.
+</div>
+
+</div>
+
+
+<div
+class="cards"
+id="missionList"
+></div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ACHIEVEMENTS
+===================================================== -->
+
+<section
+class="screen"
+id="achievementsScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+Achievements
+</h1>
+
+<div class="pageSub">
+Earn your place among St. Louis legends.
+</div>
+
+</div>
+
+
+<div
+class="cards"
+id="achievementList"
+></div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DAILY BONUS
+===================================================== -->
+
+<section
+class="screen"
+id="dailyScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+Daily Bonus
+</h1>
+
+<div class="pageSub">
+Come back every day and collect your reward.
+</div>
+
+</div>
+
+
+<div class="pageBanner">
+
+<b>
+Daily Cash Drop
+</b>
+
+<span>
+Your daily reward increases as your level rises.
+</span>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+Today's Reward
+</b>
+
+<div
+class="sub"
+id="dailyReward"
+>
+Calculating...
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="daily()"
+>
+CLAIM
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CHARACTER
+===================================================== -->
+
+<section
+class="screen"
+id="characterScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+Character Upgrades
+</h1>
+
+<div class="pageSub">
+Upgrade your character and become a better hustler.
+</div>
+
+</div>
+
+
+<div class="cards" id="characterList"></div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PRESTIGE
+===================================================== -->
+
+<section
+class="screen"
+id="prestigeScreen"
+>
+
+<div class="pageHeader">
+
+<button
+class="back"
+onclick="openScreen('homeScreen')"
+>
+BACK TO HOME
+</button>
+
+<h1 class="pageTitle">
+Prestige
+</h1>
+
+<div class="pageSub">
+Reset your empire for a permanent multiplier.
+</div>
+
+</div>
+
+
+<div class="pageBanner">
+
+<b>
+St. Louis Legend
+</b>
+
+<span>
+Reach $100K total earnings to prestige. Your businesses, vehicles and properties reset, but your prestige multiplier remains permanently.
+</span>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+Current Prestige
+</b>
+
+<div
+class="sub"
+id="prestigePage"
+>
+1.0×
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="prestige()"
+>
 PRESTIGE
 </button>
 
@@ -970,161 +2443,334 @@ PRESTIGE
 
 </div>
 
-</div>
+</section>
 
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
 
 <nav class="bottom">
 
-<button class="nav active" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+
+<button
+class="nav active"
+id="navHome"
+onclick="openScreen('homeScreen')"
+>
+
+<svg viewBox="0 0 24 24">
+
+<path
+d="M4 11 12 4l8 7v8H4z"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+<path
+d="M9 19v-5h6v5"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+</svg>
+
 HOME
+
 </button>
 
-<button class="nav" onclick="msg('Empire Stats')">
+
+<button
+class="nav"
+id="navStats"
+onclick="openScreen('statsScreen')"
+>
+
+<svg viewBox="0 0 24 24">
+
+<path
+d="M5 19V10M12 19V5M19 19v-8"
+stroke="currentColor"
+stroke-width="3"
+/>
+
+</svg>
+
 STATS
+
 </button>
 
-<button class="nav" onclick="msg('St. Louis Map')">
+
+<button
+class="nav"
+id="navMap"
+onclick="openScreen('mapScreen')"
+>
+
+<svg viewBox="0 0 24 24">
+
+<path
+d="M4 6l6-2 8 2 2-1v13l-4 2-8-2-4 1z"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+<path
+d="M10 4v14M18 6v12"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+</svg>
+
 MAP
+
 </button>
 
-<button class="nav" onclick="msg('Achievements')">
+
+<button
+class="nav"
+id="navAwards"
+onclick="openScreen('achievementsScreen')"
+>
+
+<svg viewBox="0 0 24 24">
+
+<path
+d="M7 4h10v8a5 5 0 0 1-10 0z"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+<path
+d="M7 7H3v2a4 4 0 0 0 4 4M17 7h4v2a4 4 0 0 1-4 4M12 17v4M8 21h8"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+</svg>
+
 AWARDS
+
 </button>
 
-<button class="nav" onclick="scrollToSection('missions')">
+
+<button
+class="nav"
+id="navMissions"
+onclick="openScreen('missionsScreen')"
+>
+
+<svg viewBox="0 0 24 24">
+
+<circle
+cx="12"
+cy="12"
+r="8"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+<circle
+cx="12"
+cy="12"
+r="3"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+</svg>
+
 MISSIONS
+
 </button>
 
-<button class="nav" onclick="scrollToSection('carsSection')">
+
+<button
+class="nav"
+id="navStore"
+onclick="openScreen('carsScreen')"
+>
+
+<svg viewBox="0 0 24 24">
+
+<path
+d="M3 7h18v13H3z"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+<path
+d="M7 7V4h10v3M3 12h18"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+
+</svg>
+
 STORE
+
 </button>
+
 
 </nav>
 
 
-<div class="toast" id="toast"></div>
+<div
+class="toast"
+id="toast"
+></div>
+
+
+</div>
+
 
 
 <script>
 
+/* =========================================================
+   SAVE SYSTEM
+========================================================= */
+
 const KEY = "gtr_stl_v3";
 
 
-/* =============================
-   BUSINESSES
-============================= */
-
 const B = [
-  ["Lemonade Stand", 50, 1],
-  ["Food Truck", 500, 10],
-  ["Curb Store", 5000, 100],
-  ["STL Restaurant", 25000, 500],
-  ["Downtown Building", 100000, 2000],
-  ["Factory", 500000, 10000],
-  ["STL Corporation", 2500000, 50000]
+
+  ["Lemonade Stand",50,1],
+
+  ["Food Truck",500,10],
+
+  ["Curb Store",5000,100],
+
+  ["STL Restaurant",25000,500],
+
+  ["Downtown Building",100000,2000],
+
+  ["Factory",500000,10000],
+
+  ["STL Corporation",2500000,50000]
+
 ];
 
-
-/* =============================
-   CARS
-============================= */
 
 const CARS = [
-  ["Used Sedan", 2500, 25, 2],
-  ["Muscle Car", 15000, 175, 5],
-  ["Luxury SUV", 50000, 650, 10],
-  ["Sports Car", 150000, 2500, 15],
-  ["Supercar", 1000000, 20000, 20]
+
+  ["Used Sedan",2500,25,2],
+
+  ["Muscle Car",15000,175,5],
+
+  ["Luxury SUV",50000,650,10],
+
+  ["Sports Car",150000,2500,15],
+
+  ["Supercar",1000000,20000,20]
+
 ];
 
-
-/* =============================
-   HOUSES
-============================= */
 
 const HOUSES = [
-  ["Starter House", 5000, 50, 2],
-  ["Duplex", 25000, 300, 5],
-  ["Apartment Building", 100000, 1500, 10],
-  ["Luxury Home", 500000, 8000, 15],
-  ["Downtown Tower", 2000000, 40000, 20]
+
+  ["Starter House",5000,50,2],
+
+  ["Duplex",25000,300,5],
+
+  ["Apartment Building",100000,1500,10],
+
+  ["Luxury Home",500000,8000,15],
+
+  ["Downtown Tower",2000000,40000,20]
+
 ];
 
-
-/* =============================
-   LOAD SAVE
-============================= */
 
 let s;
 
-try {
+
+try{
 
   s = JSON.parse(
     localStorage.getItem(KEY) || "null"
   );
 
-} catch(error) {
+}catch(error){
 
   s = null;
 
 }
 
 
-if (!s || typeof s !== "object") {
+if(!s || typeof s !== "object"){
 
   s = {
 
-    cash: 100,
-    earned: 0,
-    level: 1,
-    xp: 0,
-    prestige: 0,
+    cash:100,
 
-    owned: Array(7).fill(0),
+    earned:0,
 
-    up: Array(3).fill(0),
+    level:1,
 
-    cars: Array(CARS.length).fill(0),
+    xp:0,
 
-    houses: Array(HOUSES.length).fill(0),
+    prestige:0,
 
-    daily: 0
+    owned:Array(B.length).fill(0),
+
+    up:Array(3).fill(0),
+
+    cars:Array(CARS.length).fill(0),
+
+    houses:Array(HOUSES.length).fill(0),
+
+    investments:0,
+
+    rareIncome:0,
+
+    daily:0
 
   };
 
 }
 
 
-/* =============================
-   SAVE DATA SAFETY
-============================= */
+/* SAFETY */
 
-if (!Array.isArray(s.owned) ||
-    s.owned.length !== B.length) {
+if(!Array.isArray(s.owned) ||
+   s.owned.length !== B.length){
 
   s.owned = Array(B.length).fill(0);
 
 }
 
 
-if (!Array.isArray(s.up) ||
-    s.up.length !== 3) {
+if(!Array.isArray(s.up) ||
+   s.up.length !== 3){
 
   s.up = Array(3).fill(0);
 
 }
 
 
-if (!Array.isArray(s.cars) ||
-    s.cars.length !== CARS.length) {
+if(!Array.isArray(s.cars) ||
+   s.cars.length !== CARS.length){
 
   s.cars = Array(CARS.length).fill(0);
 
 }
 
 
-if (!Array.isArray(s.houses) ||
-    s.houses.length !== HOUSES.length) {
+if(!Array.isArray(s.houses) ||
+   s.houses.length !== HOUSES.length){
 
   s.houses = Array(HOUSES.length).fill(0);
 
@@ -1132,53 +2778,79 @@ if (!Array.isArray(s.houses) ||
 
 
 s.cash = Number(s.cash) || 100;
+
 s.earned = Number(s.earned) || 0;
+
 s.level = Number(s.level) || 1;
+
 s.xp = Number(s.xp) || 0;
+
 s.prestige = Number(s.prestige) || 0;
+
+s.investments = Number(s.investments) || 0;
+
+s.rareIncome = Number(s.rareIncome) || 0;
+
 s.daily = Number(s.daily) || 0;
 
 
-/* =============================
-   MONEY
-============================= */
 
-function money(n) {
+/* =========================================================
+   MONEY FORMAT
+========================================================= */
+
+function money(n){
 
   n = Number(n) || 0;
 
-  if (n >= 1000000000000)
+
+  if(n >= 1000000000000)
+
     return "$" +
-      (n / 1000000000000).toFixed(2) +
+      (n / 1000000000000)
+      .toFixed(2) +
       "T";
 
-  if (n >= 1000000000)
+
+  if(n >= 1000000000)
+
     return "$" +
-      (n / 1000000000).toFixed(2) +
+      (n / 1000000000)
+      .toFixed(2) +
       "B";
 
-  if (n >= 1000000)
+
+  if(n >= 1000000)
+
     return "$" +
-      (n / 1000000).toFixed(2) +
+      (n / 1000000)
+      .toFixed(2) +
       "M";
 
-  if (n >= 1000)
+
+  if(n >= 1000)
+
     return "$" +
-      (n / 1000).toFixed(1) +
+      (n / 1000)
+      .toFixed(1) +
       "K";
 
-  return "$" + Math.floor(n);
+
+  return "$" +
+    Math.floor(n);
+
 }
 
 
-/* =============================
-   BUSINESS INCOME
-============================= */
 
-function businessIncome() {
+/* =========================================================
+   INCOME
+========================================================= */
+
+function businessIncome(){
 
   return B.reduce(
-    (total, b, i) => {
+    (total,b,i)=>{
 
       return total +
         b[2] *
@@ -1191,14 +2863,10 @@ function businessIncome() {
 }
 
 
-/* =============================
-   CAR INCOME
-============================= */
-
-function carIncome() {
+function carIncome(){
 
   return CARS.reduce(
-    (total, car, i) => {
+    (total,car,i)=>{
 
       return total +
         car[2] *
@@ -1211,14 +2879,10 @@ function carIncome() {
 }
 
 
-/* =============================
-   HOUSE INCOME
-============================= */
-
-function houseIncome() {
+function houseIncome(){
 
   return HOUSES.reduce(
-    (total, house, i) => {
+    (total,house,i)=>{
 
       return total +
         house[2] *
@@ -1231,41 +2895,48 @@ function houseIncome() {
 }
 
 
-/* =============================
-   TOTAL INCOME
-============================= */
+function income(){
 
-function income() {
+  const base =
 
-  const baseIncome =
     businessIncome() +
-    carIncome() +
-    houseIncome();
 
-  return baseIncome *
-    (1 + s.prestige * 0.5) *
-    (1 + s.up[1] * 0.25);
+    carIncome() +
+
+    houseIncome() +
+
+    Number(s.investments || 0) +
+
+    Number(s.rareIncome || 0);
+
+
+  return base *
+
+    (1 + s.prestige * .5) *
+
+    (1 + s.up[1] * .25);
 
 }
 
 
-/* =============================
+
+/* =========================================================
    SAVE
-============================= */
+========================================================= */
 
-function save() {
+function save(){
 
-  try {
+  try{
 
     localStorage.setItem(
       KEY,
       JSON.stringify(s)
     );
 
-  } catch(error) {
+  }catch(error){
 
     console.warn(
-      "Game save failed:",
+      "Save failed",
       error
     );
 
@@ -1274,101 +2945,311 @@ function save() {
 }
 
 
-/* =============================
-   UPDATE STATS
-============================= */
 
-function updateStats() {
+/* =========================================================
+   SCREEN SYSTEM
+========================================================= */
 
-  const cashEl =
-    document.getElementById("cash");
+function openScreen(id){
 
-  const incomeEl =
-    document.getElementById("income");
-
-  const levelEl =
-    document.getElementById("level");
-
-  const prestigeEl =
-    document.getElementById("prestige");
-
-  const goalEl =
-    document.getElementById("goal");
+  const screens =
+    document.querySelectorAll(".screen");
 
 
-  if (cashEl)
-    cashEl.textContent =
-      money(s.cash);
+  screens.forEach(screen=>{
+
+    screen.classList.remove(
+      "active"
+    );
+
+  });
 
 
-  if (incomeEl)
-    incomeEl.textContent =
-      money(income()) + "/s";
+  const target =
+    document.getElementById(id);
 
 
-  if (levelEl)
-    levelEl.textContent =
-      s.level;
+  if(target){
 
-
-  if (prestigeEl)
-    prestigeEl.textContent =
-      (1 + s.prestige * 0.5)
-        .toFixed(1) + "×";
-
-
-  if (goalEl) {
-
-    let goal;
-
-    if (s.cash < 1000)
-      goal = "$1,000 CASH";
-
-    else if (s.cash < 10000)
-      goal = "$10,000 CASH";
-
-    else if (s.cash < 100000)
-      goal = "$100,000 CASH";
-
-    else
-      goal = "$1,000,000 CASH";
-
-
-    goalEl.textContent = goal;
+    target.classList.add(
+      "active"
+    );
 
   }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"instant"
+  });
+
+
+  updateNav(id);
+
+  render();
 
 }
 
 
-/* =============================
-   EARN
-============================= */
 
-function earn(amount, fullRender = true) {
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function updateNav(id){
+
+  document
+    .querySelectorAll(".nav")
+    .forEach(nav=>{
+
+      nav.classList.remove(
+        "active"
+      );
+
+    });
+
+
+  if(id === "homeScreen")
+
+    document
+      .getElementById("navHome")
+      .classList.add("active");
+
+
+  if(id === "statsScreen")
+
+    document
+      .getElementById("navStats")
+      .classList.add("active");
+
+
+  if(id === "mapScreen")
+
+    document
+      .getElementById("navMap")
+      .classList.add("active");
+
+
+  if(id === "achievementsScreen")
+
+    document
+      .getElementById("navAwards")
+      .classList.add("active");
+
+
+  if(id === "missionsScreen")
+
+    document
+      .getElementById("navMissions")
+      .classList.add("active");
+
+
+  if(
+    id === "carsScreen" ||
+    id === "housesScreen" ||
+    id === "businessScreen"
+  )
+
+    document
+      .getElementById("navStore")
+      .classList.add("active");
+
+}
+
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  document.getElementById(
+    "cash"
+  ).textContent =
+    money(s.cash);
+
+
+  document.getElementById(
+    "income"
+  ).textContent =
+    money(income()) +
+    "/s";
+
+
+  document.getElementById(
+    "level"
+  ).textContent =
+    s.level;
+
+
+  document.getElementById(
+    "prestige"
+  ).textContent =
+    (1 + s.prestige * .5)
+      .toFixed(1) +
+    "×";
+
+
+  let goal;
+
+
+  if(s.cash < 1000)
+
+    goal =
+      "$1,000 CASH";
+
+
+  else if(s.cash < 10000)
+
+    goal =
+      "$10,000 CASH";
+
+
+  else if(s.cash < 100000)
+
+    goal =
+      "$100,000 CASH";
+
+
+  else
+
+    goal =
+      "$1,000,000 CASH";
+
+
+  document.getElementById(
+    "goal"
+  ).textContent =
+    goal;
+
+
+  const totalBusinesses =
+    s.owned.reduce(
+      (a,b)=>a+b,
+      0
+    );
+
+
+  document.getElementById(
+    "owned"
+  ).textContent =
+    totalBusinesses +
+    " owned";
+
+
+  let achievements = 0;
+
+
+  if(s.earned >= 100)
+    achievements++;
+
+
+  if(totalBusinesses >= 1)
+    achievements++;
+
+
+  if(
+    s.cars.reduce(
+      (a,b)=>a+b,
+      0
+    ) >= 1
+  )
+    achievements++;
+
+
+  if(
+    s.houses.reduce(
+      (a,b)=>a+b,
+      0
+    ) >= 1
+  )
+    achievements++;
+
+
+  if(s.earned >= 1000)
+    achievements++;
+
+
+  if(s.level >= 10)
+    achievements++;
+
+
+  if(s.earned >= 100000)
+    achievements++;
+
+
+  document.getElementById(
+    "ach"
+  ).textContent =
+    achievements +
+    " unlocked";
+
+}
+
+
+
+/* =========================================================
+   WORK
+========================================================= */
+
+function work(){
+
+  const amount =
+
+    10 *
+    (1 + s.up[0] * .2);
+
+
+  earn(
+    amount,
+    true
+  );
+
+
+  showMessage(
+    "Grind complete +" +
+    money(amount)
+  );
+
+}
+
+
+
+/* =========================================================
+   EARN
+========================================================= */
+
+function earn(
+  amount,
+  renderPage = true
+){
 
   amount =
     Number(amount) || 0;
 
 
-  if (amount <= 0)
+  if(amount <= 0)
     return;
 
 
   s.cash += amount;
+
   s.earned += amount;
 
 
   s.xp += Math.max(
     1,
-    Math.floor(amount / 10)
+    Math.floor(
+      amount / 10
+    )
   );
 
 
   let leveledUp = false;
 
 
-  while (s.xp >= 100) {
+  while(s.xp >= 100){
 
     s.xp -= 100;
 
@@ -1381,15 +3262,14 @@ function earn(amount, fullRender = true) {
 
   save();
 
+  updateStats();
 
-  if (fullRender)
+
+  if(renderPage)
     render();
 
-  else
-    updateStats();
 
-
-  if (leveledUp) {
+  if(leveledUp){
 
     showMessage(
       "LEVEL UP! Level " +
@@ -1401,49 +3281,32 @@ function earn(amount, fullRender = true) {
 }
 
 
-/* =============================
-   WORK
-============================= */
 
-function work() {
+/* =========================================================
+   BUSINESSES
+========================================================= */
 
-  const amount =
-    10 *
-    (1 + s.up[0] * 0.2);
+function buyBusiness(i){
 
+  const b = B[i];
 
-  earn(amount, true);
-
-
-  showMessage(
-    "Grind complete +" +
-    money(amount)
-  );
-
-}
-
-
-/* =============================
-   BUY BUSINESS
-============================= */
-
-function buyBusiness(i) {
-
-  if (!B[i])
+  if(!b)
     return;
 
 
-  const cost =
-    Math.floor(
-      B[i][1] *
-      Math.pow(
-        1.15,
-        s.owned[i]
-      )
-    );
+  const cost = Math.floor(
+
+    b[1] *
+
+    Math.pow(
+      1.15,
+      s.owned[i]
+    )
+
+  );
 
 
-  if (s.cash < cost) {
+  if(s.cash < cost){
 
     showMessage(
       "Not enough cash"
@@ -1465,28 +3328,29 @@ function buyBusiness(i) {
 
 
   showMessage(
-    B[i][0] +
+    b[0] +
     " acquired"
   );
 
 }
 
 
-/* =============================
-   BUY CAR
-============================= */
 
-function buyCar(i) {
+/* =========================================================
+   CARS
+========================================================= */
+
+function buyCar(i){
 
   const car =
     CARS[i];
 
 
-  if (!car)
+  if(!car)
     return;
 
 
-  if (s.level < car[3]) {
+  if(s.level < car[3]){
 
     showMessage(
       "Reach Level " +
@@ -1500,17 +3364,19 @@ function buyCar(i) {
   }
 
 
-  const cost =
-    Math.floor(
-      car[1] *
-      Math.pow(
-        1.15,
-        s.cars[i]
-      )
-    );
+  const cost = Math.floor(
+
+    car[1] *
+
+    Math.pow(
+      1.15,
+      s.cars[i]
+    )
+
+  );
 
 
-  if (s.cash < cost) {
+  if(s.cash < cost){
 
     showMessage(
       "Not enough cash"
@@ -1533,27 +3399,28 @@ function buyCar(i) {
 
   showMessage(
     car[0] +
-    " added to your fleet"
+    " added to fleet"
   );
 
 }
 
 
-/* =============================
-   BUY HOUSE
-============================= */
 
-function buyHouse(i) {
+/* =========================================================
+   HOUSES
+========================================================= */
+
+function buyHouse(i){
 
   const house =
     HOUSES[i];
 
 
-  if (!house)
+  if(!house)
     return;
 
 
-  if (s.level < house[3]) {
+  if(s.level < house[3]){
 
     showMessage(
       "Reach Level " +
@@ -1567,17 +3434,19 @@ function buyHouse(i) {
   }
 
 
-  const cost =
-    Math.floor(
-      house[1] *
-      Math.pow(
-        1.15,
-        s.houses[i]
-      )
-    );
+  const cost = Math.floor(
+
+    house[1] *
+
+    Math.pow(
+      1.15,
+      s.houses[i]
+    )
+
+  );
 
 
-  if (s.cash < cost) {
+  if(s.cash < cost){
 
     showMessage(
       "Not enough cash"
@@ -1606,11 +3475,197 @@ function buyHouse(i) {
 }
 
 
-/* =============================
-   UPGRADES
-============================= */
 
-function upgrade(i) {
+/* =========================================================
+   JOBS
+========================================================= */
+
+function jobReward(amount){
+
+  const reward =
+    amount *
+    (1 + s.up[0] * .15);
+
+
+  earn(
+    reward,
+    false
+  );
+
+
+  showMessage(
+    "Job complete +" +
+    money(reward)
+  );
+
+}
+
+
+
+/* =========================================================
+   INVESTMENTS
+========================================================= */
+
+function buyInvestment(
+  cost,
+  reward,
+  name
+){
+
+  if(s.cash < cost){
+
+    showMessage(
+      "Not enough cash"
+    );
+
+    return;
+
+  }
+
+
+  s.cash -= cost;
+
+  s.investments += reward;
+
+
+  save();
+
+  render();
+
+
+  showMessage(
+    name +
+    " purchased"
+  );
+
+}
+
+
+
+/* =========================================================
+   RARE ASSETS
+========================================================= */
+
+function buyRare(
+  cost,
+  reward,
+  name
+){
+
+  if(s.cash < cost){
+
+    showMessage(
+      "Not enough cash"
+    );
+
+    return;
+
+  }
+
+
+  s.cash -= cost;
+
+  s.rareIncome += reward;
+
+
+  save();
+
+  render();
+
+
+  showMessage(
+    name +
+    " acquired"
+  );
+
+}
+
+
+
+/* =========================================================
+   DAILY BONUS
+========================================================= */
+
+function daily(){
+
+  const today =
+    Math.floor(
+      Date.now() /
+      86400000
+    );
+
+
+  if(s.daily === today){
+
+    showMessage(
+      "Daily bonus already claimed"
+    );
+
+    return;
+
+  }
+
+
+  s.daily =
+    today;
+
+
+  const bonus =
+    100 +
+    s.level * 25;
+
+
+  earn(
+    bonus,
+    true
+  );
+
+
+  showMessage(
+    "Daily bonus +" +
+    money(bonus)
+  );
+
+}
+
+
+
+/* =========================================================
+   DISTRICTS
+========================================================= */
+
+function unlockDistrict(
+  level,
+  name
+){
+
+  if(s.level < level){
+
+    showMessage(
+      "Reach Level " +
+      level +
+      " first"
+    );
+
+    return;
+
+  }
+
+
+  showMessage(
+    name +
+    " unlocked!"
+  );
+
+}
+
+
+
+/* =========================================================
+   UPGRADES
+========================================================= */
+
+function upgrade(i){
 
   const names = [
 
@@ -1634,21 +3689,19 @@ function upgrade(i) {
   ];
 
 
-  if (i < 0 || i > 2)
-    return;
+  const cost = Math.floor(
+
+    bases[i] *
+
+    Math.pow(
+      2,
+      s.up[i]
+    )
+
+  );
 
 
-  const cost =
-    Math.floor(
-      bases[i] *
-      Math.pow(
-        2,
-        s.up[i]
-      )
-    );
-
-
-  if (s.cash < cost) {
+  if(s.cash < cost){
 
     showMessage(
       "Not enough cash"
@@ -1677,58 +3730,14 @@ function upgrade(i) {
 }
 
 
-/* =============================
-   DAILY BONUS
-============================= */
 
-function daily() {
-
-  const today =
-    Math.floor(
-      Date.now() / 86400000
-    );
-
-
-  if (s.daily === today) {
-
-    showMessage(
-      "Daily bonus already claimed"
-    );
-
-    return;
-
-  }
-
-
-  s.daily = today;
-
-
-  const bonus =
-    100 +
-    s.level * 25;
-
-
-  earn(
-    bonus,
-    true
-  );
-
-
-  showMessage(
-    "Daily bonus +" +
-    money(bonus)
-  );
-
-}
-
-
-/* =============================
+/* =========================================================
    PRESTIGE
-============================= */
+========================================================= */
 
-function prestige() {
+function prestige(){
 
-  if (s.earned < 100000) {
+  if(s.earned < 100000){
 
     showMessage(
       "Earn $100K total first"
@@ -1753,19 +3762,28 @@ function prestige() {
 
 
   s.owned =
-    Array(B.length).fill(0);
+    Array(B.length)
+    .fill(0);
 
 
   s.up =
-    Array(3).fill(0);
+    Array(3)
+    .fill(0);
 
 
   s.cars =
-    Array(CARS.length).fill(0);
+    Array(CARS.length)
+    .fill(0);
 
 
   s.houses =
-    Array(HOUSES.length).fill(0);
+    Array(HOUSES.length)
+    .fill(0);
+
+
+  s.investments = 0;
+
+  s.rareIncome = 0;
 
 
   s.prestige =
@@ -1778,120 +3796,834 @@ function prestige() {
 
 
   showMessage(
-    "PRESTIGE! Permanent boost increased"
+    "PRESTIGE COMPLETE!"
   );
 
 }
 
 
-/* =============================
-   OPEN CARS
-============================= */
 
-function openCars() {
+/* =========================================================
+   RENDER
+========================================================= */
 
-  const section =
+function render(){
+
+  updateStats();
+
+
+  /* =====================
+     CARS
+  ===================== */
+
+  const carsEl =
     document.getElementById(
-      "carsSection"
+      "carsList"
     );
 
 
-  if (section) {
+  if(carsEl){
 
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
+    carsEl.innerHTML =
+
+      CARS.map(
+        (car,i)=>{
+
+          const cost =
+            Math.floor(
+
+              car[1] *
+
+              Math.pow(
+                1.15,
+                s.cars[i]
+              )
+
+            );
+
+
+          const unlocked =
+            s.level >= car[3];
+
+
+          return `
+
+          <div class="card">
+
+            <div class="row">
+
+              <div>
+
+                <b>
+                  ${car[0]}
+                </b>
+
+                <div class="sub">
+
+                  Owned:
+                  ${s.cars[i]}
+
+                  <br>
+
+                  Income:
+                  +${money(car[2])}/s each
+
+                  <br>
+
+                  Required Level:
+                  ${car[3]}
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="btn buy"
+                onclick="buyCar(${i})"
+                ${unlocked ? "" : "disabled"}
+              >
+
+                ${
+                  unlocked
+                  ? money(cost)
+                  : "LOCKED"
+                }
+
+              </button>
+
+            </div>
+
+          </div>
+
+          `;
+
+        }
+      ).join("");
 
   }
 
 
-  showMessage(
-    "Your vehicle fleet"
-  );
 
-}
+  /* =====================
+     HOUSES
+  ===================== */
 
-
-/* =============================
-   OPEN HOUSES
-============================= */
-
-function openHouses() {
-
-  const section =
+  const housesEl =
     document.getElementById(
-      "housesSection"
+      "housesList"
     );
 
 
-  if (section) {
+  if(housesEl){
 
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
+    housesEl.innerHTML =
+
+      HOUSES.map(
+        (house,i)=>{
+
+          const cost =
+            Math.floor(
+
+              house[1] *
+
+              Math.pow(
+                1.15,
+                s.houses[i]
+              )
+
+            );
+
+
+          const unlocked =
+            s.level >= house[3];
+
+
+          return `
+
+          <div class="card">
+
+            <div class="row">
+
+              <div>
+
+                <b>
+                  ${house[0]}
+                </b>
+
+                <div class="sub">
+
+                  Owned:
+                  ${s.houses[i]}
+
+                  <br>
+
+                  Income:
+                  +${money(house[2])}/s each
+
+                  <br>
+
+                  Required Level:
+                  ${house[3]}
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="btn buy"
+                onclick="buyHouse(${i})"
+                ${unlocked ? "" : "disabled"}
+              >
+
+                ${
+                  unlocked
+                  ? money(cost)
+                  : "LOCKED"
+                }
+
+              </button>
+
+            </div>
+
+          </div>
+
+          `;
+
+        }
+      ).join("");
 
   }
 
 
-  showMessage(
-    "Your property empire"
-  );
+
+  /* =====================
+     BUSINESSES
+  ===================== */
+
+  const businessEl =
+    document.getElementById(
+      "businessList"
+    );
+
+
+  if(businessEl){
+
+    businessEl.innerHTML =
+
+      B.map(
+        (b,i)=>{
+
+          const cost =
+            Math.floor(
+
+              b[1] *
+
+              Math.pow(
+                1.15,
+                s.owned[i]
+              )
+
+            );
+
+
+          return `
+
+          <div class="card">
+
+            <div class="row">
+
+              <div>
+
+                <b>
+                  ${b[0]}
+                </b>
+
+                <div class="sub">
+
+                  Owned:
+                  ${s.owned[i]}
+
+                  <br>
+
+                  Income:
+                  +${money(b[2])}/s each
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="btn buy"
+                onclick="buyBusiness(${i})"
+              >
+
+                ${money(cost)}
+
+              </button>
+
+            </div>
+
+          </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+
+
+  /* =====================
+     STATS
+  ===================== */
+
+  const totalBusinesses =
+    s.owned.reduce(
+      (a,b)=>a+b,
+      0
+    );
+
+
+  const totalCars =
+    s.cars.reduce(
+      (a,b)=>a+b,
+      0
+    );
+
+
+  const totalHouses =
+    s.houses.reduce(
+      (a,b)=>a+b,
+      0
+    );
+
+
+  const statsEl =
+    document.getElementById(
+      "bigStats"
+    );
+
+
+  if(statsEl){
+
+    statsEl.innerHTML = `
+
+      <div class="bigStat">
+
+        <small>
+          Total Earned
+        </small>
+
+        <b>
+          ${money(s.earned)}
+        </b>
+
+      </div>
+
+
+      <div class="bigStat">
+
+        <small>
+          Passive Income
+        </small>
+
+        <b>
+          ${money(income())}/s
+        </b>
+
+      </div>
+
+
+      <div class="bigStat">
+
+        <small>
+          Businesses
+        </small>
+
+        <b>
+          ${totalBusinesses}
+        </b>
+
+      </div>
+
+
+      <div class="bigStat">
+
+        <small>
+          Vehicles
+        </small>
+
+        <b>
+          ${totalCars}
+        </b>
+
+      </div>
+
+
+      <div class="bigStat">
+
+        <small>
+          Properties
+        </small>
+
+        <b>
+          ${totalHouses}
+        </b>
+
+      </div>
+
+
+      <div class="bigStat">
+
+        <small>
+          Prestige
+        </small>
+
+        <b>
+          ${s.prestige}
+        </b>
+
+      </div>
+
+    `;
+
+  }
+
+
+  const statsSummary =
+    document.getElementById(
+      "statsSummary"
+    );
+
+
+  if(statsSummary){
+
+    statsSummary.textContent =
+
+      "You currently own " +
+
+      totalBusinesses +
+
+      " businesses, " +
+
+      totalCars +
+
+      " vehicles and " +
+
+      totalHouses +
+
+      " properties. Your empire generates " +
+
+      money(income()) +
+
+      " every second.";
+
+  }
+
+
+
+  /* =====================
+     MISSIONS
+  ===================== */
+
+  const missionsEl =
+    document.getElementById(
+      "missionList"
+    );
+
+
+  if(missionsEl){
+
+    const missions = [
+
+      [
+        "First Hustle",
+        s.earned,
+        100
+      ],
+
+      [
+        "First Business",
+        totalBusinesses,
+        1
+      ],
+
+      [
+        "First Vehicle",
+        totalCars,
+        1
+      ],
+
+      [
+        "First Property",
+        totalHouses,
+        1
+      ],
+
+      [
+        "First $1K",
+        s.earned,
+        1000
+      ],
+
+      [
+        "Getting Serious",
+        s.level,
+        10
+      ],
+
+      [
+        "Big Player",
+        s.earned,
+        100000
+      ]
+
+    ];
+
+
+    missionsEl.innerHTML =
+
+      missions.map(
+        m=>{
+
+          const percent =
+
+            Math.min(
+              100,
+              (m[1] / m[2]) * 100
+            );
+
+
+          return `
+
+          <div class="card">
+
+            <div class="row">
+
+              <b>
+                ${m[0]}
+              </b>
+
+              <span>
+                ${Math.floor(percent)}%
+              </span>
+
+            </div>
+
+
+            <div class="bar">
+
+              <i
+                style="width:${percent}%"
+              ></i>
+
+            </div>
+
+
+            <div class="sub">
+
+              ${money(m[1])}
+              /
+              ${money(m[2])}
+
+            </div>
+
+          </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+
+
+  /* =====================
+     ACHIEVEMENTS
+  ===================== */
+
+  const achievementEl =
+    document.getElementById(
+      "achievementList"
+    );
+
+
+  if(achievementEl){
+
+    const achievements = [
+
+      [
+        "First $100",
+        s.earned >= 100
+      ],
+
+      [
+        "First Business",
+        totalBusinesses >= 1
+      ],
+
+      [
+        "First Vehicle",
+        totalCars >= 1
+      ],
+
+      [
+        "First Property",
+        totalHouses >= 1
+      ],
+
+      [
+        "Money Maker",
+        s.earned >= 1000
+      ],
+
+      [
+        "Level 10",
+        s.level >= 10
+      ],
+
+      [
+        "St. Louis Legend",
+        s.earned >= 100000
+      ]
+
+    ];
+
+
+    achievementEl.innerHTML =
+
+      achievements.map(
+        a=>`
+
+        <div class="card">
+
+          <div class="row">
+
+            <div>
+
+              <b>
+                ${a[0]}
+              </b>
+
+              <div class="sub">
+
+                ${
+                  a[1]
+                  ? "Achievement unlocked"
+                  : "Keep grinding to unlock"
+                }
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="btn"
+              disabled
+            >
+
+              ${
+                a[1]
+                ? "UNLOCKED"
+                : "LOCKED"
+              }
+
+            </button>
+
+          </div>
+
+        </div>
+
+        `
+      ).join("");
+
+  }
+
+
+
+  /* =====================
+     DAILY
+  ===================== */
+
+  const dailyReward =
+    document.getElementById(
+      "dailyReward"
+    );
+
+
+  if(dailyReward){
+
+    const today =
+      Math.floor(
+        Date.now() /
+        86400000
+      );
+
+
+    const reward =
+      100 +
+      s.level * 25;
+
+
+    if(s.daily === today){
+
+      dailyReward.textContent =
+        "Already claimed today.";
+
+    }else{
+
+      dailyReward.textContent =
+        "Available reward: " +
+        money(reward);
+
+    }
+
+  }
+
+
+
+  /* =====================
+     CHARACTER
+  ===================== */
+
+  const characterEl =
+    document.getElementById(
+      "characterList"
+    );
+
+
+  if(characterEl){
+
+    const upgrades = [
+
+      [
+        "Hard Worker",
+        "Increase manual work income by 20% per level.",
+        250,
+        0
+      ],
+
+      [
+        "Better Business",
+        "Increase business income by 25% per level.",
+        2500,
+        1
+      ],
+
+      [
+        "Street Hustle",
+        "Improve future grind bonuses.",
+        15000,
+        2
+      ]
+
+    ];
+
+
+    characterEl.innerHTML =
+
+      upgrades.map(
+        u=>{
+
+          const cost =
+
+            Math.floor(
+
+              u[2] *
+
+              Math.pow(
+                2,
+                s.up[u[3]]
+              )
+
+            );
+
+
+          return `
+
+          <div class="card">
+
+            <div class="row">
+
+              <div>
+
+                <b>
+                  ${u[0]}
+                  · Lv ${s.up[u[3]]}
+                </b>
+
+                <div class="sub">
+                  ${u[1]}
+                </div>
+
+              </div>
+
+
+              <button
+                class="btn buy"
+                onclick="upgrade(${u[3]})"
+              >
+
+                ${money(cost)}
+
+              </button>
+
+            </div>
+
+          </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+
+
+  /* =====================
+     PRESTIGE PAGE
+  ===================== */
+
+  const prestigePage =
+    document.getElementById(
+      "prestigePage"
+    );
+
+
+  if(prestigePage){
+
+    prestigePage.textContent =
+
+      "Current multiplier: " +
+
+      (1 + s.prestige * .5)
+        .toFixed(1) +
+
+      "×";
+
+  }
 
 }
 
 
-/* =============================
-   FUTURE SYSTEM MESSAGE
-============================= */
 
-function msg(text) {
-
-  showMessage(
-    text +
-    " system coming in the next expansion."
-  );
-
-}
-
-
-/* =============================
-   SCROLL
-============================= */
-
-function scrollToSection(id) {
-
-  const element =
-    document.getElementById(id);
-
-
-  if (!element)
-    return;
-
-
-  element.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-
-}
-
-
-/* =============================
+/* =========================================================
    TOAST
-============================= */
+========================================================= */
 
-function showMessage(text) {
+function showMessage(text){
 
   const box =
     document.getElementById(
       "toast"
     );
-
-
-  if (!box)
-    return;
 
 
   box.textContent =
@@ -1909,559 +4641,42 @@ function showMessage(text) {
 
 
   window.toastTimer =
-    setTimeout(() => {
 
-      box.classList.remove(
-        "show"
-      );
+    setTimeout(
+      ()=>{
 
-    }, 1600);
+        box.classList.remove(
+          "show"
+        );
+
+      },
+      1700
+    );
 
 }
 
 
-/* =============================
-   RENDER
-============================= */
 
-function render() {
-
-  updateStats();
-
-
-  /* =============================
-     TOTAL OWNED
-  ============================= */
-
-  const totalBusinesses =
-    s.owned.reduce(
-      (a,b) => a + b,
-      0
-    );
-
-
-  const totalCars =
-    s.cars.reduce(
-      (a,b) => a + b,
-      0
-    );
-
-
-  const totalHouses =
-    s.houses.reduce(
-      (a,b) => a + b,
-      0
-    );
-
-
-  const ownedEl =
-    document.getElementById(
-      "owned"
-    );
-
-
-  if (ownedEl) {
-
-    ownedEl.textContent =
-      totalBusinesses +
-      " owned";
-
-  }
-
-
-  /* =============================
-     ACHIEVEMENTS
-  ============================= */
-
-  let achievements = 0;
-
-
-  if (s.earned >= 100)
-    achievements++;
-
-
-  if (totalBusinesses >= 1)
-    achievements++;
-
-
-  if (totalCars >= 1)
-    achievements++;
-
-
-  if (totalHouses >= 1)
-    achievements++;
-
-
-  if (s.earned >= 1000)
-    achievements++;
-
-
-  if (s.level >= 10)
-    achievements++;
-
-
-  if (s.earned >= 100000)
-    achievements++;
-
-
-  const achEl =
-    document.getElementById(
-      "ach"
-    );
-
-
-  if (achEl) {
-
-    achEl.textContent =
-      achievements +
-      " unlocked";
-
-  }
-
-
-  /* =============================
-     BUSINESSES
-  ============================= */
-
-  const businessEl =
-    document.getElementById(
-      "businessList"
-    );
-
-
-  if (businessEl) {
-
-    businessEl.innerHTML =
-
-      B.map((b,i) => {
-
-        const cost =
-          Math.floor(
-            b[1] *
-            Math.pow(
-              1.15,
-              s.owned[i]
-            )
-          );
-
-
-        return `
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-${b[0]}
-</b>
-
-<div class="sub">
-Owned: ${s.owned[i]}
-<br>
-Income: +${money(b[2])}/s each
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="buyBusiness(${i})"
->
-
-${money(cost)}
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-      }).join("");
-
-  }
-
-
-  /* =============================
-     CARS
-  ============================= */
-
-  const carsEl =
-    document.getElementById(
-      "cars"
-    );
-
-
-  if (carsEl) {
-
-    carsEl.innerHTML =
-
-      CARS.map((car,i) => {
-
-        const cost =
-          Math.floor(
-            car[1] *
-            Math.pow(
-              1.15,
-              s.cars[i]
-            )
-          );
-
-
-        const unlocked =
-          s.level >= car[3];
-
-
-        return `
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-${car[0]}
-</b>
-
-<div class="sub">
-
-Owned: ${s.cars[i]}
-
-<br>
-
-Income:
-+${money(car[2])}/s each
-
-<br>
-
-Required Level:
-${car[3]}
-
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="buyCar(${i})"
-${unlocked ? "" : "disabled"}
->
-
-${unlocked ? money(cost) : "LOCKED"}
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-      }).join("");
-
-  }
-
-
-  /* =============================
-     HOUSES
-  ============================= */
-
-  const housesEl =
-    document.getElementById(
-      "houses"
-    );
-
-
-  if (housesEl) {
-
-    housesEl.innerHTML =
-
-      HOUSES.map((house,i) => {
-
-        const cost =
-          Math.floor(
-            house[1] *
-            Math.pow(
-              1.15,
-              s.houses[i]
-            )
-          );
-
-
-        const unlocked =
-          s.level >= house[3];
-
-
-        return `
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-${house[0]}
-</b>
-
-<div class="sub">
-
-Owned: ${s.houses[i]}
-
-<br>
-
-Income:
-+${money(house[2])}/s each
-
-<br>
-
-Required Level:
-${house[3]}
-
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="buyHouse(${i})"
-${unlocked ? "" : "disabled"}
->
-
-${unlocked ? money(cost) : "LOCKED"}
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-      }).join("");
-
-  }
-
-
-  /* =============================
-     UPGRADES
-  ============================= */
-
-  const upgradesEl =
-    document.getElementById(
-      "upgrades"
-    );
-
-
-  const upgrades = [
-
-    [
-      "Hard Worker",
-      "Work income +20% per level",
-      250
-    ],
-
-    [
-      "Better Business",
-      "Business income +25% per level",
-      2500
-    ],
-
-    [
-      "Street Hustle",
-      "Future grind bonus",
-      15000
-    ]
-
-  ];
-
-
-  if (upgradesEl) {
-
-    upgradesEl.innerHTML =
-
-      upgrades.map((u,i) => {
-
-        const cost =
-          Math.floor(
-            u[2] *
-            Math.pow(
-              2,
-              s.up[i]
-            )
-          );
-
-
-        return `
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-${u[0]} · Lv ${s.up[i]}
-</b>
-
-<div class="sub">
-${u[1]}
-</div>
-
-</div>
-
-<button
-class="btn"
-onclick="upgrade(${i})"
->
-
-${money(cost)}
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-      }).join("");
-
-  }
-
-
-  /* =============================
-     MISSIONS
-  ============================= */
-
-  const missionsEl =
-    document.getElementById(
-      "missionList"
-    );
-
-
-  const missions = [
-
-    [
-      "First Hustle",
-      s.earned,
-      100
-    ],
-
-    [
-      "First Business",
-      totalBusinesses,
-      1
-    ],
-
-    [
-      "First Vehicle",
-      totalCars,
-      1
-    ],
-
-    [
-      "First Property",
-      totalHouses,
-      1
-    ],
-
-    [
-      "First $1K",
-      s.earned,
-      1000
-    ],
-
-    [
-      "Getting Serious",
-      s.level,
-      10
-    ],
-
-    [
-      "Big Player",
-      s.earned,
-      100000
-    ]
-
-  ];
-
-
-  if (missionsEl) {
-
-    missionsEl.innerHTML =
-
-      missions.map(m => {
-
-        const percent =
-          Math.min(
-            100,
-            (m[1] / m[2]) * 100
-          );
-
-
-        return `
-
-<div class="card">
-
-<div class="row">
-
-<b>
-${m[0]}
-</b>
-
-<span>
-${Math.floor(percent)}%
-</span>
-
-</div>
-
-<div class="bar">
-
-<i style="width:${percent}%"></i>
-
-</div>
-
-<div class="sub">
-
-${money(m[1])}
-/
-${money(m[2])}
-
-</div>
-
-</div>
-
-`;
-
-      }).join("");
-
-  }
-
-}
-
-
-/* =============================
-   AUTOMATIC INCOME
-============================= */
+/* =========================================================
+   PASSIVE INCOME
+========================================================= */
 
 let lastIncomeTick =
   Date.now();
 
-let incomeSaveTimer = 0;
+
+let incomeSaveTimer =
+  0;
 
 
-setInterval(() => {
+setInterval(()=>{
 
   const now =
     Date.now();
 
 
   const elapsed =
+
     Math.min(
       2,
       (now - lastIncomeTick) / 1000
@@ -2476,7 +4691,7 @@ setInterval(() => {
     income();
 
 
-  if (rate <= 0)
+  if(rate <= 0)
     return;
 
 
@@ -2491,7 +4706,9 @@ setInterval(() => {
 
   s.xp += Math.max(
     1,
-    Math.floor(amount / 10)
+    Math.floor(
+      amount / 10
+    )
   );
 
 
@@ -2499,7 +4716,7 @@ setInterval(() => {
     false;
 
 
-  while (s.xp >= 100) {
+  while(s.xp >= 100){
 
     s.xp -= 100;
 
@@ -2518,7 +4735,7 @@ setInterval(() => {
     elapsed;
 
 
-  if (incomeSaveTimer >= 5) {
+  if(incomeSaveTimer >= 5){
 
     save();
 
@@ -2527,7 +4744,7 @@ setInterval(() => {
   }
 
 
-  if (leveledUp) {
+  if(leveledUp){
 
     render();
 
@@ -2538,12 +4755,14 @@ setInterval(() => {
 
   }
 
-}, 1000);
+
+},1000);
 
 
-/* =============================
+
+/* =========================================================
    SAVE WHEN LEAVING
-============================= */
+========================================================= */
 
 window.addEventListener(
   "pagehide",
@@ -2553,12 +4772,12 @@ window.addEventListener(
 
 document.addEventListener(
   "visibilitychange",
-  () => {
+  ()=>{
 
-    if (
+    if(
       document.visibilityState ===
       "hidden"
-    ) {
+    ){
 
       save();
 
@@ -2568,9 +4787,9 @@ document.addEventListener(
 );
 
 
-/* =============================
-   START
-============================= */
+/* =========================================================
+   START GAME
+========================================================= */
 
 render();
 
