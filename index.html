@@ -2,874 +2,1586 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#080d18">
-<title>Grind to Riches STL — V2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#07111f">
+<title>Grind to Riches — St. Louis Edition V3</title>
+
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{
-margin:0;
-background:linear-gradient(180deg,#080d18,#17233a);
-color:#fff;
-font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;
-min-height:100vh
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
-.app{
-max-width:540px;
-margin:auto;
-padding:14px 14px 35px
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 50% -10%, #183858, #050b14 48%);
+  color: #f5f7fb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-header{
-text-align:center;
-padding:8px 0 14px
+
+.app {
+  max-width: 620px;
+  margin: auto;
+  padding-bottom: 95px;
 }
-h1{
-margin:0;
-font-size:31px
+
+.top {
+  padding: 18px 14px 8px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #07111fe8;
+  backdrop-filter: blur(12px);
 }
-header p{
-margin:4px 0;
-color:#9ca3af;
-font-size:13px
+
+.brand {
+  font-weight: 950;
+  letter-spacing: 2px;
+  font-size: 22px;
 }
-.card{
-background:#111a2b;
-border:1px solid #2a3a56;
-border-radius:19px;
-padding:15px;
-margin:11px 0;
-box-shadow:0 9px 25px #0005
+
+.edition {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #f5c451;
+  font-weight: 800;
 }
-.label{
-font-size:11px;
-letter-spacing:1.5px;
-color:#9ca3af;
-font-weight:800
+
+.version {
+  float: right;
+  margin-top: -27px;
+  border: 1px solid #35516d;
+  border-radius: 8px;
+  padding: 4px 7px;
+  font-size: 9px;
+  color: #a9bfd6;
 }
-.money{
-font-size:43px;
-font-weight:900;
-text-align:center;
-margin:3px 0
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 7px;
+  margin-top: 12px;
 }
-.rate{
-text-align:center;
-color:#4ade80;
-font-weight:800
+
+.stat {
+  background: #0c1929;
+  border: 1px solid #203650;
+  border-radius: 13px;
+  padding: 8px;
 }
-button{
-border:0;
-border-radius:13px;
-min-height:48px;
-font:inherit;
-font-weight:850;
-cursor:pointer
+
+.stat small {
+  font-size: 8px;
+  color: #839ab3;
+  text-transform: uppercase;
 }
-.work{
-width:100%;
-margin-top:12px;
-background:#facc15;
-color:#111827;
-font-size:18px
+
+.stat b {
+  display: block;
+  font-size: 13px;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
 }
-.work:active{
-transform:scale(.98)
+
+.hero {
+  margin: 7px 12px 13px;
+  height: 170px;
+  border: 1px solid #2b4c6c;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(#173b5e,#091422);
 }
-h2{
-font-size:19px;
-margin:2px 0 11px
+
+.hero:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 45%,#06101c 100%);
 }
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:7px
+
+.skyline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  background: #071321;
+  clip-path: polygon(
+    0 30%,8% 30%,8% 8%,15% 8%,15% 42%,
+    23% 42%,23% 18%,31% 18%,31% 48%,
+    39% 48%,39% 4%,45% 4%,45% 38%,
+    53% 38%,53% 0,58% 0,58% 45%,
+    66% 45%,66% 15%,75% 15%,75% 50%,
+    84% 50%,84% 10%,91% 10%,91% 35%,
+    100% 35%,100% 100%,0 100%
+  );
 }
-.stat{
-background:#0b1220;
-border-radius:12px;
-padding:10px 4px;
-text-align:center
+
+.arch {
+  position: absolute;
+  z-index: 2;
+  bottom: 19px;
+  left: 50%;
+  width: 88px;
+  height: 52px;
+  transform: translateX(-50%);
+  border: 7px solid #e0e6ec;
+  border-top: 0;
+  border-radius: 0 0 60px 60px;
 }
-.stat b{
-display:block;
-font-size:18px
+
+.heroText {
+  position: relative;
+  padding: 20px 17px;
 }
-.stat span{
-font-size:9px;
-color:#9ca3af
+
+.hero h1 {
+  margin: 0;
+  font-size: 25px;
 }
-.barbg{
-height:8px;
-background:#080e1a;
-border-radius:99px;
-overflow:hidden;
-margin-top:11px
+
+.hero p {
+  margin: 4px 0;
+  color: #b7c8da;
+  font-size: 12px;
 }
-.bar{
-height:100%;
-width:0;
-background:#4ade80;
-transition:width .2s
+
+.goal {
+  display: inline-block;
+  margin-top: 14px;
+  background: #071321dd;
+  border: 1px solid #365473;
+  border-radius: 9px;
+  padding: 7px 9px;
+  font-size: 10px;
 }
-.hint{
-font-size:11px;
-color:#9ca3af;
-margin:7px 0 0
+
+.gold {
+  color: #f5c451;
 }
-.biz{
-display:flex;
-align-items:center;
-gap:9px;
-background:#172338;
-border:1px solid #2a3a56;
-border-radius:15px;
-padding:11px;
-margin:8px 0
+
+.work {
+  width: calc(100% - 24px);
+  margin: 0 12px;
+  border: 0;
+  border-radius: 16px;
+  padding: 15px;
+  background: linear-gradient(135deg,#d3a12d,#f8d86d);
+  font-weight: 950;
+  color: #08111b;
+  font-size: 14px;
 }
-.icon{
-font-size:29px;
-width:40px;
-text-align:center
+
+h2 {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 18px 13px 8px;
 }
-.info{
-flex:1;
-min-width:0
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+  padding: 0 12px;
 }
-.name{
-font-weight:900
+
+.tile {
+  min-height: 105px;
+  text-align: left;
+  color: #fff;
+  background: linear-gradient(145deg,#11253b,#0a1524);
+  border: 1px solid #213954;
+  border-radius: 16px;
+  padding: 10px 8px;
 }
-.desc,
-.owned{
-font-size:11px;
-color:#9ca3af;
-margin-top:2px
+
+.tile:active,
+.work:active,
+.btn:active {
+  transform: scale(.98);
 }
-.buy{
-background:#2563eb;
-color:#fff;
-padding:9px 10px;
-min-width:105px;
-font-size:12px
+
+.tile strong {
+  display: block;
+  font-size: 10px;
+  margin-top: 5px;
 }
-.buy:disabled{
-background:#354156;
-color:#8b95a5
+
+.tile span {
+  display: block;
+  color: #8299b1;
+  font-size: 8px;
+  margin-top: 3px;
 }
-.up{
-display:grid;
-grid-template-columns:1fr auto;
-gap:8px;
-align-items:center;
-background:#0d1626;
-border-radius:13px;
-padding:10px;
-margin-top:8px
+
+.icon {
+  display: block;
+  height: 43px;
 }
-.up button{
-background:#16a34a;
-color:white;
-padding:9px 11px;
-font-size:12px
+
+.icon svg {
+  width: 52px;
+  height: 43px;
 }
-.up button:disabled{
-background:#354156;
-color:#8b95a5
+
+.cards {
+  display: grid;
+  gap: 8px;
+  padding: 0 12px;
 }
-.mission{
-background:#0d1626;
-border-radius:13px;
-padding:11px;
-margin:8px 0
+
+.card {
+  background: #0c1929;
+  border: 1px solid #203650;
+  border-radius: 15px;
+  padding: 12px;
 }
-.mission b{
-display:block
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
-.mission span{
-font-size:11px;
-color:#9ca3af
+
+.row b {
+  font-size: 12px;
 }
-.claim{
-float:right;
-background:#f59e0b;
-color:#111827;
-padding:7px 10px;
-font-size:12px
+
+.sub {
+  font-size: 9px;
+  color: #849ab1;
+  margin-top: 4px;
 }
-.actions{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px
+
+.btn {
+  background: #142a43;
+  border: 1px solid #365473;
+  color: #fff;
+  border-radius: 9px;
+  padding: 8px 10px;
+  font-weight: 800;
+  font-size: 9px;
 }
-.secondary{
-background:#334155;
-color:white
+
+.buy {
+  background: #173b34;
+  border-color: #2c725d;
 }
-.purple{
-background:#9333ea;
-color:white
+
+.bar {
+  height: 6px;
+  background: #18283c;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 7px;
 }
-.danger{
-background:#3b1f2a;
-color:#fca5a5
+
+.bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg,#54a9ff,#47d18c);
 }
-.toast{
-position:fixed;
-left:50%;
-bottom:20px;
-transform:translate(-50%,20px);
-opacity:0;
-transition:.2s;
-background:#fff;
-color:#111827;
-border-radius:99px;
-padding:10px 16px;
-font-weight:800;
-z-index:10;
-white-space:nowrap
+
+.bottom {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%,620px);
+  height: 68px;
+  background: #07111fee;
+  border-top: 1px solid #203650;
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  backdrop-filter: blur(16px);
 }
-.toast.show{
-opacity:1;
-transform:translate(-50%,0)
+
+.nav {
+  border: 0;
+  background: none;
+  color: #71869e;
+  font-size: 8px;
+}
+
+.nav.active {
+  color: #f5c451;
+}
+
+.nav svg {
+  display: block;
+  margin: auto auto 3px;
+  width: 20px;
+  height: 20px;
+}
+
+.toast {
+  position: fixed;
+  z-index: 20;
+  top: 16px;
+  left: 50%;
+  transform: translate(-50%,-130px);
+  background: #102238;
+  border: 1px solid #3a5877;
+  border-radius: 10px;
+  padding: 9px 13px;
+  font-size: 11px;
+  transition: .25s;
+}
+
+.toast.show {
+  transform: translate(-50%,0);
+}
+
+@media(max-width:390px) {
+  .grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .stats {
+    grid-template-columns: repeat(2,1fr);
+  }
 }
 </style>
 </head>
+
 <body>
-<main class="app">
-<header>
-<h1>💰 Grind to Riches</h1>
-<p>St. Louis Edition 🌆 • Version 2</p>
-</header>
-<section class="card">
-<div class="label">CASH</div>
-<div id="cash" class="money">$100</div>
-<div id="rate" class="rate">
-+$0/sec
+
+<div class="app">
+
+<header class="top">
+
+<div class="brand">
+GRIND TO RICHES
 </div>
-<button id="work" class="work">
-💪 WORK +$10 XP +1
-</button>
-</section>
-<section class="card">
-<h2>📊 Empire</h2>
+
+<div class="edition">
+ST. LOUIS EDITION
+</div>
+
+<div class="version">
+VERSION 3
+</div>
+
 <div class="stats">
+
 <div class="stat">
-<b id="total">$100</b>
-<span>TOTAL EARNED</span>
+<small>Cash</small>
+<b id="cash">$100</b>
 </div>
+
 <div class="stat">
+<small>Income</small>
+<b id="income">$0/s</b>
+</div>
+
+<div class="stat">
+<small>Level</small>
 <b id="level">1</b>
-<span>LEVEL</span>
 </div>
+
 <div class="stat">
-<b id="mult">1.0x</b>
-<span>MULTIPLIER</span>
+<small>Prestige</small>
+<b id="prestige">1.0×</b>
 </div>
+
 </div>
-<div class="barbg">
-<div id="xpbar" class="bar"></div>
-</div>
-<p id="xptext" class="hint">
-XP: 0 / 100
+</header>
+
+
+<section class="hero">
+
+<div class="arch"></div>
+<div class="skyline"></div>
+
+<div class="heroText">
+
+<h1>
+Build Your Empire
+</h1>
+
+<p>
+Start from the grind. Build a St. Louis empire.
 </p>
+
+<div class="goal">
+NEXT GOAL:
+<b class="gold" id="goal">
+$1,000 CASH
+</b>
+</div>
+
+</div>
+
 </section>
-<section class="card">
-<h2>🏙️ St. Louis Businesses</h2>
-<div id="businesses"></div>
-</section>
-<section class="card">
-<h2>⬆️ Upgrades</h2>
-<div id="upgrades"></div>
-</section>
-<section class="card">
-<h2>🎯 Missions</h2>
-<div id="missions"></div>
-</section>
-<section class="card">
-<h2>🔄 Prestige</h2>
-<p class="hint">
-Reach $100,000 total earned. Prestige resets your businesses and cash but permanently adds +0.5x income.
-</p>
-<button
-id="prestige"
-class="purple"
-style="width:100%;margin-top:10px">
+
+
+<button class="work" onclick="work()">
+WORK +$10
+</button>
+
+
+<h2>
+Empire
+</h2>
+
+
+<div class="grid">
+
+
+<button class="tile" onclick="msg('Cars & Vehicles')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<path
+d="M8 34h8l5-14h39l11 14h3v12H8z"
+fill="#397eae"/>
+
+<path
+d="M24 25h28l8 9H18z"
+fill="#79b9e3"/>
+
+<circle
+cx="23"
+cy="46"
+r="6"
+fill="#dce5ed"/>
+
+<circle
+cx="59"
+cy="46"
+r="6"
+fill="#dce5ed"/>
+
+</svg>
+
+</i>
+
+<strong>
+Cars & Vehicles
+</strong>
+
+<span>
+Build your fleet
+</span>
+
+</button>
+
+
+<button class="tile" onclick="msg('Houses & Properties')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<path
+d="M8 29 40 5l32 24v23H8z"
+fill="#a9603a"/>
+
+<path
+d="m13 29 27-20 27 20"
+fill="none"
+stroke="#f0bd67"
+stroke-width="5"/>
+
+<path
+d="M34 52V34h12v18"
+fill="#15263a"/>
+
+<path
+d="M17 35h11v10H17zM52 35h11v10H52z"
+fill="#69a9d7"/>
+
+</svg>
+
+</i>
+
+<strong>
+Houses
+</strong>
+
+<span>
+Own property
+</span>
+
+</button>
+
+
+<button class="tile" onclick="msg('Jobs')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<rect
+x="9"
+y="18"
+width="62"
+height="33"
+rx="6"
+fill="#345675"/>
+
+<path
+d="M28 18v-7h24v7"
+fill="none"
+stroke="#8db9df"
+stroke-width="5"/>
+
+<path
+d="M9 31h62"
+stroke="#47d18c"
+stroke-width="5"/>
+
+<circle
+cx="40"
+cy="31"
+r="5"
+fill="#f5c451"/>
+
+</svg>
+
+</i>
+
+<strong>
+Jobs
+</strong>
+
+<span>
+Level up skills
+</span>
+
+</button>
+
+
+<button class="tile" onclick="msg('Empire Stats')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<path
+d="M10 51V26h16v25M32 51V13h16v38M54 51V5h16v46"
+fill="#32658e"/>
+
+<path
+d="M14 32h8M36 21h8M58 14h8M58 24h8M36 31h8M14 41h8"
+stroke="#f5c451"
+stroke-width="3"/>
+
+</svg>
+
+</i>
+
+<strong>
+Empire
+</strong>
+
+<span>
+Track your rise
+</span>
+
+</button>
+
+
+<button class="tile" onclick="scrollToSection('businesses')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<path
+d="M9 22h62v30H9z"
+fill="#7d4c35"/>
+
+<path
+d="M7 22 14 9h52l7 13"
+fill="#d48b42"/>
+
+<path
+d="M16 29h48v13H16z"
+fill="#5aa4c9"/>
+
+<path
+d="M31 29v13M47 29v13"
+stroke="#d7edf7"
+stroke-width="3"/>
+
+</svg>
+
+</i>
+
+<strong>
+Businesses
+</strong>
+
+<span id="owned">
+0 owned
+</span>
+
+</button>
+
+
+<button class="tile" onclick="msg('Investments')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<path
+d="M8 45 25 31l11 7 27-27"
+fill="none"
+stroke="#47d18c"
+stroke-width="6"/>
+
+<path
+d="M54 11h13v13"
+fill="none"
+stroke="#47d18c"
+stroke-width="5"/>
+
+<path
+d="M8 49h64"
+stroke="#38516c"
+stroke-width="3"/>
+
+</svg>
+
+</i>
+
+<strong>
+Investments
+</strong>
+
+<span>
+Grow your money
+</span>
+
+</button>
+
+
+<button class="tile" onclick="msg('Rare Businesses')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<path
+d="m40 5 27 17-27 28L13 22z"
+fill="#d9a938"/>
+
+<path
+d="m40 5 8 17-8 28-8-28z"
+fill="#fff0a8"/>
+
+</svg>
+
+</i>
+
+<strong>
+Rare Businesses
+</strong>
+
+<span>
+Legendary assets
+</span>
+
+</button>
+
+
+<button class="tile" onclick="msg('St. Louis Map')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<path
+d="M7 10 28 5l24 6 21-6v40l-21 5-24-6-21 6z"
+fill="#295b57"/>
+
+<path
+d="M28 5v39M52 11v39"
+stroke="#8bd1ae"
+stroke-width="3"/>
+
+<path
+d="M38 14q0 8-7 14h14q-7-6-7-14z"
+fill="#e9eef4"/>
+
+</svg>
+
+</i>
+
+<strong>
+St. Louis Map
+</strong>
+
+<span>
+Explore districts
+</span>
+
+</button>
+
+
+<button class="tile" onclick="scrollToSection('missions')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<circle
+cx="40"
+cy="27"
+r="21"
+fill="none"
+stroke="#e45e63"
+stroke-width="7"/>
+
+<circle
+cx="40"
+cy="27"
+r="10"
+fill="none"
+stroke="#f5c451"
+stroke-width="5"/>
+
+<path
+d="M40 27 59 10"
+stroke="#fff"
+stroke-width="4"/>
+
+</svg>
+
+</i>
+
+<strong>
+Missions
+</strong>
+
+<span>
+Complete goals
+</span>
+
+</button>
+
+
+<button class="tile" onclick="msg('Achievements')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<path
+d="M26 9h28v22a14 14 0 0 1-28 0z"
+fill="#f5c451"/>
+
+<path
+d="M26 14H13v7a13 13 0 0 0 13 13M54 14h13v7a13 13 0 0 1-13 13M40 45v7M29 52h22"
+fill="none"
+stroke="#f5c451"
+stroke-width="5"/>
+
+</svg>
+
+</i>
+
+<strong>
+Achievements
+</strong>
+
+<span id="ach">
+0 unlocked
+</span>
+
+</button>
+
+
+<button class="tile" onclick="daily()">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<rect
+x="13"
+y="10"
+width="54"
+height="40"
+rx="6"
+fill="#a44e55"/>
+
+<path
+d="M13 21h54M28 5v10M52 5v10"
+stroke="#f0b7bc"
+stroke-width="4"/>
+
+<path
+d="m40 28 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"
+fill="#f5c451"/>
+
+</svg>
+
+</i>
+
+<strong>
+Daily Bonus
+</strong>
+
+<span>
+Claim daily
+</span>
+
+</button>
+
+
+<button class="tile" onclick="msg('Character Upgrades')">
+
+<i class="icon">
+
+<svg viewBox="0 0 80 55">
+
+<circle
+cx="40"
+cy="18"
+r="12"
+fill="#d99a72"/>
+
+<path
+d="M20 52q3-21 20-21t20 21"
+fill="#345f87"/>
+
+<path
+d="M29 12q5-12 22-4l2 8q-13-8-24-1z"
+fill="#1c2430"/>
+
+</svg>
+
+</i>
+
+<strong>
+Character
+</strong>
+
+<span>
+Upgrade your grind
+</span>
+
+</button>
+
+</div>
+
+
+<h2>
+Businesses
+</h2>
+
+<div class="cards" id="businesses"></div>
+
+
+<h2>
+Upgrades
+</h2>
+
+<div class="cards" id="upgrades"></div>
+
+
+<h2>
+Mission Progress
+</h2>
+
+<div class="cards" id="missions"></div>
+
+
+<h2>
 Prestige
-</button>
-</section>
-<section class="card">
-<div class="actions">
-<button id="save" class="secondary">
-💾 Save
-</button>
-<button id="reset" class="danger">
-Reset
-</button>
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+St. Louis Legend
+</b>
+
+<div class="sub">
+Reach $100K total earnings to reset and gain a permanent income multiplier.
 </div>
-</section>
-</main>
-<div id="toast" class="toast"></div>
+
+</div>
+
+<button class="btn" onclick="prestige()">
+PRESTIGE
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<nav class="bottom">
+
+<button class="nav active" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+HOME
+</button>
+
+<button class="nav" onclick="msg('Empire Stats')">
+STATS
+</button>
+
+<button class="nav" onclick="msg('St. Louis Map')">
+MAP
+</button>
+
+<button class="nav" onclick="msg('Achievements')">
+AWARDS
+</button>
+
+<button class="nav" onclick="scrollToSection('missions')">
+MISSIONS
+</button>
+
+<button class="nav" onclick="scrollToSection('businesses')">
+STORE
+</button>
+
+</nav>
+
+
+<div class="toast" id="toast"></div>
+
+
 <script>
-"use strict";
-const KEY = "gtr_stl_v2";
-const businesses = [
-{
-name:"Lemonade Stand",
-icon:"🍋",
-base:50,
-income:1
-},
-{
-name:"Food Truck",
-icon:"🍔",
-base:500,
-income:10
-},
-{
-name:"Curb Store",
-icon:"🏪",
-base:5000,
-income:100
-},
-{
-name:"STL Restaurant",
-icon:"🍗",
-base:25000,
-income:500
-},
-{
-name:"Downtown Building",
-icon:"🏢",
-base:100000,
-income:2000
-},
-{
-name:"Factory",
-icon:"🏭",
-base:500000,
-income:10000
-},
-{
-name:"STL Corporation",
-icon:"🌆",
-base:2500000,
-income:50000
-}
+
+const KEY = "gtr_stl_v3";
+
+const B = [
+
+["Lemonade Stand",50,1],
+
+["Food Truck",500,10],
+
+["Curb Store",5000,100],
+
+["STL Restaurant",25000,500],
+
+["Downtown Building",100000,2000],
+
+["Factory",500000,10000],
+
+["STL Corporation",2500000,50000]
+
 ];
-const upgrades = [
+
+
+let s =
+JSON.parse(localStorage.getItem(KEY) || "null")
+||
 {
-name:"Hard Worker",
-desc:"+$5 to every manual WORK",
-cost:250,
-level:0
-},
-{
-name:"Better Business",
-desc:"+25% business income",
-cost:2500,
-level:0
-},
-{
-name:"Street Hustle",
-desc:"+1x income multiplier",
-cost:50000,
-level:0
-}
-];
-const missionData = [
-{
-id:"work10",
-title:"First Hustle",
-desc:"Work 10 times",
-goal:10,
-reward:100,
-type:"works"
-},
-{
-id:"own1",
-title:"First Business",
-desc:"Own 1 business",
-goal:1,
-reward:150,
-type:"owned"
-},
-{
-id:"earn1k",
-title:"First $1K",
-desc:"Earn $1,000 total",
-goal:1000,
-reward:500,
-type:"total"
-},
-{
-id:"earn10k",
-title:"Getting Serious",
-desc:"Earn $10,000 total",
-goal:10000,
-reward:2500,
-type:"total"
-}
-];
-let g = {
 cash:100,
-total:100,
-xp:0,
+earned:0,
 level:1,
+xp:0,
 prestige:0,
-works:0,
 owned:Array(7).fill(0),
 up:Array(3).fill(0),
-claimed:[]
+daily:0
 };
-function load(){
-try{
-const saved =
-JSON.parse(localStorage.getItem(KEY));
-if(saved && Array.isArray(saved.owned)){
-g = {...g,...saved};
-g.owned =
-Array.from(
-{length:7},
-(_,i)=>Number(g.owned[i] || 0)
-);
+
+
+function money(n) {
+
+if(n >= 1000000000)
+return "$" + (n/1000000000).toFixed(2) + "B";
+
+if(n >= 1000000)
+return "$" + (n/1000000).toFixed(2) + "M";
+
+if(n >= 1000)
+return "$" + (n/1000).toFixed(1) + "K";
+
+return "$" + Math.floor(n);
+
 }
-}catch(e){}
-}
-function save(){
-try{
-localStorage.setItem(
-KEY,
-JSON.stringify(g)
-);
-}catch(e){}
-}
-function fmt(n){
-return "$" +
-Math.floor(n).toLocaleString("en-US");
-}
-function mult(){
-return 1 +
-g.prestige * .5 +
-g.up[2] * 1;
-}
-function bizMultiplier(){
-return mult() *
-(1 + g.up[1] * .25);
-}
-function income(){
-return businesses.reduce(
-(sum,b,i)=>
-sum + b.income * g.owned[i],
+
+
+function income() {
+
+return B.reduce(
+(total,b,i) =>
+total + b[2] * s.owned[i],
 0
-) * bizMultiplier();
-}
-function cost(i){
-return Math.floor(
-businesses[i].base *
-Math.pow(1.15,g.owned[i])
-);
-}
-function xpNeed(){
-return g.level * 100;
-}
-function addXP(n){
-g.xp += n;
-while(g.xp >= xpNeed()){
-g.xp -= xpNeed();
-g.level++;
-toast(
-"Level up! You are level " +
-g.level + "!"
-);
-}
-}
-function work(){
-const gain =
-10 + g.up[0] * 5;
-const amount =
-gain * mult();
-g.cash += amount;
-g.total += amount;
-g.works++;
-addXP(1);
-save();
-render();
-}
-function buy(i){
-const c = cost(i);
-if(g.cash < c){
-toast("Not enough cash!");
-return;
-}
-g.cash -= c;
-g.owned[i]++;
-addXP(5);
-save();
-render();
-toast(
-businesses[i].name +
-" purchased!"
-);
-}
-function upgrade(i){
-const u = upgrades[i];
-const c =
-Math.floor(
-u.cost *
-Math.pow(3,u.level)
-);
-if(g.cash < c){
-toast("Not enough cash!");
-return;
-}
-g.cash -= c;
-g.up[i]++;
-addXP(15);
-save();
-render();
-toast(
-u.name +
-" upgraded!"
-);
-}
-function missionValue(m){
-if(m.type === "works")
-return g.works;
-if(m.type === "owned")
-return g.owned.reduce(
-(a,b)=>a+b,
-0
-);
-return g.total;
-}
-function claimMission(i){
-const m =
-missionData[i];
-if(
-g.claimed.includes(m.id) ||
-missionValue(m) < m.goal
 )
-return;
-g.claimed.push(m.id);
-g.cash += m.reward;
-g.total += m.reward;
-addXP(20);
+*
+(1 + s.prestige * .5)
+*
+(1 + s.up[1] * .25);
+
+}
+
+
+function save() {
+
+localStorage.setItem(KEY,JSON.stringify(s));
+
+}
+
+
+function earn(amount) {
+
+s.cash += amount;
+
+s.earned += amount;
+
+s.xp += Math.max(
+1,
+Math.floor(amount/10)
+);
+
+while(s.xp >= 100) {
+
+s.xp -= 100;
+
+s.level++;
+
+showMessage(
+"LEVEL UP! Level " + s.level
+);
+
+}
+
 save();
+
 render();
-toast(
-"Mission complete! +" +
-fmt(m.reward)
-);
+
 }
-function prestige(){
-if(g.total < 100000){
-toast(
-"Need $100,000 total earned!"
+
+
+function work() {
+
+let amount =
+10 * (1 + s.up[0] * .2);
+
+earn(amount);
+
+showMessage(
+"Grind complete +" + money(amount)
 );
+
+}
+
+
+function buyBusiness(i) {
+
+let cost =
+Math.floor(
+B[i][1] *
+Math.pow(
+1.15,
+s.owned[i]
+)
+);
+
+if(s.cash < cost) {
+
+showMessage("Not enough cash");
+
 return;
+
 }
-g.cash = 100;
-g.total = 100;
-g.xp = 0;
-g.level = 1;
-g.owned =
+
+s.cash -= cost;
+
+s.owned[i]++;
+
+save();
+
+render();
+
+showMessage(
+B[i][0] + " acquired"
+);
+
+}
+
+
+function upgrade(i) {
+
+let names = [
+
+"Hard Worker",
+
+"Better Business",
+
+"Street Hustle"
+
+];
+
+let bases = [
+
+250,
+
+2500,
+
+15000
+
+];
+
+let cost =
+Math.floor(
+bases[i] *
+Math.pow(
+2,
+s.up[i]
+)
+);
+
+if(s.cash < cost) {
+
+showMessage("Not enough cash");
+
+return;
+
+}
+
+s.cash -= cost;
+
+s.up[i]++;
+
+save();
+
+render();
+
+showMessage(
+names[i] + " upgraded"
+);
+
+}
+
+
+function daily() {
+
+let today =
+Math.floor(
+Date.now()/86400000
+);
+
+if(s.daily === today) {
+
+showMessage(
+"Daily bonus already claimed"
+);
+
+return;
+
+}
+
+s.daily = today;
+
+earn(
+100 + s.level * 25
+);
+
+showMessage(
+"Daily bonus claimed!"
+);
+
+}
+
+
+function prestige() {
+
+if(s.earned < 100000) {
+
+showMessage(
+"Earn $100K total first"
+);
+
+return;
+
+}
+
+s.cash = 100;
+
+s.earned = 0;
+
+s.owned =
 Array(7).fill(0);
-g.up =
+
+s.up =
 Array(3).fill(0);
-g.prestige++;
+
+s.prestige++;
+
 save();
+
 render();
-toast(
-"Prestige complete!"
+
+showMessage(
+"PRESTIGE! Permanent boost increased"
 );
+
 }
-function render(){
-document.getElementById(
-"cash"
-).textContent =
-fmt(g.cash);
-document.getElementById(
-"total"
-).textContent =
-fmt(g.total);
-document.getElementById(
-"rate"
-).textContent =
-"+" +
-fmt(income()) +
-"/sec";
-document.getElementById(
-"level"
-).textContent =
-g.level;
-document.getElementById(
-"mult"
-).textContent =
-mult().toFixed(1) +
-"x";
-document.getElementById(
-"xpbar"
-).style.width =
+
+
+function showMessage(text) {
+
+let box =
+document.getElementById("toast");
+
+box.textContent = text;
+
+box.classList.add("show");
+
+clearTimeout(window.toastTimer);
+
+window.toastTimer =
+setTimeout(
+() => box.classList.remove("show"),
+1600
+);
+
+}
+
+
+function msg(text) {
+
+showMessage(
+text + " system coming in the next V3 expansion."
+);
+
+}
+
+
+function scrollToSection(id) {
+
+let element =
+document.getElementById(id);
+
+if(element) {
+
+element.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+}
+
+
+function render() {
+
+document.getElementById("cash").textContent =
+money(s.cash);
+
+document.getElementById("income").textContent =
+money(income()) + "/s";
+
+document.getElementById("level").textContent =
+s.level;
+
+document.getElementById("prestige").textContent =
+(1 + s.prestige * .5).toFixed(1) + "×";
+
+
+let total =
+s.owned.reduce(
+(a,b) => a+b,
+0
+);
+
+
+document.getElementById("owned").textContent =
+total + " owned";
+
+
+let achievements = 0;
+
+if(s.earned >= 100)
+achievements++;
+
+if(total >= 1)
+achievements++;
+
+if(s.earned >= 1000)
+achievements++;
+
+if(s.level >= 10)
+achievements++;
+
+if(s.earned >= 100000)
+achievements++;
+
+
+document.getElementById("ach").textContent =
+achievements + " unlocked";
+
+
+document.getElementById("businesses").innerHTML =
+
+B.map((b,i) => {
+
+let cost =
+Math.floor(
+b[1] *
+Math.pow(
+1.15,
+s.owned[i]
+)
+);
+
+return `
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+${b[0]}
+</b>
+
+<div class="sub">
+
+Level ${s.owned[i]}
+
+·
+
++${money(b[2])}/s each
+
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="buyBusiness(${i})"
+>
+
+${money(cost)}
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+let upgrades = [
+
+[
+"Hard Worker",
+"Work income +20% per level",
+250
+],
+
+[
+"Better Business",
+"Business income +25% per level",
+2500
+],
+
+[
+"Street Hustle",
+"Future grind bonus",
+15000
+]
+
+];
+
+
+document.getElementById("upgrades").innerHTML =
+
+upgrades.map((u,i) => {
+
+let cost =
+Math.floor(
+u[2] *
+Math.pow(
+2,
+s.up[i]
+)
+);
+
+return `
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+${u[0]} · Lv ${s.up[i]}
+</b>
+
+<div class="sub">
+${u[1]}
+</div>
+
+</div>
+
+<button
+class="btn"
+onclick="upgrade(${i})"
+>
+
+${money(cost)}
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+let missions = [
+
+[
+"First Hustle",
+s.earned,
+100
+],
+
+[
+"First Business",
+total,
+1
+],
+
+[
+"First $1K",
+s.earned,
+1000
+],
+
+[
+"Getting Serious",
+s.level,
+10
+],
+
+[
+"Big Player",
+s.earned,
+100000
+]
+
+];
+
+
+document.getElementById("missions").innerHTML =
+
+missions.map(m => {
+
+let percent =
 Math.min(
 100,
-g.xp / xpNeed() * 100
-) + "%";
-document.getElementById(
-"xptext"
-).textContent =
-"XP: " +
-Math.floor(g.xp) +
-" / " +
-xpNeed() +
-" • " +
-g.prestige +
-" prestige";
-const bc =
-document.getElementById(
-"businesses"
+m[1] / m[2] * 100
 );
-bc.innerHTML = "";
-businesses.forEach(
-(b,i)=>{
-const c = cost(i);
-const d =
-document.createElement("div");
-d.className = "biz";
-d.innerHTML =
-'<div class="icon">' +
-b.icon +
-'</div>' +
-'<div class="info">' +
-'<div class="name">' +
-b.name +
-'</div>' +
-'<div class="desc">+' +
-fmt(
-b.income *
-bizMultiplier()
-) +
-'/sec each</div>' +
-'<div class="owned">Owned: ' +
-g.owned[i] +
-'</div>' +
-'</div>' +
-'<button class="buy" ' +
-(g.cash < c ?
-"disabled" :
-"") +
-' data-buy="' +
-i +
-'">' +
-"Buy " +
-fmt(c) +
-"</button>";
-bc.appendChild(d);
-}
-);
-const uc =
-document.getElementById(
-"upgrades"
-);
-uc.innerHTML = "";
-upgrades.forEach(
-(u,i)=>{
-const c =
-Math.floor(
-u.cost *
-Math.pow(
-3,
-g.up[i]
-)
-);
-const d =
-document.createElement(
-"div"
-);
-d.className = "up";
-d.innerHTML =
-'<div>' +
-"<b>" +
-u.name +
-" Lv." +
-g.up[i] +
-"</b>" +
-'<div class="desc">' +
-u.desc +
-"</div>" +
-"</div>" +
-'<button ' +
-(g.cash < c ?
-"disabled" :
-"") +
-' data-up="' +
-i +
-'">' +
-"Upgrade " +
-fmt(c) +
-"</button>";
-uc.appendChild(d);
-}
-);
-const mc =
-document.getElementById(
-"missions"
-);
-mc.innerHTML = "";
-missionData.forEach(
-(m,i)=>{
-const done =
-g.claimed.includes(m.id);
-const value =
-Math.min(
-m.goal,
-missionValue(m)
-);
-const d =
-document.createElement(
-"div"
-);
-d.className = "mission";
-d.innerHTML =
-'<button class="claim" ' +
-(done ||
-value < m.goal ?
-"disabled" :
-"") +
-' data-mission="' +
-i +
-'">' +
-(
-done ?
-"Claimed" :
-value >= m.goal ?
-"Claim" :
-"Locked"
-) +
-"</button>" +
-"<b>" +
-m.title +
-"</b>" +
-"<span>" +
-m.desc +
-" • " +
-Math.floor(value).toLocaleString() +
-"/" +
-m.goal.toLocaleString() +
-" • Reward " +
-fmt(m.reward) +
-"</span>";
-mc.appendChild(d);
-}
-);
-}
-function toast(s){
-const t =
-document.getElementById(
-"toast"
-);
-t.textContent = s;
-t.classList.add("show");
-clearTimeout(
-window.tt
-);
-window.tt =
-setTimeout(
-()=>{
-t.classList.remove(
-"show"
-);
-},
-1500
-);
-}
-document.getElementById(
-"work"
-).onclick = work;
-document.getElementById(
-"save"
-).onclick = ()=>{
+
+return `
+
+<div class="card">
+
+<div class="row">
+
+<b>
+${m[0]}
+</b>
+
+<span>
+${Math.floor(percent)}%
+</span>
+
+</div>
+
+<div class="bar">
+
+<i style="width:${percent}%"></i>
+
+</div>
+
+<div class="sub">
+
+${money(m[1])}
+/
+${money(m[2])}
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+let goal;
+
+if(s.cash < 1000)
+goal = "$1,000 CASH";
+
+else if(s.cash < 10000)
+goal = "$10,000 CASH";
+
+else if(s.cash < 100000)
+goal = "$100,000 CASH";
+
+else
+goal = "$1,000,000 CASH";
+
+
+document.getElementById("goal").textContent =
+goal;
+
+
 save();
-toast("Game saved!");
-};
-document.getElementById(
-"prestige"
-).onclick = prestige;
-document.getElementById(
-"reset"
-).onclick = ()=>{
-if(
-confirm(
-"Erase all progress?"
-)
-){
-localStorage.removeItem(
-KEY
-);
-location.reload();
+
 }
-};
-document.getElementById(
-"businesses"
-).onclick = e=>{
-const b =
-e.target.closest(
-"[data-buy]"
-);
-if(b)
-buy(
-Number(b.dataset.buy)
-);
-};
-document.getElementById(
-"upgrades"
-).onclick = e=>{
-const b =
-e.target.closest(
-"[data-up]"
-);
-if(b)
-upgrade(
-Number(b.dataset.up)
-);
-};
-document.getElementById(
-"missions"
-).onclick = e=>{
-const b =
-e.target.closest(
-"[data-mission]"
-);
-if(b)
-claimMission(
-Number(b.dataset.mission)
-);
-};
-load();
-render();
+
+
 setInterval(
-()=>{
-const x =
-income();
-if(x > 0){
-g.cash += x;
-g.total += x;
-addXP(.1);
-save();
-render();
-}
+() => {
+
+let amount = income();
+
+if(amount > 0)
+earn(amount);
+
 },
 1000
 );
-document.addEventListener(
-"visibilitychange",
-()=>{
-if(
-document.visibilityState ===
-"hidden"
-){
-save();
-}
-}
-);
+
+
+render();
+
 </script>
+
 </body>
 </html>
