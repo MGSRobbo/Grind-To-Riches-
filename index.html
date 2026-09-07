@@ -12,12 +12,24 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  background: #050b14;
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background:
     radial-gradient(circle at 50% -10%, #183858, #050b14 48%);
   color: #f5f7fb;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .app {
@@ -33,6 +45,7 @@ body {
   z-index: 5;
   background: #07111fe8;
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .brand {
@@ -136,6 +149,7 @@ body {
 
 .heroText {
   position: relative;
+  z-index: 3;
   padding: 20px 17px;
 }
 
@@ -174,6 +188,7 @@ body {
   font-weight: 950;
   color: #08111b;
   font-size: 14px;
+  transition: transform .1s;
 }
 
 h2 {
@@ -198,6 +213,7 @@ h2 {
   border: 1px solid #213954;
   border-radius: 16px;
   padding: 10px 8px;
+  transition: transform .1s;
 }
 
 .tile:active,
@@ -267,6 +283,7 @@ h2 {
   padding: 8px 10px;
   font-weight: 800;
   font-size: 9px;
+  white-space: nowrap;
 }
 
 .buy {
@@ -286,6 +303,7 @@ h2 {
   display: block;
   height: 100%;
   background: linear-gradient(90deg,#54a9ff,#47d18c);
+  transition: width .25s ease;
 }
 
 .bottom {
@@ -296,11 +314,13 @@ h2 {
   transform: translateX(-50%);
   width: min(100%,620px);
   height: 68px;
+  padding-bottom: env(safe-area-inset-bottom);
   background: #07111fee;
   border-top: 1px solid #203650;
   display: grid;
   grid-template-columns: repeat(6,1fr);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .nav {
@@ -332,7 +352,10 @@ h2 {
   border-radius: 10px;
   padding: 9px 13px;
   font-size: 11px;
-  transition: .25s;
+  transition: transform .25s ease;
+  pointer-events: none;
+  max-width: calc(100% - 30px);
+  text-align: center;
 }
 
 .toast.show {
@@ -971,382 +994,518 @@ STORE
 const KEY = "gtr_stl_v3";
 
 const B = [
-
-["Lemonade Stand",50,1],
-
-["Food Truck",500,10],
-
-["Curb Store",5000,100],
-
-["STL Restaurant",25000,500],
-
-["Downtown Building",100000,2000],
-
-["Factory",500000,10000],
-
-["STL Corporation",2500000,50000]
-
+  ["Lemonade Stand", 50, 1],
+  ["Food Truck", 500, 10],
+  ["Curb Store", 5000, 100],
+  ["STL Restaurant", 25000, 500],
+  ["Downtown Building", 100000, 2000],
+  ["Factory", 500000, 10000],
+  ["STL Corporation", 2500000, 50000]
 ];
 
 
-let s =
-JSON.parse(localStorage.getItem(KEY) || "null")
-||
-{
-cash:100,
-earned:0,
-level:1,
-xp:0,
-prestige:0,
-owned:Array(7).fill(0),
-up:Array(3).fill(0),
-daily:0
-};
+/* -----------------------------
+   LOAD SAVED GAME
+----------------------------- */
 
+let s;
+
+try {
+  s = JSON.parse(localStorage.getItem(KEY) || "null");
+} catch(error) {
+  s = null;
+}
+
+if (!s || typeof s !== "object") {
+  s = {
+    cash: 100,
+    earned: 0,
+    level: 1,
+    xp: 0,
+    prestige: 0,
+    owned: Array(7).fill(0),
+    up: Array(3).fill(0),
+    daily: 0
+  };
+}
+
+
+/* -----------------------------
+   DATA SAFETY
+----------------------------- */
+
+if (!Array.isArray(s.owned) || s.owned.length !== 7) {
+  s.owned = Array(7).fill(0);
+}
+
+if (!Array.isArray(s.up) || s.up.length !== 3) {
+  s.up = Array(3).fill(0);
+}
+
+s.cash = Number(s.cash) || 100;
+s.earned = Number(s.earned) || 0;
+s.level = Number(s.level) || 1;
+s.xp = Number(s.xp) || 0;
+s.prestige = Number(s.prestige) || 0;
+s.daily = Number(s.daily) || 0;
+
+
+/* -----------------------------
+   MONEY FORMAT
+----------------------------- */
 
 function money(n) {
 
-if(n >= 1000000000)
-return "$" + (n/1000000000).toFixed(2) + "B";
+  n = Number(n) || 0;
 
-if(n >= 1000000)
-return "$" + (n/1000000).toFixed(2) + "M";
+  if (n >= 1000000000000) {
+    return "$" + (n / 1000000000000).toFixed(2) + "T";
+  }
 
-if(n >= 1000)
-return "$" + (n/1000).toFixed(1) + "K";
+  if (n >= 1000000000) {
+    return "$" + (n / 1000000000).toFixed(2) + "B";
+  }
 
-return "$" + Math.floor(n);
+  if (n >= 1000000) {
+    return "$" + (n / 1000000).toFixed(2) + "M";
+  }
 
+  if (n >= 1000) {
+    return "$" + (n / 1000).toFixed(1) + "K";
+  }
+
+  return "$" + Math.floor(n);
 }
 
+
+/* -----------------------------
+   BUSINESS INCOME
+----------------------------- */
 
 function income() {
 
-return B.reduce(
-(total,b,i) =>
-total + b[2] * s.owned[i],
-0
-)
-*
-(1 + s.prestige * .5)
-*
-(1 + s.up[1] * .25);
+  const businessIncome = B.reduce(
+    (total, b, i) => {
+      return total + (b[2] * Number(s.owned[i] || 0));
+    },
+    0
+  );
 
+  return businessIncome
+    * (1 + s.prestige * 0.5)
+    * (1 + s.up[1] * 0.25);
 }
 
+
+/* -----------------------------
+   SAVE
+----------------------------- */
 
 function save() {
 
-localStorage.setItem(KEY,JSON.stringify(s));
-
+  try {
+    localStorage.setItem(KEY, JSON.stringify(s));
+  } catch(error) {
+    console.warn("Game save failed:", error);
+  }
 }
 
 
-function earn(amount) {
+/* -----------------------------
+   UPDATE ONLY STATS
+----------------------------- */
 
-s.cash += amount;
+function updateStats() {
 
-s.earned += amount;
+  const cashEl = document.getElementById("cash");
+  const incomeEl = document.getElementById("income");
+  const levelEl = document.getElementById("level");
+  const prestigeEl = document.getElementById("prestige");
+  const goalEl = document.getElementById("goal");
 
-s.xp += Math.max(
-1,
-Math.floor(amount/10)
-);
+  if (cashEl) {
+    cashEl.textContent = money(s.cash);
+  }
 
-while(s.xp >= 100) {
+  if (incomeEl) {
+    incomeEl.textContent = money(income()) + "/s";
+  }
 
-s.xp -= 100;
+  if (levelEl) {
+    levelEl.textContent = s.level;
+  }
 
-s.level++;
+  if (prestigeEl) {
+    prestigeEl.textContent =
+      (1 + s.prestige * 0.5).toFixed(1) + "×";
+  }
 
-showMessage(
-"LEVEL UP! Level " + s.level
-);
+  if (goalEl) {
 
+    let goal;
+
+    if (s.cash < 1000) {
+      goal = "$1,000 CASH";
+    }
+    else if (s.cash < 10000) {
+      goal = "$10,000 CASH";
+    }
+    else if (s.cash < 100000) {
+      goal = "$100,000 CASH";
+    }
+    else {
+      goal = "$1,000,000 CASH";
+    }
+
+    goalEl.textContent = goal;
+  }
 }
 
-save();
 
-render();
+/* -----------------------------
+   EARN MONEY
+----------------------------- */
 
+function earn(amount, fullRender = true) {
+
+  amount = Number(amount) || 0;
+
+  if (amount <= 0) {
+    return;
+  }
+
+  s.cash += amount;
+  s.earned += amount;
+
+  s.xp += Math.max(
+    1,
+    Math.floor(amount / 10)
+  );
+
+  let leveledUp = false;
+
+  while (s.xp >= 100) {
+
+    s.xp -= 100;
+    s.level++;
+    leveledUp = true;
+  }
+
+  save();
+
+  if (fullRender) {
+    render();
+  } else {
+    updateStats();
+  }
+
+  if (leveledUp) {
+    showMessage("LEVEL UP! Level " + s.level);
+  }
 }
 
+
+/* -----------------------------
+   WORK
+----------------------------- */
 
 function work() {
 
-let amount =
-10 * (1 + s.up[0] * .2);
+  const amount =
+    10 * (1 + s.up[0] * 0.2);
 
-earn(amount);
+  earn(amount, true);
 
-showMessage(
-"Grind complete +" + money(amount)
-);
-
+  showMessage(
+    "Grind complete +" + money(amount)
+  );
 }
 
+
+/* -----------------------------
+   BUY BUSINESS
+----------------------------- */
 
 function buyBusiness(i) {
 
-let cost =
-Math.floor(
-B[i][1] *
-Math.pow(
-1.15,
-s.owned[i]
-)
-);
+  if (!B[i]) {
+    return;
+  }
 
-if(s.cash < cost) {
+  const cost =
+    Math.floor(
+      B[i][1] *
+      Math.pow(1.15, s.owned[i])
+    );
 
-showMessage("Not enough cash");
+  if (s.cash < cost) {
 
-return;
+    showMessage("Not enough cash");
 
+    return;
+  }
+
+  s.cash -= cost;
+  s.owned[i]++;
+
+  save();
+  render();
+
+  showMessage(
+    B[i][0] + " acquired"
+  );
 }
 
-s.cash -= cost;
 
-s.owned[i]++;
-
-save();
-
-render();
-
-showMessage(
-B[i][0] + " acquired"
-);
-
-}
-
+/* -----------------------------
+   UPGRADES
+----------------------------- */
 
 function upgrade(i) {
 
-let names = [
+  const names = [
+    "Hard Worker",
+    "Better Business",
+    "Street Hustle"
+  ];
 
-"Hard Worker",
+  const bases = [
+    250,
+    2500,
+    15000
+  ];
 
-"Better Business",
+  if (i < 0 || i > 2) {
+    return;
+  }
 
-"Street Hustle"
+  const cost =
+    Math.floor(
+      bases[i] *
+      Math.pow(2, s.up[i])
+    );
 
-];
+  if (s.cash < cost) {
 
-let bases = [
+    showMessage("Not enough cash");
 
-250,
+    return;
+  }
 
-2500,
+  s.cash -= cost;
+  s.up[i]++;
 
-15000
+  save();
+  render();
 
-];
-
-let cost =
-Math.floor(
-bases[i] *
-Math.pow(
-2,
-s.up[i]
-)
-);
-
-if(s.cash < cost) {
-
-showMessage("Not enough cash");
-
-return;
-
+  showMessage(
+    names[i] + " upgraded"
+  );
 }
 
-s.cash -= cost;
 
-s.up[i]++;
-
-save();
-
-render();
-
-showMessage(
-names[i] + " upgraded"
-);
-
-}
-
+/* -----------------------------
+   DAILY BONUS
+----------------------------- */
 
 function daily() {
 
-let today =
-Math.floor(
-Date.now()/86400000
-);
+  const today =
+    Math.floor(Date.now() / 86400000);
 
-if(s.daily === today) {
+  if (s.daily === today) {
 
-showMessage(
-"Daily bonus already claimed"
-);
+    showMessage(
+      "Daily bonus already claimed"
+    );
 
-return;
+    return;
+  }
 
+  s.daily = today;
+
+  const bonus =
+    100 + s.level * 25;
+
+  earn(bonus, true);
+
+  showMessage(
+    "Daily bonus +" + money(bonus)
+  );
 }
 
-s.daily = today;
 
-earn(
-100 + s.level * 25
-);
-
-showMessage(
-"Daily bonus claimed!"
-);
-
-}
-
+/* -----------------------------
+   PRESTIGE
+----------------------------- */
 
 function prestige() {
 
-if(s.earned < 100000) {
+  if (s.earned < 100000) {
 
-showMessage(
-"Earn $100K total first"
-);
+    showMessage(
+      "Earn $100K total first"
+    );
 
-return;
+    return;
+  }
 
+  const oldPrestige = s.prestige;
+
+  s.cash = 100;
+  s.earned = 0;
+  s.xp = 0;
+  s.level = 1;
+
+  s.owned = Array(7).fill(0);
+  s.up = Array(3).fill(0);
+
+  s.prestige = oldPrestige + 1;
+
+  save();
+  render();
+
+  showMessage(
+    "PRESTIGE! Permanent boost increased"
+  );
 }
 
-s.cash = 100;
 
-s.earned = 0;
-
-s.owned =
-Array(7).fill(0);
-
-s.up =
-Array(3).fill(0);
-
-s.prestige++;
-
-save();
-
-render();
-
-showMessage(
-"PRESTIGE! Permanent boost increased"
-);
-
-}
-
+/* -----------------------------
+   TOAST MESSAGE
+----------------------------- */
 
 function showMessage(text) {
 
-let box =
-document.getElementById("toast");
+  const box =
+    document.getElementById("toast");
 
-box.textContent = text;
+  if (!box) {
+    return;
+  }
 
-box.classList.add("show");
+  box.textContent = text;
 
-clearTimeout(window.toastTimer);
+  box.classList.add("show");
 
-window.toastTimer =
-setTimeout(
-() => box.classList.remove("show"),
-1600
-);
+  clearTimeout(window.toastTimer);
 
+  window.toastTimer =
+    setTimeout(() => {
+      box.classList.remove("show");
+    }, 1600);
 }
 
+
+/* -----------------------------
+   FUTURE SYSTEM MESSAGE
+----------------------------- */
 
 function msg(text) {
 
-showMessage(
-text + " system coming in the next V3 expansion."
-);
-
+  showMessage(
+    text +
+    " system coming in the next V3 expansion."
+  );
 }
 
+
+/* -----------------------------
+   SCROLL
+----------------------------- */
 
 function scrollToSection(id) {
 
-let element =
-document.getElementById(id);
+  const element =
+    document.getElementById(id);
 
-if(element) {
+  if (!element) {
+    return;
+  }
 
-element.scrollIntoView({
-behavior:"smooth",
-block:"center"
-});
-
+  element.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
 }
 
-}
 
+/* -----------------------------
+   RENDER GAME
+   Only called when something
+   actually changes the UI.
+----------------------------- */
 
 function render() {
 
-document.getElementById("cash").textContent =
-money(s.cash);
+  updateStats();
 
-document.getElementById("income").textContent =
-money(income()) + "/s";
-
-document.getElementById("level").textContent =
-s.level;
-
-document.getElementById("prestige").textContent =
-(1 + s.prestige * .5).toFixed(1) + "×";
+  const total =
+    s.owned.reduce(
+      (a, b) => a + b,
+      0
+    );
 
 
-let total =
-s.owned.reduce(
-(a,b) => a+b,
-0
-);
+  const ownedEl =
+    document.getElementById("owned");
+
+  if (ownedEl) {
+    ownedEl.textContent =
+      total + " owned";
+  }
 
 
-document.getElementById("owned").textContent =
-total + " owned";
+  /* ACHIEVEMENTS */
+
+  let achievements = 0;
+
+  if (s.earned >= 100)
+    achievements++;
+
+  if (total >= 1)
+    achievements++;
+
+  if (s.earned >= 1000)
+    achievements++;
+
+  if (s.level >= 10)
+    achievements++;
+
+  if (s.earned >= 100000)
+    achievements++;
 
 
-let achievements = 0;
+  const achEl =
+    document.getElementById("ach");
 
-if(s.earned >= 100)
-achievements++;
-
-if(total >= 1)
-achievements++;
-
-if(s.earned >= 1000)
-achievements++;
-
-if(s.level >= 10)
-achievements++;
-
-if(s.earned >= 100000)
-achievements++;
+  if (achEl) {
+    achEl.textContent =
+      achievements + " unlocked";
+  }
 
 
-document.getElementById("ach").textContent =
-achievements + " unlocked";
+  /* BUSINESSES */
 
+  const businessesEl =
+    document.getElementById("businesses");
 
-document.getElementById("businesses").innerHTML =
+  if (businessesEl) {
 
-B.map((b,i) => {
+    businessesEl.innerHTML =
 
-let cost =
-Math.floor(
-b[1] *
-Math.pow(
-1.15,
-s.owned[i]
-)
-);
+      B.map((b, i) => {
 
-return `
+        const cost =
+          Math.floor(
+            b[1] *
+            Math.pow(
+              1.15,
+              s.owned[i]
+            )
+          );
+
+        return `
 
 <div class="card">
 
@@ -1359,13 +1518,9 @@ ${b[0]}
 </b>
 
 <div class="sub">
-
 Level ${s.owned[i]}
-
 ·
-
 +${money(b[2])}/s each
-
 </div>
 
 </div>
@@ -1385,46 +1540,54 @@ ${money(cost)}
 
 `;
 
-}).join("");
+      }).join("");
+  }
 
 
-let upgrades = [
+  /* UPGRADES */
 
-[
-"Hard Worker",
-"Work income +20% per level",
-250
-],
+  const upgradesEl =
+    document.getElementById("upgrades");
 
-[
-"Better Business",
-"Business income +25% per level",
-2500
-],
+  const upgrades = [
 
-[
-"Street Hustle",
-"Future grind bonus",
-15000
-]
+    [
+      "Hard Worker",
+      "Work income +20% per level",
+      250
+    ],
 
-];
+    [
+      "Better Business",
+      "Business income +25% per level",
+      2500
+    ],
+
+    [
+      "Street Hustle",
+      "Future grind bonus",
+      15000
+    ]
+
+  ];
 
 
-document.getElementById("upgrades").innerHTML =
+  if (upgradesEl) {
 
-upgrades.map((u,i) => {
+    upgradesEl.innerHTML =
 
-let cost =
-Math.floor(
-u[2] *
-Math.pow(
-2,
-s.up[i]
-)
-);
+      upgrades.map((u, i) => {
 
-return `
+        const cost =
+          Math.floor(
+            u[2] *
+            Math.pow(
+              2,
+              s.up[i]
+            )
+          );
+
+        return `
 
 <div class="card">
 
@@ -1457,55 +1620,63 @@ ${money(cost)}
 
 `;
 
-}).join("");
+      }).join("");
+  }
 
 
-let missions = [
+  /* MISSIONS */
 
-[
-"First Hustle",
-s.earned,
-100
-],
+  const missionsEl =
+    document.getElementById("missions");
 
-[
-"First Business",
-total,
-1
-],
+  const missions = [
 
-[
-"First $1K",
-s.earned,
-1000
-],
+    [
+      "First Hustle",
+      s.earned,
+      100
+    ],
 
-[
-"Getting Serious",
-s.level,
-10
-],
+    [
+      "First Business",
+      total,
+      1
+    ],
 
-[
-"Big Player",
-s.earned,
-100000
-]
+    [
+      "First $1K",
+      s.earned,
+      1000
+    ],
 
-];
+    [
+      "Getting Serious",
+      s.level,
+      10
+    ],
+
+    [
+      "Big Player",
+      s.earned,
+      100000
+    ]
+
+  ];
 
 
-document.getElementById("missions").innerHTML =
+  if (missionsEl) {
 
-missions.map(m => {
+    missionsEl.innerHTML =
 
-let percent =
-Math.min(
-100,
-m[1] / m[2] * 100
-);
+      missions.map(m => {
 
-return `
+        const percent =
+          Math.min(
+            100,
+            (m[1] / m[2]) * 100
+          );
+
+        return `
 
 <div class="card">
 
@@ -1539,45 +1710,130 @@ ${money(m[2])}
 
 `;
 
-}).join("");
-
-
-let goal;
-
-if(s.cash < 1000)
-goal = "$1,000 CASH";
-
-else if(s.cash < 10000)
-goal = "$10,000 CASH";
-
-else if(s.cash < 100000)
-goal = "$100,000 CASH";
-
-else
-goal = "$1,000,000 CASH";
-
-
-document.getElementById("goal").textContent =
-goal;
-
-
-save();
-
+      }).join("");
+  }
 }
 
 
-setInterval(
-() => {
+/* -----------------------------
+   AUTOMATIC BUSINESS INCOME
 
-let amount = income();
+   IMPORTANT:
+   This does NOT call render()
+   every second anymore.
 
-if(amount > 0)
-earn(amount);
+   It only updates the stats.
+----------------------------- */
 
-},
-1000
+let lastIncomeTick = Date.now();
+let incomeSaveTimer = 0;
+
+setInterval(() => {
+
+  const now = Date.now();
+
+  const elapsed =
+    Math.min(
+      2,
+      (now - lastIncomeTick) / 1000
+    );
+
+  lastIncomeTick = now;
+
+  const rate = income();
+
+  if (rate <= 0) {
+    return;
+  }
+
+  const amount =
+    rate * elapsed;
+
+  s.cash += amount;
+  s.earned += amount;
+
+  s.xp += Math.max(
+    1,
+    Math.floor(amount / 10)
+  );
+
+  let leveledUp = false;
+
+  while (s.xp >= 100) {
+
+    s.xp -= 100;
+    s.level++;
+    leveledUp = true;
+  }
+
+  /*
+     Update only the visible numbers.
+     No rebuilding the entire page.
+  */
+
+  updateStats();
+
+  const total =
+    s.owned.reduce(
+      (a, b) => a + b,
+      0
+    );
+
+  const ownedEl =
+    document.getElementById("owned");
+
+  if (ownedEl) {
+    ownedEl.textContent =
+      total + " owned";
+  }
+
+  /*
+     Save occasionally instead of
+     hitting localStorage every second.
+  */
+
+  incomeSaveTimer += elapsed;
+
+  if (incomeSaveTimer >= 5) {
+
+    save();
+
+    incomeSaveTimer = 0;
+  }
+
+  if (leveledUp) {
+
+    render();
+
+    showMessage(
+      "LEVEL UP! Level " + s.level
+    );
+  }
+
+}, 1000);
+
+
+/* -----------------------------
+   SAVE WHEN LEAVING PAGE
+----------------------------- */
+
+window.addEventListener("pagehide", save);
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if (document.visibilityState === "hidden") {
+      save();
+    }
+
+  }
 );
 
+
+/* -----------------------------
+   START GAME
+----------------------------- */
 
 render();
 
