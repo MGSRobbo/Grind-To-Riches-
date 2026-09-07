@@ -134,19 +134,6 @@ button {
   );
 }
 
-.arch {
-  position: absolute;
-  z-index: 2;
-  bottom: 19px;
-  left: 50%;
-  width: 88px;
-  height: 52px;
-  transform: translateX(-50%);
-  border: 7px solid #e0e6ec;
-  border-top: 0;
-  border-radius: 0 0 60px 60px;
-}
-
 .heroText {
   position: relative;
   z-index: 3;
@@ -420,7 +407,6 @@ VERSION 3
 
 <section class="hero">
 
-<div class="arch"></div>
 <div class="skyline"></div>
 
 <div class="heroText">
@@ -1003,11 +989,6 @@ const B = [
   ["STL Corporation", 2500000, 50000]
 ];
 
-
-/* -----------------------------
-   LOAD SAVED GAME
------------------------------ */
-
 let s;
 
 try {
@@ -1029,11 +1010,6 @@ if (!s || typeof s !== "object") {
   };
 }
 
-
-/* -----------------------------
-   DATA SAFETY
------------------------------ */
-
 if (!Array.isArray(s.owned) || s.owned.length !== 7) {
   s.owned = Array(7).fill(0);
 }
@@ -1049,38 +1025,24 @@ s.xp = Number(s.xp) || 0;
 s.prestige = Number(s.prestige) || 0;
 s.daily = Number(s.daily) || 0;
 
-
-/* -----------------------------
-   MONEY FORMAT
------------------------------ */
-
 function money(n) {
 
   n = Number(n) || 0;
 
-  if (n >= 1000000000000) {
+  if (n >= 1000000000000)
     return "$" + (n / 1000000000000).toFixed(2) + "T";
-  }
 
-  if (n >= 1000000000) {
+  if (n >= 1000000000)
     return "$" + (n / 1000000000).toFixed(2) + "B";
-  }
 
-  if (n >= 1000000) {
+  if (n >= 1000000)
     return "$" + (n / 1000000).toFixed(2) + "M";
-  }
 
-  if (n >= 1000) {
+  if (n >= 1000)
     return "$" + (n / 1000).toFixed(1) + "K";
-  }
 
   return "$" + Math.floor(n);
 }
-
-
-/* -----------------------------
-   BUSINESS INCOME
------------------------------ */
 
 function income() {
 
@@ -1096,11 +1058,6 @@ function income() {
     * (1 + s.up[1] * 0.25);
 }
 
-
-/* -----------------------------
-   SAVE
------------------------------ */
-
 function save() {
 
   try {
@@ -1110,11 +1067,6 @@ function save() {
   }
 }
 
-
-/* -----------------------------
-   UPDATE ONLY STATS
------------------------------ */
-
 function updateStats() {
 
   const cashEl = document.getElementById("cash");
@@ -1123,56 +1075,42 @@ function updateStats() {
   const prestigeEl = document.getElementById("prestige");
   const goalEl = document.getElementById("goal");
 
-  if (cashEl) {
+  if (cashEl)
     cashEl.textContent = money(s.cash);
-  }
 
-  if (incomeEl) {
+  if (incomeEl)
     incomeEl.textContent = money(income()) + "/s";
-  }
 
-  if (levelEl) {
+  if (levelEl)
     levelEl.textContent = s.level;
-  }
 
-  if (prestigeEl) {
+  if (prestigeEl)
     prestigeEl.textContent =
       (1 + s.prestige * 0.5).toFixed(1) + "×";
-  }
 
   if (goalEl) {
 
     let goal;
 
-    if (s.cash < 1000) {
+    if (s.cash < 1000)
       goal = "$1,000 CASH";
-    }
-    else if (s.cash < 10000) {
+    else if (s.cash < 10000)
       goal = "$10,000 CASH";
-    }
-    else if (s.cash < 100000) {
+    else if (s.cash < 100000)
       goal = "$100,000 CASH";
-    }
-    else {
+    else
       goal = "$1,000,000 CASH";
-    }
 
     goalEl.textContent = goal;
   }
 }
 
-
-/* -----------------------------
-   EARN MONEY
------------------------------ */
-
 function earn(amount, fullRender = true) {
 
   amount = Number(amount) || 0;
 
-  if (amount <= 0) {
+  if (amount <= 0)
     return;
-  }
 
   s.cash += amount;
   s.earned += amount;
@@ -1193,21 +1131,14 @@ function earn(amount, fullRender = true) {
 
   save();
 
-  if (fullRender) {
+  if (fullRender)
     render();
-  } else {
+  else
     updateStats();
-  }
 
-  if (leveledUp) {
+  if (leveledUp)
     showMessage("LEVEL UP! Level " + s.level);
-  }
 }
-
-
-/* -----------------------------
-   WORK
------------------------------ */
 
 function work() {
 
@@ -1221,16 +1152,10 @@ function work() {
   );
 }
 
-
-/* -----------------------------
-   BUY BUSINESS
------------------------------ */
-
 function buyBusiness(i) {
 
-  if (!B[i]) {
+  if (!B[i])
     return;
-  }
 
   const cost =
     Math.floor(
@@ -1241,7 +1166,6 @@ function buyBusiness(i) {
   if (s.cash < cost) {
 
     showMessage("Not enough cash");
-
     return;
   }
 
@@ -1255,11 +1179,6 @@ function buyBusiness(i) {
     B[i][0] + " acquired"
   );
 }
-
-
-/* -----------------------------
-   UPGRADES
------------------------------ */
 
 function upgrade(i) {
 
@@ -1275,9 +1194,8 @@ function upgrade(i) {
     15000
   ];
 
-  if (i < 0 || i > 2) {
+  if (i < 0 || i > 2)
     return;
-  }
 
   const cost =
     Math.floor(
@@ -1288,7 +1206,6 @@ function upgrade(i) {
   if (s.cash < cost) {
 
     showMessage("Not enough cash");
-
     return;
   }
 
@@ -1302,11 +1219,6 @@ function upgrade(i) {
     names[i] + " upgraded"
   );
 }
-
-
-/* -----------------------------
-   DAILY BONUS
------------------------------ */
 
 function daily() {
 
@@ -1333,11 +1245,6 @@ function daily() {
     "Daily bonus +" + money(bonus)
   );
 }
-
-
-/* -----------------------------
-   PRESTIGE
------------------------------ */
 
 function prestige() {
 
@@ -1370,19 +1277,13 @@ function prestige() {
   );
 }
 
-
-/* -----------------------------
-   TOAST MESSAGE
------------------------------ */
-
 function showMessage(text) {
 
   const box =
     document.getElementById("toast");
 
-  if (!box) {
+  if (!box)
     return;
-  }
 
   box.textContent = text;
 
@@ -1396,11 +1297,6 @@ function showMessage(text) {
     }, 1600);
 }
 
-
-/* -----------------------------
-   FUTURE SYSTEM MESSAGE
------------------------------ */
-
 function msg(text) {
 
   showMessage(
@@ -1409,32 +1305,19 @@ function msg(text) {
   );
 }
 
-
-/* -----------------------------
-   SCROLL
------------------------------ */
-
 function scrollToSection(id) {
 
   const element =
     document.getElementById(id);
 
-  if (!element) {
+  if (!element)
     return;
-  }
 
   element.scrollIntoView({
     behavior: "smooth",
     block: "center"
   });
 }
-
-
-/* -----------------------------
-   RENDER GAME
-   Only called when something
-   actually changes the UI.
------------------------------ */
 
 function render() {
 
@@ -1446,17 +1329,11 @@ function render() {
       0
     );
 
-
   const ownedEl =
     document.getElementById("owned");
 
-  if (ownedEl) {
-    ownedEl.textContent =
-      total + " owned";
-  }
-
-
-  /* ACHIEVEMENTS */
+  if (ownedEl)
+    ownedEl.textContent = total + " owned";
 
   let achievements = 0;
 
@@ -1475,17 +1352,12 @@ function render() {
   if (s.earned >= 100000)
     achievements++;
 
-
   const achEl =
     document.getElementById("ach");
 
-  if (achEl) {
+  if (achEl)
     achEl.textContent =
       achievements + " unlocked";
-  }
-
-
-  /* BUSINESSES */
 
   const businessesEl =
     document.getElementById("businesses");
@@ -1543,9 +1415,6 @@ ${money(cost)}
       }).join("");
   }
 
-
-  /* UPGRADES */
-
   const upgradesEl =
     document.getElementById("upgrades");
 
@@ -1570,7 +1439,6 @@ ${money(cost)}
     ]
 
   ];
-
 
   if (upgradesEl) {
 
@@ -1623,9 +1491,6 @@ ${money(cost)}
       }).join("");
   }
 
-
-  /* MISSIONS */
-
   const missionsEl =
     document.getElementById("missions");
 
@@ -1662,7 +1527,6 @@ ${money(cost)}
     ]
 
   ];
-
 
   if (missionsEl) {
 
@@ -1714,17 +1578,6 @@ ${money(m[2])}
   }
 }
 
-
-/* -----------------------------
-   AUTOMATIC BUSINESS INCOME
-
-   IMPORTANT:
-   This does NOT call render()
-   every second anymore.
-
-   It only updates the stats.
------------------------------ */
-
 let lastIncomeTick = Date.now();
 let incomeSaveTimer = 0;
 
@@ -1742,9 +1595,8 @@ setInterval(() => {
 
   const rate = income();
 
-  if (rate <= 0) {
+  if (rate <= 0)
     return;
-  }
 
   const amount =
     rate * elapsed;
@@ -1766,11 +1618,6 @@ setInterval(() => {
     leveledUp = true;
   }
 
-  /*
-     Update only the visible numbers.
-     No rebuilding the entire page.
-  */
-
   updateStats();
 
   const total =
@@ -1782,15 +1629,9 @@ setInterval(() => {
   const ownedEl =
     document.getElementById("owned");
 
-  if (ownedEl) {
+  if (ownedEl)
     ownedEl.textContent =
       total + " owned";
-  }
-
-  /*
-     Save occasionally instead of
-     hitting localStorage every second.
-  */
 
   incomeSaveTimer += elapsed;
 
@@ -1812,28 +1653,17 @@ setInterval(() => {
 
 }, 1000);
 
-
-/* -----------------------------
-   SAVE WHEN LEAVING PAGE
------------------------------ */
-
 window.addEventListener("pagehide", save);
 
 document.addEventListener(
   "visibilitychange",
   () => {
 
-    if (document.visibilityState === "hidden") {
+    if (document.visibilityState === "hidden")
       save();
-    }
 
   }
 );
-
-
-/* -----------------------------
-   START GAME
------------------------------ */
 
 render();
 
