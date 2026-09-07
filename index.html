@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#07111f">
-<title>Grind to Riches — St. Louis Edition V3</title>
+<title>Grind to Riches — St. Louis Edition V3.1</title>
 
 <style>
 * {
@@ -30,6 +30,11 @@ button {
   font-family: inherit;
   cursor: pointer;
   -webkit-appearance: none;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
 }
 
 .app {
@@ -260,6 +265,7 @@ h2 {
   font-size: 9px;
   color: #849ab1;
   margin-top: 4px;
+  line-height: 1.5;
 }
 
 .btn {
@@ -349,6 +355,12 @@ h2 {
   transform: translate(-50%,0);
 }
 
+.sectionIntro {
+  margin: 0 13px 8px;
+  color: #71869e;
+  font-size: 9px;
+}
+
 @media(max-width:390px) {
   .grid {
     grid-template-columns: repeat(2,1fr);
@@ -376,7 +388,7 @@ ST. LOUIS EDITION
 </div>
 
 <div class="version">
-VERSION 3
+VERSION 3.1
 </div>
 
 <div class="stats">
@@ -444,7 +456,7 @@ Empire
 <div class="grid">
 
 
-<button class="tile" onclick="msg('Cars & Vehicles')">
+<button class="tile" onclick="openCars()">
 
 <i class="icon">
 
@@ -485,7 +497,7 @@ Build your fleet
 </button>
 
 
-<button class="tile" onclick="msg('Houses & Properties')">
+<button class="tile" onclick="openHouses()">
 
 <i class="icon">
 
@@ -720,10 +732,6 @@ d="M28 5v39M52 11v39"
 stroke="#8bd1ae"
 stroke-width="3"/>
 
-<path
-d="M38 14q0 8-7 14h14q-7-6-7-14z"
-fill="#e9eef4"/>
-
 </svg>
 
 </i>
@@ -887,11 +895,33 @@ Upgrade your grind
 </div>
 
 
-<h2>
+<h2 id="carsSection">
+Cars & Vehicles
+</h2>
+
+<div class="sectionIntro">
+Build your fleet and create another stream of passive income.
+</div>
+
+<div class="cards" id="cars"></div>
+
+
+<h2 id="housesSection">
+Houses & Properties
+</h2>
+
+<div class="sectionIntro">
+Build a property empire across St. Louis.
+</div>
+
+<div class="cards" id="houses"></div>
+
+
+<h2 id="businesses">
 Businesses
 </h2>
 
-<div class="cards" id="businesses"></div>
+<div class="cards" id="businessList"></div>
 
 
 <h2>
@@ -901,11 +931,11 @@ Upgrades
 <div class="cards" id="upgrades"></div>
 
 
-<h2>
+<h2 id="missions">
 Mission Progress
 </h2>
 
-<div class="cards" id="missions"></div>
+<div class="cards" id="missionList"></div>
 
 
 <h2>
@@ -965,7 +995,7 @@ AWARDS
 MISSIONS
 </button>
 
-<button class="nav" onclick="scrollToSection('businesses')">
+<button class="nav" onclick="scrollToSection('carsSection')">
 STORE
 </button>
 
@@ -979,6 +1009,11 @@ STORE
 
 const KEY = "gtr_stl_v3";
 
+
+/* =============================
+   BUSINESSES
+============================= */
+
 const B = [
   ["Lemonade Stand", 50, 1],
   ["Food Truck", 500, 10],
@@ -989,34 +1024,112 @@ const B = [
   ["STL Corporation", 2500000, 50000]
 ];
 
+
+/* =============================
+   CARS
+============================= */
+
+const CARS = [
+  ["Used Sedan", 2500, 25, 2],
+  ["Muscle Car", 15000, 175, 5],
+  ["Luxury SUV", 50000, 650, 10],
+  ["Sports Car", 150000, 2500, 15],
+  ["Supercar", 1000000, 20000, 20]
+];
+
+
+/* =============================
+   HOUSES
+============================= */
+
+const HOUSES = [
+  ["Starter House", 5000, 50, 2],
+  ["Duplex", 25000, 300, 5],
+  ["Apartment Building", 100000, 1500, 10],
+  ["Luxury Home", 500000, 8000, 15],
+  ["Downtown Tower", 2000000, 40000, 20]
+];
+
+
+/* =============================
+   LOAD SAVE
+============================= */
+
 let s;
 
 try {
-  s = JSON.parse(localStorage.getItem(KEY) || "null");
+
+  s = JSON.parse(
+    localStorage.getItem(KEY) || "null"
+  );
+
 } catch(error) {
+
   s = null;
+
 }
 
+
 if (!s || typeof s !== "object") {
+
   s = {
+
     cash: 100,
     earned: 0,
     level: 1,
     xp: 0,
     prestige: 0,
+
     owned: Array(7).fill(0),
+
     up: Array(3).fill(0),
+
+    cars: Array(CARS.length).fill(0),
+
+    houses: Array(HOUSES.length).fill(0),
+
     daily: 0
+
   };
+
 }
 
-if (!Array.isArray(s.owned) || s.owned.length !== 7) {
-  s.owned = Array(7).fill(0);
+
+/* =============================
+   SAVE DATA SAFETY
+============================= */
+
+if (!Array.isArray(s.owned) ||
+    s.owned.length !== B.length) {
+
+  s.owned = Array(B.length).fill(0);
+
 }
 
-if (!Array.isArray(s.up) || s.up.length !== 3) {
+
+if (!Array.isArray(s.up) ||
+    s.up.length !== 3) {
+
   s.up = Array(3).fill(0);
+
 }
+
+
+if (!Array.isArray(s.cars) ||
+    s.cars.length !== CARS.length) {
+
+  s.cars = Array(CARS.length).fill(0);
+
+}
+
+
+if (!Array.isArray(s.houses) ||
+    s.houses.length !== HOUSES.length) {
+
+  s.houses = Array(HOUSES.length).fill(0);
+
+}
+
 
 s.cash = Number(s.cash) || 100;
 s.earned = Number(s.earned) || 0;
@@ -1025,68 +1138,184 @@ s.xp = Number(s.xp) || 0;
 s.prestige = Number(s.prestige) || 0;
 s.daily = Number(s.daily) || 0;
 
+
+/* =============================
+   MONEY
+============================= */
+
 function money(n) {
 
   n = Number(n) || 0;
 
   if (n >= 1000000000000)
-    return "$" + (n / 1000000000000).toFixed(2) + "T";
+    return "$" +
+      (n / 1000000000000).toFixed(2) +
+      "T";
 
   if (n >= 1000000000)
-    return "$" + (n / 1000000000).toFixed(2) + "B";
+    return "$" +
+      (n / 1000000000).toFixed(2) +
+      "B";
 
   if (n >= 1000000)
-    return "$" + (n / 1000000).toFixed(2) + "M";
+    return "$" +
+      (n / 1000000).toFixed(2) +
+      "M";
 
   if (n >= 1000)
-    return "$" + (n / 1000).toFixed(1) + "K";
+    return "$" +
+      (n / 1000).toFixed(1) +
+      "K";
 
   return "$" + Math.floor(n);
 }
 
-function income() {
 
-  const businessIncome = B.reduce(
+/* =============================
+   BUSINESS INCOME
+============================= */
+
+function businessIncome() {
+
+  return B.reduce(
     (total, b, i) => {
-      return total + (b[2] * Number(s.owned[i] || 0));
+
+      return total +
+        b[2] *
+        Number(s.owned[i] || 0);
+
     },
     0
   );
 
-  return businessIncome
-    * (1 + s.prestige * 0.5)
-    * (1 + s.up[1] * 0.25);
 }
+
+
+/* =============================
+   CAR INCOME
+============================= */
+
+function carIncome() {
+
+  return CARS.reduce(
+    (total, car, i) => {
+
+      return total +
+        car[2] *
+        Number(s.cars[i] || 0);
+
+    },
+    0
+  );
+
+}
+
+
+/* =============================
+   HOUSE INCOME
+============================= */
+
+function houseIncome() {
+
+  return HOUSES.reduce(
+    (total, house, i) => {
+
+      return total +
+        house[2] *
+        Number(s.houses[i] || 0);
+
+    },
+    0
+  );
+
+}
+
+
+/* =============================
+   TOTAL INCOME
+============================= */
+
+function income() {
+
+  const baseIncome =
+    businessIncome() +
+    carIncome() +
+    houseIncome();
+
+  return baseIncome *
+    (1 + s.prestige * 0.5) *
+    (1 + s.up[1] * 0.25);
+
+}
+
+
+/* =============================
+   SAVE
+============================= */
 
 function save() {
 
   try {
-    localStorage.setItem(KEY, JSON.stringify(s));
+
+    localStorage.setItem(
+      KEY,
+      JSON.stringify(s)
+    );
+
   } catch(error) {
-    console.warn("Game save failed:", error);
+
+    console.warn(
+      "Game save failed:",
+      error
+    );
+
   }
+
 }
+
+
+/* =============================
+   UPDATE STATS
+============================= */
 
 function updateStats() {
 
-  const cashEl = document.getElementById("cash");
-  const incomeEl = document.getElementById("income");
-  const levelEl = document.getElementById("level");
-  const prestigeEl = document.getElementById("prestige");
-  const goalEl = document.getElementById("goal");
+  const cashEl =
+    document.getElementById("cash");
+
+  const incomeEl =
+    document.getElementById("income");
+
+  const levelEl =
+    document.getElementById("level");
+
+  const prestigeEl =
+    document.getElementById("prestige");
+
+  const goalEl =
+    document.getElementById("goal");
+
 
   if (cashEl)
-    cashEl.textContent = money(s.cash);
+    cashEl.textContent =
+      money(s.cash);
+
 
   if (incomeEl)
-    incomeEl.textContent = money(income()) + "/s";
+    incomeEl.textContent =
+      money(income()) + "/s";
+
 
   if (levelEl)
-    levelEl.textContent = s.level;
+    levelEl.textContent =
+      s.level;
+
 
   if (prestigeEl)
     prestigeEl.textContent =
-      (1 + s.prestige * 0.5).toFixed(1) + "×";
+      (1 + s.prestige * 0.5)
+        .toFixed(1) + "×";
+
 
   if (goalEl) {
 
@@ -1094,136 +1323,371 @@ function updateStats() {
 
     if (s.cash < 1000)
       goal = "$1,000 CASH";
+
     else if (s.cash < 10000)
       goal = "$10,000 CASH";
+
     else if (s.cash < 100000)
       goal = "$100,000 CASH";
+
     else
       goal = "$1,000,000 CASH";
 
+
     goalEl.textContent = goal;
+
   }
+
 }
+
+
+/* =============================
+   EARN
+============================= */
 
 function earn(amount, fullRender = true) {
 
-  amount = Number(amount) || 0;
+  amount =
+    Number(amount) || 0;
+
 
   if (amount <= 0)
     return;
 
+
   s.cash += amount;
   s.earned += amount;
+
 
   s.xp += Math.max(
     1,
     Math.floor(amount / 10)
   );
 
+
   let leveledUp = false;
+
 
   while (s.xp >= 100) {
 
     s.xp -= 100;
+
     s.level++;
+
     leveledUp = true;
+
   }
+
 
   save();
 
+
   if (fullRender)
     render();
+
   else
     updateStats();
 
-  if (leveledUp)
-    showMessage("LEVEL UP! Level " + s.level);
+
+  if (leveledUp) {
+
+    showMessage(
+      "LEVEL UP! Level " +
+      s.level
+    );
+
+  }
+
 }
+
+
+/* =============================
+   WORK
+============================= */
 
 function work() {
 
   const amount =
-    10 * (1 + s.up[0] * 0.2);
+    10 *
+    (1 + s.up[0] * 0.2);
+
 
   earn(amount, true);
 
+
   showMessage(
-    "Grind complete +" + money(amount)
+    "Grind complete +" +
+    money(amount)
   );
+
 }
+
+
+/* =============================
+   BUY BUSINESS
+============================= */
 
 function buyBusiness(i) {
 
   if (!B[i])
     return;
 
+
   const cost =
     Math.floor(
       B[i][1] *
-      Math.pow(1.15, s.owned[i])
+      Math.pow(
+        1.15,
+        s.owned[i]
+      )
     );
+
 
   if (s.cash < cost) {
 
-    showMessage("Not enough cash");
+    showMessage(
+      "Not enough cash"
+    );
+
     return;
+
   }
 
+
   s.cash -= cost;
+
   s.owned[i]++;
 
+
   save();
+
   render();
 
+
   showMessage(
-    B[i][0] + " acquired"
+    B[i][0] +
+    " acquired"
   );
+
 }
+
+
+/* =============================
+   BUY CAR
+============================= */
+
+function buyCar(i) {
+
+  const car =
+    CARS[i];
+
+
+  if (!car)
+    return;
+
+
+  if (s.level < car[3]) {
+
+    showMessage(
+      "Reach Level " +
+      car[3] +
+      " to unlock " +
+      car[0]
+    );
+
+    return;
+
+  }
+
+
+  const cost =
+    Math.floor(
+      car[1] *
+      Math.pow(
+        1.15,
+        s.cars[i]
+      )
+    );
+
+
+  if (s.cash < cost) {
+
+    showMessage(
+      "Not enough cash"
+    );
+
+    return;
+
+  }
+
+
+  s.cash -= cost;
+
+  s.cars[i]++;
+
+
+  save();
+
+  render();
+
+
+  showMessage(
+    car[0] +
+    " added to your fleet"
+  );
+
+}
+
+
+/* =============================
+   BUY HOUSE
+============================= */
+
+function buyHouse(i) {
+
+  const house =
+    HOUSES[i];
+
+
+  if (!house)
+    return;
+
+
+  if (s.level < house[3]) {
+
+    showMessage(
+      "Reach Level " +
+      house[3] +
+      " to unlock " +
+      house[0]
+    );
+
+    return;
+
+  }
+
+
+  const cost =
+    Math.floor(
+      house[1] *
+      Math.pow(
+        1.15,
+        s.houses[i]
+      )
+    );
+
+
+  if (s.cash < cost) {
+
+    showMessage(
+      "Not enough cash"
+    );
+
+    return;
+
+  }
+
+
+  s.cash -= cost;
+
+  s.houses[i]++;
+
+
+  save();
+
+  render();
+
+
+  showMessage(
+    house[0] +
+    " purchased"
+  );
+
+}
+
+
+/* =============================
+   UPGRADES
+============================= */
 
 function upgrade(i) {
 
   const names = [
+
     "Hard Worker",
+
     "Better Business",
+
     "Street Hustle"
+
   ];
 
+
   const bases = [
+
     250,
+
     2500,
+
     15000
+
   ];
+
 
   if (i < 0 || i > 2)
     return;
 
+
   const cost =
     Math.floor(
       bases[i] *
-      Math.pow(2, s.up[i])
+      Math.pow(
+        2,
+        s.up[i]
+      )
     );
+
 
   if (s.cash < cost) {
 
-    showMessage("Not enough cash");
+    showMessage(
+      "Not enough cash"
+    );
+
     return;
+
   }
 
+
   s.cash -= cost;
+
   s.up[i]++;
 
+
   save();
+
   render();
 
+
   showMessage(
-    names[i] + " upgraded"
+    names[i] +
+    " upgraded"
   );
+
 }
+
+
+/* =============================
+   DAILY BONUS
+============================= */
 
 function daily() {
 
   const today =
-    Math.floor(Date.now() / 86400000);
+    Math.floor(
+      Date.now() / 86400000
+    );
+
 
   if (s.daily === today) {
 
@@ -1232,19 +1696,35 @@ function daily() {
     );
 
     return;
+
   }
+
 
   s.daily = today;
 
-  const bonus =
-    100 + s.level * 25;
 
-  earn(bonus, true);
+  const bonus =
+    100 +
+    s.level * 25;
+
+
+  earn(
+    bonus,
+    true
+  );
+
 
   showMessage(
-    "Daily bonus +" + money(bonus)
+    "Daily bonus +" +
+    money(bonus)
   );
+
 }
+
+
+/* =============================
+   PRESTIGE
+============================= */
 
 function prestige() {
 
@@ -1255,118 +1735,305 @@ function prestige() {
     );
 
     return;
+
   }
 
-  const oldPrestige = s.prestige;
+
+  const oldPrestige =
+    s.prestige;
+
 
   s.cash = 100;
+
   s.earned = 0;
+
   s.xp = 0;
+
   s.level = 1;
 
-  s.owned = Array(7).fill(0);
-  s.up = Array(3).fill(0);
 
-  s.prestige = oldPrestige + 1;
+  s.owned =
+    Array(B.length).fill(0);
+
+
+  s.up =
+    Array(3).fill(0);
+
+
+  s.cars =
+    Array(CARS.length).fill(0);
+
+
+  s.houses =
+    Array(HOUSES.length).fill(0);
+
+
+  s.prestige =
+    oldPrestige + 1;
+
 
   save();
+
   render();
+
 
   showMessage(
     "PRESTIGE! Permanent boost increased"
   );
+
 }
 
-function showMessage(text) {
 
-  const box =
-    document.getElementById("toast");
+/* =============================
+   OPEN CARS
+============================= */
 
-  if (!box)
-    return;
+function openCars() {
 
-  box.textContent = text;
+  const section =
+    document.getElementById(
+      "carsSection"
+    );
 
-  box.classList.add("show");
 
-  clearTimeout(window.toastTimer);
+  if (section) {
 
-  window.toastTimer =
-    setTimeout(() => {
-      box.classList.remove("show");
-    }, 1600);
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }
+
+
+  showMessage(
+    "Your vehicle fleet"
+  );
+
 }
+
+
+/* =============================
+   OPEN HOUSES
+============================= */
+
+function openHouses() {
+
+  const section =
+    document.getElementById(
+      "housesSection"
+    );
+
+
+  if (section) {
+
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }
+
+
+  showMessage(
+    "Your property empire"
+  );
+
+}
+
+
+/* =============================
+   FUTURE SYSTEM MESSAGE
+============================= */
 
 function msg(text) {
 
   showMessage(
     text +
-    " system coming in the next V3 expansion."
+    " system coming in the next expansion."
   );
+
 }
+
+
+/* =============================
+   SCROLL
+============================= */
 
 function scrollToSection(id) {
 
   const element =
     document.getElementById(id);
 
+
   if (!element)
     return;
 
+
   element.scrollIntoView({
     behavior: "smooth",
-    block: "center"
+    block: "start"
   });
+
 }
+
+
+/* =============================
+   TOAST
+============================= */
+
+function showMessage(text) {
+
+  const box =
+    document.getElementById(
+      "toast"
+    );
+
+
+  if (!box)
+    return;
+
+
+  box.textContent =
+    text;
+
+
+  box.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer =
+    setTimeout(() => {
+
+      box.classList.remove(
+        "show"
+      );
+
+    }, 1600);
+
+}
+
+
+/* =============================
+   RENDER
+============================= */
 
 function render() {
 
   updateStats();
 
-  const total =
+
+  /* =============================
+     TOTAL OWNED
+  ============================= */
+
+  const totalBusinesses =
     s.owned.reduce(
-      (a, b) => a + b,
+      (a,b) => a + b,
       0
     );
 
-  const ownedEl =
-    document.getElementById("owned");
 
-  if (ownedEl)
-    ownedEl.textContent = total + " owned";
+  const totalCars =
+    s.cars.reduce(
+      (a,b) => a + b,
+      0
+    );
+
+
+  const totalHouses =
+    s.houses.reduce(
+      (a,b) => a + b,
+      0
+    );
+
+
+  const ownedEl =
+    document.getElementById(
+      "owned"
+    );
+
+
+  if (ownedEl) {
+
+    ownedEl.textContent =
+      totalBusinesses +
+      " owned";
+
+  }
+
+
+  /* =============================
+     ACHIEVEMENTS
+  ============================= */
 
   let achievements = 0;
+
 
   if (s.earned >= 100)
     achievements++;
 
-  if (total >= 1)
+
+  if (totalBusinesses >= 1)
     achievements++;
+
+
+  if (totalCars >= 1)
+    achievements++;
+
+
+  if (totalHouses >= 1)
+    achievements++;
+
 
   if (s.earned >= 1000)
     achievements++;
 
+
   if (s.level >= 10)
     achievements++;
+
 
   if (s.earned >= 100000)
     achievements++;
 
+
   const achEl =
-    document.getElementById("ach");
+    document.getElementById(
+      "ach"
+    );
 
-  if (achEl)
+
+  if (achEl) {
+
     achEl.textContent =
-      achievements + " unlocked";
+      achievements +
+      " unlocked";
 
-  const businessesEl =
-    document.getElementById("businesses");
+  }
 
-  if (businessesEl) {
 
-    businessesEl.innerHTML =
+  /* =============================
+     BUSINESSES
+  ============================= */
 
-      B.map((b, i) => {
+  const businessEl =
+    document.getElementById(
+      "businessList"
+    );
+
+
+  if (businessEl) {
+
+    businessEl.innerHTML =
+
+      B.map((b,i) => {
 
         const cost =
           Math.floor(
@@ -1376,6 +2043,7 @@ function render() {
               s.owned[i]
             )
           );
+
 
         return `
 
@@ -1390,9 +2058,9 @@ ${b[0]}
 </b>
 
 <div class="sub">
-Level ${s.owned[i]}
-·
-+${money(b[2])}/s each
+Owned: ${s.owned[i]}
+<br>
+Income: +${money(b[2])}/s each
 </div>
 
 </div>
@@ -1413,10 +2081,181 @@ ${money(cost)}
 `;
 
       }).join("");
+
   }
 
+
+  /* =============================
+     CARS
+  ============================= */
+
+  const carsEl =
+    document.getElementById(
+      "cars"
+    );
+
+
+  if (carsEl) {
+
+    carsEl.innerHTML =
+
+      CARS.map((car,i) => {
+
+        const cost =
+          Math.floor(
+            car[1] *
+            Math.pow(
+              1.15,
+              s.cars[i]
+            )
+          );
+
+
+        const unlocked =
+          s.level >= car[3];
+
+
+        return `
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+${car[0]}
+</b>
+
+<div class="sub">
+
+Owned: ${s.cars[i]}
+
+<br>
+
+Income:
++${money(car[2])}/s each
+
+<br>
+
+Required Level:
+${car[3]}
+
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="buyCar(${i})"
+${unlocked ? "" : "disabled"}
+>
+
+${unlocked ? money(cost) : "LOCKED"}
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+      }).join("");
+
+  }
+
+
+  /* =============================
+     HOUSES
+  ============================= */
+
+  const housesEl =
+    document.getElementById(
+      "houses"
+    );
+
+
+  if (housesEl) {
+
+    housesEl.innerHTML =
+
+      HOUSES.map((house,i) => {
+
+        const cost =
+          Math.floor(
+            house[1] *
+            Math.pow(
+              1.15,
+              s.houses[i]
+            )
+          );
+
+
+        const unlocked =
+          s.level >= house[3];
+
+
+        return `
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<b>
+${house[0]}
+</b>
+
+<div class="sub">
+
+Owned: ${s.houses[i]}
+
+<br>
+
+Income:
++${money(house[2])}/s each
+
+<br>
+
+Required Level:
+${house[3]}
+
+</div>
+
+</div>
+
+<button
+class="btn buy"
+onclick="buyHouse(${i})"
+${unlocked ? "" : "disabled"}
+>
+
+${unlocked ? money(cost) : "LOCKED"}
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+      }).join("");
+
+  }
+
+
+  /* =============================
+     UPGRADES
+  ============================= */
+
   const upgradesEl =
-    document.getElementById("upgrades");
+    document.getElementById(
+      "upgrades"
+    );
+
 
   const upgrades = [
 
@@ -1440,11 +2279,12 @@ ${money(cost)}
 
   ];
 
+
   if (upgradesEl) {
 
     upgradesEl.innerHTML =
 
-      upgrades.map((u, i) => {
+      upgrades.map((u,i) => {
 
         const cost =
           Math.floor(
@@ -1454,6 +2294,7 @@ ${money(cost)}
               s.up[i]
             )
           );
+
 
         return `
 
@@ -1489,10 +2330,19 @@ ${money(cost)}
 `;
 
       }).join("");
+
   }
 
+
+  /* =============================
+     MISSIONS
+  ============================= */
+
   const missionsEl =
-    document.getElementById("missions");
+    document.getElementById(
+      "missionList"
+    );
+
 
   const missions = [
 
@@ -1504,7 +2354,19 @@ ${money(cost)}
 
     [
       "First Business",
-      total,
+      totalBusinesses,
+      1
+    ],
+
+    [
+      "First Vehicle",
+      totalCars,
+      1
+    ],
+
+    [
+      "First Property",
+      totalHouses,
       1
     ],
 
@@ -1528,6 +2390,7 @@ ${money(cost)}
 
   ];
 
+
   if (missionsEl) {
 
     missionsEl.innerHTML =
@@ -1539,6 +2402,7 @@ ${money(cost)}
             100,
             (m[1] / m[2]) * 100
           );
+
 
         return `
 
@@ -1575,15 +2439,27 @@ ${money(m[2])}
 `;
 
       }).join("");
+
   }
+
 }
 
-let lastIncomeTick = Date.now();
+
+/* =============================
+   AUTOMATIC INCOME
+============================= */
+
+let lastIncomeTick =
+  Date.now();
+
 let incomeSaveTimer = 0;
+
 
 setInterval(() => {
 
-  const now = Date.now();
+  const now =
+    Date.now();
+
 
   const elapsed =
     Math.min(
@@ -1591,79 +2467,110 @@ setInterval(() => {
       (now - lastIncomeTick) / 1000
     );
 
-  lastIncomeTick = now;
 
-  const rate = income();
+  lastIncomeTick =
+    now;
+
+
+  const rate =
+    income();
+
 
   if (rate <= 0)
     return;
 
+
   const amount =
     rate * elapsed;
 
+
   s.cash += amount;
+
   s.earned += amount;
+
 
   s.xp += Math.max(
     1,
     Math.floor(amount / 10)
   );
 
-  let leveledUp = false;
+
+  let leveledUp =
+    false;
+
 
   while (s.xp >= 100) {
 
     s.xp -= 100;
+
     s.level++;
-    leveledUp = true;
+
+    leveledUp =
+      true;
+
   }
+
 
   updateStats();
 
-  const total =
-    s.owned.reduce(
-      (a, b) => a + b,
-      0
-    );
 
-  const ownedEl =
-    document.getElementById("owned");
+  incomeSaveTimer +=
+    elapsed;
 
-  if (ownedEl)
-    ownedEl.textContent =
-      total + " owned";
-
-  incomeSaveTimer += elapsed;
 
   if (incomeSaveTimer >= 5) {
 
     save();
 
     incomeSaveTimer = 0;
+
   }
+
 
   if (leveledUp) {
 
     render();
 
     showMessage(
-      "LEVEL UP! Level " + s.level
+      "LEVEL UP! Level " +
+      s.level
     );
+
   }
 
 }, 1000);
 
-window.addEventListener("pagehide", save);
+
+/* =============================
+   SAVE WHEN LEAVING
+============================= */
+
+window.addEventListener(
+  "pagehide",
+  save
+);
+
 
 document.addEventListener(
   "visibilitychange",
   () => {
 
-    if (document.visibilityState === "hidden")
+    if (
+      document.visibilityState ===
+      "hidden"
+    ) {
+
       save();
+
+    }
 
   }
 );
+
+
+/* =============================
+   START
+============================= */
 
 render();
 
