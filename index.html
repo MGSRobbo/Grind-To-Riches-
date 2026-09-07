@@ -1,161 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
-
-<meta
-name="theme-color"
-content="#07111f"
->
-
-<title>
-Grind to Riches — St. Louis Edition
-</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#06111f">
+<title>Grind to Riches — St. Louis Edition</title>
 
 <style>
-
-/* =========================
-   BASE
-========================= */
-
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
 }
 
-html{
-  background:#050b14;
-  scroll-behavior:smooth;
+html,body{
+  margin:0;
+  padding:0;
+  background:#020711;
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-  margin:0;
-  background:
-    radial-gradient(
-      circle at 50% -10%,
-      #183858,
-      #050b14 48%
-    );
-  color:#f5f7fb;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
   min-height:100vh;
+  overflow-x:hidden;
 }
 
 button{
-  font-family:inherit;
-  cursor:pointer;
-  -webkit-appearance:none;
+  font:inherit;
 }
-
-button:disabled{
-  opacity:.4;
-  cursor:not-allowed;
-}
-
-
-/* =========================
-   APP
-========================= */
 
 .app{
   width:100%;
-  max-width:620px;
+  max-width:520px;
   margin:auto;
   min-height:100vh;
-  padding-bottom:95px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(0,130,255,.16),transparent 30%),
+    linear-gradient(180deg,#06111f,#020711 65%);
+  padding-bottom:82px;
 }
 
+/* HEADER */
 
-/* =========================
-   HEADER
-========================= */
-
-.top{
-  padding:18px 14px 10px;
+.header{
+  padding:16px 16px 10px;
   position:sticky;
   top:0;
   z-index:20;
-  background:#07111fe8;
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  background:rgba(3,10,20,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-.brand{
-  font-weight:950;
-  letter-spacing:2px;
+.logo{
   font-size:22px;
+  font-weight:900;
+  letter-spacing:.5px;
 }
 
-.edition{
-  font-size:10px;
+.logo span{
+  display:block;
+  color:#ffc72c;
+  font-size:11px;
   letter-spacing:2px;
-  color:#f5c451;
-  font-weight:800;
+  margin-top:2px;
 }
 
-.version{
-  float:right;
-  margin-top:-27px;
-  border:1px solid #35516d;
-  border-radius:9px;
-  padding:5px 8px;
-  font-size:9px;
-  color:#a9bfd6;
-}
-
-
-/* =========================
-   STATS
-========================= */
-
-.stats{
+.topStats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:7px;
+  gap:6px;
   margin-top:12px;
 }
 
-.stat{
-  background:#0c1929;
-  border:1px solid #203650;
-  border-radius:13px;
-  padding:9px;
+.topStat{
+  background:rgba(8,28,48,.9);
+  border:1px solid rgba(70,160,230,.22);
+  border-radius:10px;
+  padding:7px 5px;
+  text-align:center;
 }
 
-.stat small{
+.topStat small{
+  display:block;
+  color:#8294a9;
   font-size:8px;
-  color:#839ab3;
   text-transform:uppercase;
 }
 
-.stat b{
-  display:block;
-  font-size:13px;
-  margin-top:3px;
-  white-space:nowrap;
-  overflow:hidden;
+.topStat b{
+  font-size:12px;
+  color:#fff;
 }
 
-
-/* =========================
-   SCREENS
-========================= */
+/* SCREENS */
 
 .screen{
   display:none;
-  min-height:calc(100vh - 160px);
+  padding:14px;
   animation:screenIn .18s ease;
 }
 
@@ -164,4632 +106,2512 @@ button:disabled{
 }
 
 @keyframes screenIn{
-
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
+.back{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border:1px solid #2a668f;
+  background:#071c2d;
+  color:#fff;
+  padding:7px 11px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
 
-/* =========================
-   HOME HERO
-========================= */
+.screenTitle{
+  font-size:23px;
+  font-weight:900;
+  margin:2px 0;
+}
 
-.hero{
-  margin:7px 12px 13px;
-  height:170px;
-  border:1px solid #2b4c6c;
-  border-radius:22px;
+.screenSub{
+  color:#8da1b7;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+/* ARTWORK */
+
+.art{
+  height:190px;
+  border-radius:18px;
   overflow:hidden;
   position:relative;
-  background:
-    linear-gradient(
-      #173b5e,
-      #091422
-    );
+  margin-bottom:12px;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 15px 40px rgba(0,0,0,.4);
 }
 
-.hero:before{
+.art:after{
   content:"";
   position:absolute;
   inset:0;
+  background:linear-gradient(180deg,transparent 35%,rgba(2,7,17,.9));
+}
+
+.artLabel{
+  position:absolute;
+  z-index:3;
+  left:14px;
+  bottom:13px;
+}
+
+.artLabel b{
+  font-size:20px;
+}
+
+.artLabel small{
+  display:block;
+  color:#c8d3df;
+  margin-top:3px;
+}
+
+/* HOME ART */
+
+.homeArt{
   background:
-    linear-gradient(
-      transparent 45%,
-      #06101c 100%
-    );
+    radial-gradient(circle at 78% 30%,#ffc94a 0 2%,transparent 3%),
+    linear-gradient(180deg,#162f55 0%,#d87942 54%,#111b2d 55%,#050b14 100%);
+}
+
+.homeArt .sun{
+  position:absolute;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:#ffd36a;
+  top:30px;
+  right:60px;
+  box-shadow:0 0 45px #ffbd4a;
 }
 
 .skyline{
   position:absolute;
-  bottom:0;
+  bottom:40px;
   left:0;
   right:0;
-  height:68px;
-  background:#071321;
+  height:75px;
+  background:
+    linear-gradient(90deg,
+      transparent 0 3%,
+      #101d2b 3% 10%,
+      transparent 10% 12%,
+      #152537 12% 19%,
+      transparent 19% 21%,
+      #0e1b29 21% 29%,
+      transparent 29% 31%,
+      #16293b 31% 40%,
+      transparent 40% 42%,
+      #0b1927 42% 48%,
+      transparent 48% 50%,
+      #14283a 50% 59%,
+      transparent 59% 62%,
+      #0c1928 62% 72%,
+      transparent 72% 74%,
+      #15283a 74% 85%,
+      transparent 85%);
+}
 
-  clip-path:polygon(
-    0 30%,
-    8% 30%,
-    8% 8%,
-    15% 8%,
-    15% 42%,
-    23% 42%,
-    23% 18%,
-    31% 18%,
-    31% 48%,
-    39% 48%,
-    39% 4%,
-    45% 4%,
-    45% 38%,
-    53% 38%,
-    53% 0,
-    58% 0,
-    58% 45%,
-    66% 45%,
-    66% 15%,
-    75% 15%,
-    75% 50%,
-    84% 50%,
-    84% 10%,
-    91% 10%,
-    91% 35%,
-    100% 35%,
-    100% 100%,
-    0 100%
+.arch{
+  position:absolute;
+  z-index:2;
+  bottom:35px;
+  left:50%;
+  transform:translateX(-50%);
+  width:105px;
+  height:75px;
+  border:12px solid rgba(210,220,230,.8);
+  border-bottom:0;
+  border-radius:90px 90px 0 0;
+}
+
+/* CAR ART */
+
+.carArt{
+  background:
+    radial-gradient(circle at 70% 35%,rgba(0,180,255,.35),transparent 25%),
+    linear-gradient(135deg,#07131e,#09263b 45%,#02060d);
+}
+
+.car{
+  position:absolute;
+  width:220px;
+  height:62px;
+  left:50%;
+  top:65px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,#36bfff,#08608e);
+  border-radius:65px 85px 18px 18px;
+  box-shadow:0 12px 25px #000;
+}
+
+.car:before{
+  content:"";
+  position:absolute;
+  width:95px;
+  height:35px;
+  left:62px;
+  top:-25px;
+  background:linear-gradient(135deg,#1a4d6e,#07131e);
+  clip-path:polygon(15% 100%,35% 0,75% 0,100% 100%);
+  border-radius:8px;
+}
+
+.wheel{
+  position:absolute;
+  width:42px;
+  height:42px;
+  background:#030507;
+  border:8px solid #36424c;
+  border-radius:50%;
+  bottom:-20px;
+}
+
+.w1{left:25px}.w2{right:25px}
+
+/* HOUSE ART */
+
+.houseArt{
+  background:
+    linear-gradient(180deg,#08182b,#152f48 50%,#0a111b 51%);
+}
+
+.house{
+  position:absolute;
+  width:260px;
+  height:105px;
+  left:50%;
+  bottom:27px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,#d8c8a7,#75664f);
+  border-radius:4px;
+  box-shadow:0 20px 35px #000;
+}
+
+.houseRoof{
+  position:absolute;
+  width:285px;
+  height:80px;
+  left:-12px;
+  top:-60px;
+  background:#171a20;
+  clip-path:polygon(50% 0,100% 100%,0 100%);
+}
+
+.window{
+  position:absolute;
+  width:32px;
+  height:38px;
+  background:#ffd76b;
+  border:4px solid #202b35;
+  bottom:25px;
+}
+
+.win1{left:35px}.win2{left:105px}.win3{right:35px}
+
+/* BUSINESS ART */
+
+.businessArt{
+  background:
+    linear-gradient(180deg,#173957,#0b1826 65%,#05090f);
+}
+
+.store{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:25px;
+  width:285px;
+  height:105px;
+  background:linear-gradient(#c65e27,#713116);
+  border-radius:6px;
+}
+
+.storeTop{
+  height:32px;
+  background:#0b2132;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#ffc72c;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.awning{
+  position:absolute;
+  left:0;
+  right:0;
+  top:32px;
+  height:18px;
+  background:repeating-linear-gradient(
+    90deg,
+    #fff 0 25px,
+    #e64b31 25px 50px
   );
 }
 
-.heroText{
-  position:relative;
-  z-index:3;
-  padding:20px 17px;
-}
+/* JOB ART */
 
-.hero h1{
-  margin:0;
-  font-size:25px;
-}
-
-.hero p{
-  margin:4px 0;
-  color:#b7c8da;
-  font-size:12px;
-}
-
-.goal{
-  display:inline-block;
-  margin-top:14px;
-  background:#071321dd;
-  border:1px solid #365473;
-  border-radius:9px;
-  padding:7px 9px;
-  font-size:10px;
-}
-
-.gold{
-  color:#f5c451;
-}
-
-
-/* =========================
-   WORK
-========================= */
-
-.work{
-  width:calc(100% - 24px);
-  margin:0 12px;
-  border:0;
-  border-radius:16px;
-  padding:15px;
+.jobArt{
   background:
-    linear-gradient(
-      135deg,
-      #d3a12d,
-      #f8d86d
-    );
-  font-weight:950;
-  color:#08111b;
-  font-size:14px;
-  transition:transform .1s;
+    linear-gradient(180deg,#f2a65c,#273a48 58%,#080d14);
 }
 
-.work:active{
-  transform:scale(.98);
+.worker{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:20px;
+  width:90px;
+  height:135px;
 }
 
-
-/* =========================
-   HOME EMPIRE GRID
-========================= */
-
-.homeTitle{
-  font-size:14px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  margin:18px 13px 8px;
+.head{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#a96f4a;
+  margin:auto;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  padding:0 12px;
+.body{
+  width:72px;
+  height:75px;
+  margin:3px auto;
+  background:#e5a52e;
+  border-radius:15px 15px 5px 5px;
 }
 
-.tile{
-  min-height:105px;
-  text-align:left;
-  color:#fff;
+.leg{
+  position:absolute;
+  width:24px;
+  height:58px;
+  bottom:0;
+  background:#172333;
+}
+
+.leg1{left:18px}.leg2{right:18px}
+
+/* INVESTMENT ART */
+
+.investArt{
   background:
-    linear-gradient(
-      145deg,
-      #11253b,
-      #0a1524
-    );
-  border:1px solid #213954;
-  border-radius:16px;
-  padding:10px 8px;
-  transition:transform .1s;
+    radial-gradient(circle at 50% 25%,rgba(0,207,255,.3),transparent 30%),
+    linear-gradient(135deg,#061322,#0d263e);
 }
 
-.tile:active{
-  transform:scale(.97);
+.chart{
+  position:absolute;
+  left:25px;
+  right:25px;
+  bottom:25px;
+  height:115px;
+  border-bottom:2px solid #547080;
+  border-left:2px solid #547080;
 }
 
-.tile strong{
-  display:block;
-  font-size:10px;
-  margin-top:5px;
+.line{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:
+    linear-gradient(145deg,
+      transparent 0 15%,
+      #36d7ff 15% 16%,
+      transparent 16% 32%,
+      #36d7ff 32% 33%,
+      transparent 33% 49%,
+      #36d7ff 49% 50%,
+      transparent 50% 64%,
+      #36d7ff 64% 65%,
+      transparent 65% 77%,
+      #36d7ff 77% 78%,
+      transparent 78%);
 }
 
-.tile span{
-  display:block;
-  color:#8299b1;
-  font-size:8px;
-  margin-top:3px;
+/* RARE ART */
+
+.rareArt{
+  background:
+    radial-gradient(circle at 50% 45%,rgba(255,194,42,.35),transparent 28%),
+    linear-gradient(135deg,#090909,#241a08 55%,#050505);
 }
 
-.icon{
-  display:block;
-  height:43px;
-}
-
-.icon svg{
-  width:52px;
-  height:43px;
-}
-
-
-/* =========================
-   PAGE HEADER
-========================= */
-
-.pageHeader{
-  padding:18px 14px 8px;
-}
-
-.back{
-  border:1px solid #365473;
-  background:#0d1d30;
-  color:#cbd8e5;
+.goldBar{
+  position:absolute;
+  width:170px;
+  height:85px;
+  left:50%;
+  top:57px;
+  transform:translateX(-50%) rotate(-8deg);
+  background:linear-gradient(135deg,#fff0a1,#d79b17 45%,#fff09b);
   border-radius:10px;
-  padding:8px 12px;
-  font-size:10px;
-  font-weight:800;
-  margin-bottom:13px;
+  box-shadow:0 15px 45px rgba(255,193,32,.35);
 }
 
-.pageTitle{
-  margin:0;
-  font-size:24px;
-  letter-spacing:.5px;
+.goldBar:after{
+  content:"GOLD";
+  position:absolute;
+  inset:25px;
+  color:#8b5d00;
+  font-weight:900;
+  text-align:center;
+  letter-spacing:3px;
 }
 
-.pageSub{
-  color:#8299b1;
-  font-size:11px;
-  margin-top:5px;
+/* MAP ART */
+
+.mapArt{
+  background:
+    linear-gradient(135deg,#082b3c,#0a5361 48%,#092433);
 }
 
-
-/* =========================
-   CARDS
-========================= */
-
-.cards{
-  display:grid;
-  gap:8px;
-  padding:0 12px;
+.mapRoad{
+  position:absolute;
+  height:12px;
+  width:430px;
+  background:#263f49;
+  transform:rotate(-25deg);
+  left:-40px;
+  top:90px;
+  box-shadow:0 45px #263f49,0 90px #263f49;
 }
+
+.mapPoint{
+  position:absolute;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#ffc72c;
+  border:4px solid #fff;
+  box-shadow:0 0 20px #ffc72c;
+}
+
+.p1{left:65px;top:55px}
+.p2{right:75px;top:85px}
+.p3{left:110px;bottom:35px}
+.p4{right:55px;bottom:45px}
+
+/* MISSION ART */
+
+.missionArt{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(255,199,44,.28),transparent 28%),
+    linear-gradient(135deg,#071425,#172d45);
+}
+
+.target{
+  position:absolute;
+  width:105px;
+  height:105px;
+  border:12px solid #e8edf2;
+  border-radius:50%;
+  left:50%;
+  top:42px;
+  transform:translateX(-50%);
+}
+
+.target:before{
+  content:"";
+  position:absolute;
+  width:55px;
+  height:55px;
+  border:12px solid #ff3344;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* ACHIEVEMENT ART */
+
+.awardArt{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(255,199,44,.35),transparent 28%),
+    linear-gradient(135deg,#0b1523,#23394a);
+}
+
+.trophy{
+  position:absolute;
+  width:80px;
+  height:90px;
+  background:linear-gradient(90deg,#b67b10,#ffe37a,#b67b10);
+  left:50%;
+  top:47px;
+  transform:translateX(-50%);
+  border-radius:10px 10px 35px 35px;
+  box-shadow:0 20px 35px #000;
+}
+
+.trophy:before,
+.trophy:after{
+  content:"";
+  position:absolute;
+  width:35px;
+  height:45px;
+  border:8px solid #dba82e;
+  top:10px;
+}
+
+.trophy:before{left:-32px;border-right:0;border-radius:30px 0 0 30px}
+.trophy:after{right:-32px;border-left:0;border-radius:0 30px 30px 0}
+
+/* DAILY ART */
+
+.dailyArt{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(255,199,44,.35),transparent 30%),
+    linear-gradient(135deg,#11243a,#253d52);
+}
+
+.chest{
+  position:absolute;
+  width:180px;
+  height:100px;
+  left:50%;
+  top:65px;
+  transform:translateX(-50%);
+  background:linear-gradient(#c89020,#70480c);
+  border-radius:8px;
+  border:5px solid #e0ad39;
+}
+
+.chest:before{
+  content:"";
+  position:absolute;
+  left:75px;
+  top:38px;
+  width:25px;
+  height:30px;
+  background:#ffe16d;
+  border-radius:4px;
+}
+
+/* CHARACTER ART */
+
+.characterArt{
+  background:
+    linear-gradient(180deg,#e69a57,#344b59 55%,#091019);
+}
+
+.person{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:15px;
+  width:100px;
+}
+
+.personHead{
+  width:46px;
+  height:46px;
+  background:#a86d49;
+  border-radius:50%;
+  margin:auto;
+}
+
+.personBody{
+  width:85px;
+  height:105px;
+  background:#111b27;
+  margin:4px auto;
+  border-radius:25px 25px 8px 8px;
+}
+
+/* STATS ART */
+
+.statsArt{
+  background:
+    linear-gradient(180deg,#172f4c,#0b1725 65%,#050b12);
+}
+
+.statsBars{
+  position:absolute;
+  left:25px;
+  right:25px;
+  bottom:25px;
+  display:flex;
+  align-items:end;
+  gap:12px;
+  height:120px;
+}
+
+.bar{
+  flex:1;
+  background:linear-gradient(#38c9ff,#08618d);
+  border-radius:6px 6px 0 0;
+}
+
+.b1{height:35%}.b2{height:55%}.b3{height:72%}.b4{height:92%}
+
+/* PRESTIGE ART */
+
+.prestigeArt{
+  background:
+    radial-gradient(circle at 50% 45%,rgba(255,199,44,.42),transparent 27%),
+    linear-gradient(135deg,#090d15,#2c210b);
+}
+
+.crown{
+  position:absolute;
+  left:50%;
+  top:53px;
+  transform:translateX(-50%);
+  font-size:80px;
+  width:160px;
+  height:80px;
+  background:linear-gradient(90deg,#a9700c,#ffe77c,#a9700c);
+  clip-path:polygon(0 15%,25% 55%,50% 0,75% 55%,100% 15%,90% 100%,10% 100%);
+}
+
+/* CARDS */
 
 .card{
-  background:#0c1929;
-  border:1px solid #203650;
-  border-radius:15px;
-  padding:12px;
+  background:linear-gradient(145deg,rgba(10,33,54,.96),rgba(4,15,27,.96));
+  border:1px solid rgba(50,145,205,.3);
+  border-radius:14px;
+  padding:13px;
+  margin-bottom:10px;
+  box-shadow:0 8px 25px rgba(0,0,0,.22);
 }
 
-.row{
+.cardHead{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
 }
 
-.row b{
+.card h3{
+  margin:0;
+  font-size:14px;
+}
+
+.muted{
+  color:#8195a9;
+  font-size:11px;
+}
+
+.money{
+  color:#39e3a4;
+  font-weight:bold;
+}
+
+.gold{
+  color:#ffc72c;
+}
+
+/* HOME */
+
+.work{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  margin:10px 0 16px;
+  background:linear-gradient(135deg,#ffc72c,#ff9d21);
+  color:#101010;
+  font-size:16px;
+  font-weight:900;
+  box-shadow:0 8px 25px rgba(255,181,30,.2);
+}
+
+.sectionLabel{
+  font-size:13px;
+  font-weight:900;
+  margin:12px 0 9px;
+  letter-spacing:1px;
+}
+
+.empireGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.empireTile{
+  min-height:88px;
+  background:linear-gradient(145deg,#092b46,#061725);
+  border:1px solid #1c628b;
+  border-radius:13px;
+  padding:8px;
+  text-align:center;
+  color:#fff;
+  font-weight:bold;
+  font-size:10px;
+}
+
+.tileArt{
+  width:100%;
+  height:45px;
+  margin-bottom:6px;
+  border-radius:8px;
+  overflow:hidden;
+  position:relative;
+}
+
+.tileCar{background:linear-gradient(135deg,#08283c,#0d668c)}
+.tileHouse{background:linear-gradient(135deg,#273b4e,#b17948)}
+.tileBusiness{background:linear-gradient(135deg,#4d2b1c,#c35e28)}
+.tileJob{background:linear-gradient(135deg,#bc713e,#273d4b)}
+.tileInvest{background:linear-gradient(135deg,#09253a,#176f89)}
+.tileRare{background:linear-gradient(135deg,#211a0b,#d69a16)}
+.tileMap{background:linear-gradient(135deg,#0b3c4c,#15717b)}
+.tileMission{background:linear-gradient(135deg,#0c233d,#315a73)}
+.tileAward{background:linear-gradient(135deg,#172b3e,#a5791c)}
+.tileDaily{background:linear-gradient(135deg,#23374a,#b47d1c)}
+.tileCharacter{background:linear-gradient(135deg,#bd7744,#273b48)}
+.tileStats{background:linear-gradient(135deg,#102b44,#12688c)}
+.tilePrestige{background:linear-gradient(135deg,#241b09,#b5831e)}
+
+.tileShape{
+  position:absolute;
+  width:45px;
+  height:18px;
+  left:50%;
+  top:14px;
+  transform:translateX(-50%);
+  border-radius:20px;
+  background:rgba(255,255,255,.65);
+}
+
+/* LIST ITEMS */
+
+.item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  margin-top:8px;
+  border-radius:10px;
+  background:rgba(1,13,24,.75);
+  border:1px solid rgba(75,145,180,.25);
+}
+
+.itemArt{
+  width:62px;
+  height:48px;
+  flex-shrink:0;
+  border-radius:8px;
+  overflow:hidden;
+  position:relative;
+}
+
+.itemInfo{
+  flex:1;
+}
+
+.itemInfo b{
+  display:block;
   font-size:12px;
 }
 
-.sub{
-  font-size:9px;
-  color:#849ab1;
-  margin-top:4px;
-  line-height:1.5;
-}
-
-.btn{
-  background:#142a43;
-  border:1px solid #365473;
-  color:#fff;
-  border-radius:9px;
-  padding:8px 10px;
-  font-weight:800;
-  font-size:9px;
-  white-space:nowrap;
+.itemInfo span{
+  display:block;
+  font-size:10px;
+  color:#8295a8;
+  margin-top:3px;
 }
 
 .buy{
-  background:#173b34;
-  border-color:#2c725d;
-}
-
-
-/* =========================
-   PAGE BANNERS
-========================= */
-
-.pageBanner{
-  margin:8px 12px 14px;
-  padding:16px;
-  border:1px solid #294867;
-  border-radius:16px;
-  background:
-    linear-gradient(
-      135deg,
-      #10263e,
-      #091522
-    );
-}
-
-.pageBanner b{
-  display:block;
-  font-size:15px;
-}
-
-.pageBanner span{
-  display:block;
-  margin-top:5px;
-  color:#8299b1;
+  background:#0b68a0;
+  color:white;
+  border:1px solid #38baff;
+  border-radius:7px;
+  padding:7px 9px;
   font-size:10px;
-  line-height:1.5;
+  font-weight:bold;
 }
 
+.buy:disabled{
+  opacity:.35;
+}
 
-/* =========================
-   PROGRESS BAR
-========================= */
+.greenBtn{
+  background:#07895d;
+  border-color:#27dc9e;
+}
 
-.bar{
-  height:7px;
-  background:#18283c;
+.goldBtn{
+  background:#d89516;
+  border-color:#ffe17b;
+  color:#111;
+}
+
+/* PROGRESS */
+
+.progress{
+  height:8px;
   border-radius:8px;
   overflow:hidden;
-  margin-top:8px;
+  background:#07111d;
+  margin:8px 0;
 }
 
-.bar i{
+.progress span{
   display:block;
   height:100%;
-  background:
-    linear-gradient(
-      90deg,
-      #54a9ff,
-      #47d18c
-    );
-  transition:width .25s ease;
+  background:linear-gradient(90deg,#20aaff,#39e3a4);
 }
 
+/* BOTTOM NAV */
 
-/* =========================
-   BIG STATS
-========================= */
-
-.bigStats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-  padding:0 12px;
-}
-
-.bigStat{
-  background:#0c1929;
-  border:1px solid #203650;
-  border-radius:15px;
-  padding:15px;
-}
-
-.bigStat small{
-  color:#8299b1;
-  font-size:9px;
-  text-transform:uppercase;
-}
-
-.bigStat b{
-  display:block;
-  margin-top:5px;
-  font-size:19px;
-}
-
-
-/* =========================
-   MAP
-========================= */
-
-.mapBox{
-  margin:0 12px;
-  height:380px;
-  border:1px solid #294867;
-  border-radius:20px;
-  background:
-    linear-gradient(
-      145deg,
-      #102d42,
-      #071522
-    );
-  position:relative;
-  overflow:hidden;
-}
-
-.mapRiver{
-  position:absolute;
-  top:-30px;
-  right:35%;
-  width:95px;
-  height:460px;
-  background:#153f62;
-  transform:rotate(9deg);
-  border-radius:50%;
-}
-
-.mapRoad{
-  position:absolute;
-  background:#34536d;
-  height:3px;
-  width:110%;
-  left:-5%;
-  transform:rotate(-20deg);
-}
-
-.r1{
-  top:90px;
-}
-
-.r2{
-  top:175px;
-  transform:rotate(17deg);
-}
-
-.r3{
-  top:260px;
-  transform:rotate(-8deg);
-}
-
-.archGraphic{
-  position:absolute;
+.bottomNav{
+  position:fixed;
+  z-index:50;
+  bottom:0;
   left:50%;
-  top:105px;
   transform:translateX(-50%);
-  width:115px;
-  height:145px;
-  border:10px solid #d7dce1;
-  border-top:0;
-  border-radius:0 0 65px 65px;
+  width:100%;
+  max-width:520px;
+  height:68px;
+  background:rgba(3,10,19,.96);
+  backdrop-filter:blur(16px);
+  border-top:1px solid rgba(255,255,255,.1);
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  padding:6px 4px;
 }
 
-.mapLabel{
-  position:absolute;
-  background:#091827e8;
-  border:1px solid #385873;
-  padding:7px 9px;
-  border-radius:9px;
-  font-size:9px;
+.navBtn{
+  background:none;
+  border:0;
+  color:#65798c;
+  font-size:8px;
+  font-weight:bold;
 }
 
-.label1{
-  top:40px;
-  left:25px;
+.navBtn.active{
+  color:#ffc72c;
 }
 
-.label2{
-  top:70px;
-  right:20px;
+.navShape{
+  width:22px;
+  height:18px;
+  border:2px solid currentColor;
+  margin:0 auto 4px;
+  border-radius:5px;
 }
 
-.label3{
-  bottom:70px;
-  left:25px;
-}
-
-.label4{
-  bottom:35px;
-  right:30px;
-}
-
-
-/* =========================
-   TOAST
-========================= */
+/* TOAST */
 
 .toast{
   position:fixed;
   z-index:100;
-  top:16px;
   left:50%;
-  transform:translate(-50%,-130px);
-  background:#102238;
-  border:1px solid #3a5877;
-  border-radius:10px;
-  padding:9px 13px;
+  bottom:82px;
+  transform:translateX(-50%) translateY(20px);
+  background:#071c2d;
+  border:1px solid #2b719c;
+  padding:10px 15px;
+  border-radius:9px;
   font-size:11px;
-  transition:transform .25s ease;
+  opacity:0;
   pointer-events:none;
-  max-width:calc(100% - 30px);
+  transition:.25s;
+  max-width:90%;
   text-align:center;
 }
 
 .toast.show{
-  transform:translate(-50%,0);
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
+/* SMALL SCREENS */
 
-/* =========================
-   BOTTOM NAV
-========================= */
-
-.bottom{
-  position:fixed;
-  z-index:90;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(100%,620px);
-  min-height:68px;
-  padding-bottom:env(safe-area-inset-bottom);
-  background:#07111fee;
-  border-top:1px solid #203650;
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-}
-
-.nav{
-  border:0;
-  background:none;
-  color:#71869e;
-  font-size:8px;
-}
-
-.nav.active{
-  color:#f5c451;
-}
-
-.nav svg{
-  display:block;
-  margin:auto auto 3px;
-  width:20px;
-  height:20px;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:390px){
-
-  .grid{
-    grid-template-columns:repeat(2,1fr);
+@media(max-width:370px){
+  .empireGrid{
+    gap:5px;
   }
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
+  .empireTile{
+    min-height:82px;
+    font-size:9px;
   }
 
-}
-
-
-/* =========================
-   SAFE AREA
-========================= */
-
-@supports(padding:max(0px)){
-
-  .top{
-    padding-top:max(
-      18px,
-      env(safe-area-inset-top)
-    );
+  .topStat b{
+    font-size:10px;
   }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <div class="app">
 
+<header class="header">
+  <div class="logo">
+    GRIND TO RICHES
+    <span>ST. LOUIS EDITION • V5</span>
+  </div>
 
-<!-- =====================================================
-     GLOBAL HEADER
-===================================================== -->
-
-<header class="top">
-
-<div class="brand">
-GRIND TO RICHES
-</div>
-
-<div class="edition">
-ST. LOUIS EDITION
-</div>
-
-<div class="version">
-VERSION 4
-</div>
-
-
-<div class="stats">
-
-<div class="stat">
-<small>Cash</small>
-<b id="cash">$100</b>
-</div>
-
-<div class="stat">
-<small>Income</small>
-<b id="income">$0/s</b>
-</div>
-
-<div class="stat">
-<small>Level</small>
-<b id="level">1</b>
-</div>
-
-<div class="stat">
-<small>Prestige</small>
-<b id="prestige">1.0×</b>
-</div>
-
-</div>
-
+  <div class="topStats">
+    <div class="topStat">
+      <small>Cash</small>
+      <b id="cash">$100</b>
+    </div>
+    <div class="topStat">
+      <small>Income</small>
+      <b id="income">$0/s</b>
+    </div>
+    <div class="topStat">
+      <small>Level</small>
+      <b id="level">1</b>
+    </div>
+    <div class="topStat">
+      <small>Prestige</small>
+      <b id="prestige">1.0x</b>
+    </div>
+  </div>
 </header>
 
 
+<!-- HOME -->
 
-<!-- =====================================================
-     HOME SCREEN
-===================================================== -->
+<section id="home" class="screen active">
 
-<section
-class="screen active"
-id="homeScreen"
->
+  <div class="art homeArt">
+    <div class="sun"></div>
+    <div class="skyline"></div>
+    <div class="arch"></div>
 
+    <div class="artLabel">
+      <b>BUILD YOUR EMPIRE</b>
+      <small>Start from $100. Build St. Louis.</small>
+    </div>
+  </div>
 
-<div class="hero">
+  <button class="work" onclick="work()">
+    WORK +$10
+  </button>
 
-<div class="skyline"></div>
+  <div class="sectionLabel">YOUR EMPIRE</div>
 
-<div class="heroText">
+  <div class="empireGrid">
 
-<h1>
-Build Your Empire
-</h1>
+    <button class="empireTile" onclick="openScreen('cars')">
+      <div class="tileArt tileCar">
+        <div class="tileShape"></div>
+      </div>
+      CARS & VEHICLES
+    </button>
 
-<p>
-Start from the grind. Build a St. Louis empire.
-</p>
+    <button class="empireTile" onclick="openScreen('houses')">
+      <div class="tileArt tileHouse">
+        <div class="tileShape"></div>
+      </div>
+      HOUSES
+    </button>
 
-<div class="goal">
+    <button class="empireTile" onclick="openScreen('jobs')">
+      <div class="tileArt tileJob">
+        <div class="tileShape"></div>
+      </div>
+      JOBS
+    </button>
 
-NEXT GOAL:
+    <button class="empireTile" onclick="openScreen('businesses')">
+      <div class="tileArt tileBusiness">
+        <div class="tileShape"></div>
+      </div>
+      BUSINESSES
+    </button>
 
-<b
-class="gold"
-id="goal"
->
-$1,000 CASH
-</b>
+    <button class="empireTile" onclick="openScreen('investments')">
+      <div class="tileArt tileInvest">
+        <div class="tileShape"></div>
+      </div>
+      INVESTMENTS
+    </button>
 
-</div>
+    <button class="empireTile" onclick="openScreen('rare')">
+      <div class="tileArt tileRare">
+        <div class="tileShape"></div>
+      </div>
+      RARE BUSINESSES
+    </button>
 
-</div>
+    <button class="empireTile" onclick="openScreen('map')">
+      <div class="tileArt tileMap">
+        <div class="tileShape"></div>
+      </div>
+      ST. LOUIS MAP
+    </button>
 
-</div>
+    <button class="empireTile" onclick="openScreen('missions')">
+      <div class="tileArt tileMission">
+        <div class="tileShape"></div>
+      </div>
+      MISSIONS
+    </button>
 
+    <button class="empireTile" onclick="openScreen('achievements')">
+      <div class="tileArt tileAward">
+        <div class="tileShape"></div>
+      </div>
+      ACHIEVEMENTS
+    </button>
 
-<button
-class="work"
-onclick="work()"
->
-WORK +$10
-</button>
+    <button class="empireTile" onclick="openScreen('daily')">
+      <div class="tileArt tileDaily">
+        <div class="tileShape"></div>
+      </div>
+      DAILY BONUS
+    </button>
 
+    <button class="empireTile" onclick="openScreen('character')">
+      <div class="tileArt tileCharacter">
+        <div class="tileShape"></div>
+      </div>
+      CHARACTER
+    </button>
 
-<div class="homeTitle">
-Empire
-</div>
+    <button class="empireTile" onclick="openScreen('stats')">
+      <div class="tileArt tileStats">
+        <div class="tileShape"></div>
+      </div>
+      EMPIRE STATS
+    </button>
 
+    <button class="empireTile" onclick="openScreen('prestige')">
+      <div class="tileArt tilePrestige">
+        <div class="tileShape"></div>
+      </div>
+      PRESTIGE
+    </button>
 
-<div class="grid">
+  </div>
+</section>
 
 
 <!-- CARS -->
 
-<button
-class="tile"
-onclick="openScreen('carsScreen')"
->
+<section id="cars" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">Cars & Vehicles</div>
+  <div class="screenSub">Build your fleet and create passive income.</div>
 
-<path
-d="M8 34h8l5-14h39l11 14h3v12H8z"
-fill="#397eae"
-/>
+  <div class="art carArt">
+    <div class="car">
+      <div class="wheel w1"></div>
+      <div class="wheel w2"></div>
+    </div>
 
-<path
-d="M24 25h28l8 9H18z"
-fill="#79b9e3"
-/>
+    <div class="artLabel">
+      <b>YOUR FLEET</b>
+      <small>Own vehicles across St. Louis.</small>
+    </div>
+  </div>
 
-<circle
-cx="23"
-cy="46"
-r="6"
-fill="#dce5ed"
-/>
+  <div class="card">
+    <div class="cardHead">
+      <b>Your Fleet</b>
+      <span class="money" id="carIncome">$0/s</span>
+    </div>
+    <div class="muted" id="carOwned">Vehicles owned: 0</div>
+  </div>
 
-<circle
-cx="59"
-cy="46"
-r="6"
-fill="#dce5ed"
-/>
+  <div id="carsList"></div>
 
-</svg>
-
-</i>
-
-<strong>
-Cars & Vehicles
-</strong>
-
-<span>
-Build your fleet
-</span>
-
-</button>
-
+</section>
 
 
 <!-- HOUSES -->
 
-<button
-class="tile"
-onclick="openScreen('housesScreen')"
->
+<section id="houses" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">Houses & Properties</div>
+  <div class="screenSub">Build a property empire across St. Louis.</div>
 
-<path
-d="M8 29 40 5l32 24v23H8z"
-fill="#a9603a"
-/>
+  <div class="art houseArt">
+    <div class="house">
+      <div class="houseRoof"></div>
+      <div class="window win1"></div>
+      <div class="window win2"></div>
+      <div class="window win3"></div>
+    </div>
 
-<path
-d="m13 29 27-20 27 20"
-fill="none"
-stroke="#f0bd67"
-stroke-width="5"
-/>
+    <div class="artLabel">
+      <b>YOUR PROPERTIES</b>
+      <small>Real estate creates passive wealth.</small>
+    </div>
+  </div>
 
-<path
-d="M34 52V34h12v18"
-fill="#15263a"
-/>
+  <div class="card">
+    <div class="cardHead">
+      <b>Your Properties</b>
+      <span class="money" id="houseIncome">$0/s</span>
+    </div>
+    <div class="muted" id="houseOwned">Properties owned: 0</div>
+  </div>
 
-<path
-d="M17 35h11v10H17zM52 35h11v10H52z"
-fill="#69a9d7"
-/>
+  <div id="housesList"></div>
 
-</svg>
-
-</i>
-
-<strong>
-Houses
-</strong>
-
-<span>
-Own property
-</span>
-
-</button>
-
-
-
-<!-- JOBS -->
-
-<button
-class="tile"
-onclick="openScreen('jobsScreen')"
->
-
-<i class="icon">
-
-<svg viewBox="0 0 80 55">
-
-<rect
-x="9"
-y="18"
-width="62"
-height="33"
-rx="6"
-fill="#345675"
-/>
-
-<path
-d="M28 18v-7h24v7"
-fill="none"
-stroke="#8db9df"
-stroke-width="5"
-/>
-
-<path
-d="M9 31h62"
-stroke="#47d18c"
-stroke-width="5"
-/>
-
-<circle
-cx="40"
-cy="31"
-r="5"
-fill="#f5c451"
-/>
-
-</svg>
-
-</i>
-
-<strong>
-Jobs
-</strong>
-
-<span>
-Level up skills
-</span>
-
-</button>
-
-
-
-<!-- STATS -->
-
-<button
-class="tile"
-onclick="openScreen('statsScreen')"
->
-
-<i class="icon">
-
-<svg viewBox="0 0 80 55">
-
-<path
-d="M10 51V26h16v25M32 51V13h16v38M54 51V5h16v46"
-fill="#32658e"
-/>
-
-<path
-d="M14 32h8M36 21h8M58 14h8M58 24h8M36 31h8M14 41h8"
-stroke="#f5c451"
-stroke-width="3"
-/>
-
-</svg>
-
-</i>
-
-<strong>
-Empire
-</strong>
-
-<span>
-Track your rise
-</span>
-
-</button>
-
+</section>
 
 
 <!-- BUSINESSES -->
 
-<button
-class="tile"
-onclick="openScreen('businessScreen')"
->
+<section id="businesses" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">Businesses</div>
+  <div class="screenSub">Turn small businesses into a St. Louis empire.</div>
 
-<path
-d="M9 22h62v30H9z"
-fill="#7d4c35"
-/>
+  <div class="art businessArt">
+    <div class="store">
+      <div class="storeTop">ST. LOUIS</div>
+      <div class="awning"></div>
+    </div>
 
-<path
-d="M7 22 14 9h52l7 13"
-fill="#d48b42"
-/>
+    <div class="artLabel">
+      <b>YOUR BUSINESSES</b>
+      <small>Own the neighborhood.</small>
+    </div>
+  </div>
 
-<path
-d="M16 29h48v13H16z"
-fill="#5aa4c9"
-/>
+  <div id="businessList"></div>
 
-<path
-d="M31 29v13M47 29v13"
-stroke="#d7edf7"
-stroke-width="3"
-/>
+</section>
 
-</svg>
 
-</i>
+<!-- JOBS -->
 
-<strong>
-Businesses
-</strong>
+<section id="jobs" class="screen">
 
-<span id="owned">
-0 owned
-</span>
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-</button>
+  <div class="screenTitle">Jobs & Careers</div>
+  <div class="screenSub">Work your way from employee to CEO.</div>
 
+  <div class="art jobArt">
+    <div class="worker">
+      <div class="head"></div>
+      <div class="body"></div>
+      <div class="leg leg1"></div>
+      <div class="leg leg2"></div>
+    </div>
+
+    <div class="artLabel">
+      <b>WORK YOUR WAY UP</b>
+      <small>Higher careers mean bigger paychecks.</small>
+    </div>
+  </div>
+
+  <div class="card">
+    <b>Current Career</b>
+    <h3 id="jobTitle">Warehouse Worker</h3>
+    <div class="muted">Level <span id="jobLevel">1</span></div>
+
+    <div class="progress">
+      <span id="jobProgress" style="width:0%"></span>
+    </div>
+
+    <button class="buy goldBtn" onclick="jobWork()">
+      WORK
+    </button>
+  </div>
+
+  <div class="card">
+    <b>Career Path</b>
+    <div id="jobList"></div>
+  </div>
+
+</section>
 
 
 <!-- INVESTMENTS -->
 
-<button
-class="tile"
-onclick="openScreen('investmentsScreen')"
->
+<section id="investments" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">Investments</div>
+  <div class="screenSub">Put your money to work.</div>
 
-<path
-d="M8 45 25 31l11 7 27-27"
-fill="none"
-stroke="#47d18c"
-stroke-width="6"
-/>
+  <div class="art investArt">
+    <div class="chart">
+      <div class="line"></div>
+    </div>
 
-<path
-d="M54 11h13v13"
-fill="none"
-stroke="#47d18c"
-stroke-width="5"
-/>
+    <div class="artLabel">
+      <b>ST. LOUIS MARKET</b>
+      <small>Grow your portfolio.</small>
+    </div>
+  </div>
 
-<path
-d="M8 49h64"
-stroke="#38516c"
-stroke-width="3"
-/>
+  <div class="card">
+    <b>Your Portfolio</b>
+    <div class="money" id="portfolioIncome">$0/s passive income</div>
+  </div>
 
-</svg>
+  <div id="investmentList"></div>
 
-</i>
-
-<strong>
-Investments
-</strong>
-
-<span>
-Grow your money
-</span>
-
-</button>
-
+</section>
 
 
 <!-- RARE -->
 
-<button
-class="tile"
-onclick="openScreen('rareScreen')"
->
+<section id="rare" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">Rare Businesses</div>
+  <div class="screenSub">Legendary assets for serious players.</div>
 
-<path
-d="m40 5 27 17-27 28L13 22z"
-fill="#d9a938"
-/>
+  <div class="art rareArt">
+    <div class="goldBar"></div>
 
-<path
-d="m40 5 8 17-8 28-8-28z"
-fill="#fff0a8"
-/>
+    <div class="artLabel">
+      <b>RARE ASSETS</b>
+      <small>Only the richest players can own them.</small>
+    </div>
+  </div>
 
-</svg>
+  <div id="rareList"></div>
 
-</i>
-
-<strong>
-Rare Businesses
-</strong>
-
-<span>
-Legendary assets
-</span>
-
-</button>
-
+</section>
 
 
 <!-- MAP -->
 
-<button
-class="tile"
-onclick="openScreen('mapScreen')"
->
+<section id="map" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">St. Louis Map</div>
+  <div class="screenSub">Expand your empire district by district.</div>
 
-<path
-d="M7 10 28 5l24 6 21-6v40l-21 5-24-6-21 6z"
-fill="#295b57"
-/>
+  <div class="art mapArt">
+    <div class="mapRoad"></div>
+    <div class="mapPoint p1"></div>
+    <div class="mapPoint p2"></div>
+    <div class="mapPoint p3"></div>
+    <div class="mapPoint p4"></div>
 
-<path
-d="M28 5v39M52 11v39"
-stroke="#8bd1ae"
-stroke-width="3"
-/>
+    <div class="arch"></div>
 
-</svg>
+    <div class="artLabel">
+      <b>ST. LOUIS</b>
+      <small>Control the city.</small>
+    </div>
+  </div>
 
-</i>
+  <div id="mapList"></div>
 
-<strong>
-St. Louis Map
-</strong>
-
-<span>
-Explore districts
-</span>
-
-</button>
-
+</section>
 
 
 <!-- MISSIONS -->
 
-<button
-class="tile"
-onclick="openScreen('missionsScreen')"
->
+<section id="missions" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">Missions</div>
+  <div class="screenSub">Complete goals and earn rewards.</div>
 
-<circle
-cx="40"
-cy="27"
-r="21"
-fill="none"
-stroke="#e45e63"
-stroke-width="7"
-/>
+  <div class="art missionArt">
+    <div class="target"></div>
 
-<circle
-cx="40"
-cy="27"
-r="10"
-fill="none"
-stroke="#f5c451"
-stroke-width="5"
-/>
+    <div class="artLabel">
+      <b>YOUR MISSIONS</b>
+      <small>Complete goals. Get paid.</small>
+    </div>
+  </div>
 
-<path
-d="M40 27 59 10"
-stroke="#fff"
-stroke-width="4"
-/>
+  <div id="missionList"></div>
 
-</svg>
-
-</i>
-
-<strong>
-Missions
-</strong>
-
-<span>
-Complete goals
-</span>
-
-</button>
-
+</section>
 
 
 <!-- ACHIEVEMENTS -->
 
-<button
-class="tile"
-onclick="openScreen('achievementsScreen')"
->
+<section id="achievements" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">Achievements</div>
+  <div class="screenSub">Build your legacy.</div>
 
-<path
-d="M26 9h28v22a14 14 0 0 1-28 0z"
-fill="#f5c451"
-/>
+  <div class="art awardArt">
+    <div class="trophy"></div>
 
-<path
-d="M26 14H13v7a13 13 0 0 0 13 13M54 14h13v7a13 13 0 0 1-13 13M40 45v7M29 52h22"
-fill="none"
-stroke="#f5c451"
-stroke-width="5"
-/>
+    <div class="artLabel">
+      <b>YOUR LEGACY</b>
+      <small>Unlock achievements as you grow.</small>
+    </div>
+  </div>
 
-</svg>
+  <div id="achievementList"></div>
 
-</i>
-
-<strong>
-Achievements
-</strong>
-
-<span id="ach">
-0 unlocked
-</span>
-
-</button>
-
+</section>
 
 
 <!-- DAILY -->
 
-<button
-class="tile"
-onclick="openScreen('dailyScreen')"
->
+<section id="daily" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">Daily Bonus</div>
+  <div class="screenSub">Come back every day for free cash.</div>
 
-<rect
-x="13"
-y="10"
-width="54"
-height="40"
-rx="6"
-fill="#a44e55"
-/>
+  <div class="art dailyArt">
+    <div class="chest"></div>
 
-<path
-d="M13 21h54M28 5v10M52 5v10"
-stroke="#f0b7bc"
-stroke-width="4"
-/>
+    <div class="artLabel">
+      <b>DAILY CASH DROP</b>
+      <small>Your reward grows with your level.</small>
+    </div>
+  </div>
 
-<path
-d="m40 28 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"
-fill="#f5c451"
-/>
+  <div class="card" style="text-align:center">
+    <div class="muted">TODAY'S REWARD</div>
+    <h1 class="gold" id="dailyReward">$125</h1>
 
-</svg>
+    <button class="work" id="dailyButton" onclick="claimDaily()">
+      CLAIM REWARD
+    </button>
 
-</i>
+    <div class="muted" id="dailyStatus"></div>
+  </div>
 
-<strong>
-Daily Bonus
-</strong>
-
-<span>
-Claim daily
-</span>
-
-</button>
-
+</section>
 
 
 <!-- CHARACTER -->
 
-<button
-class="tile"
-onclick="openScreen('characterScreen')"
->
+<section id="character" class="screen">
 
-<i class="icon">
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<svg viewBox="0 0 80 55">
+  <div class="screenTitle">Character Upgrades</div>
+  <div class="screenSub">Upgrade yourself and become more powerful.</div>
 
-<circle
-cx="40"
-cy="18"
-r="12"
-fill="#d99a72"
-/>
+  <div class="art characterArt">
+    <div class="person">
+      <div class="personHead"></div>
+      <div class="personBody"></div>
+    </div>
 
-<path
-d="M20 52q3-21 20-21t20 21"
-fill="#345f87"
-/>
+    <div class="artLabel">
+      <b>LEVEL UP YOURSELF</b>
+      <small>Hard work creates wealth.</small>
+    </div>
+  </div>
 
-<path
-d="M29 12q5-12 22-4l2 8q-13-8-24-1z"
-fill="#1c2430"
-/>
+  <div class="card">
+    <b>Your Character</b>
+    <div class="muted">
+      Level <span id="charLevel">1</span>
+      • XP <span id="xp">0</span>/100
+    </div>
 
-</svg>
+    <div class="progress">
+      <span id="xpBar" style="width:0%"></span>
+    </div>
+  </div>
 
-</i>
-
-<strong>
-Character
-</strong>
-
-<span>
-Upgrade your grind
-</span>
-
-</button>
-
-
-</div>
+  <div id="upgradeList"></div>
 
 </section>
 
 
+<!-- STATS -->
 
-<!-- =====================================================
-     CARS SCREEN
-===================================================== -->
+<section id="stats" class="screen">
 
-<section
-class="screen"
-id="carsScreen"
->
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<div class="pageHeader">
+  <div class="screenTitle">Empire Stats</div>
+  <div class="screenSub">Track everything you've built.</div>
 
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
+  <div class="art statsArt">
+    <div class="statsBars">
+      <div class="bar b1"></div>
+      <div class="bar b2"></div>
+      <div class="bar b3"></div>
+      <div class="bar b4"></div>
+    </div>
 
-<h1 class="pageTitle">
-Cars & Vehicles
-</h1>
+    <div class="artLabel">
+      <b>EMPIRE GROWTH</b>
+      <small>Your wealth is building.</small>
+    </div>
+  </div>
 
-<div class="pageSub">
-Build your fleet and create passive income.
-</div>
-
-</div>
-
-
-<div class="pageBanner">
-
-<b>
-Your Vehicle Fleet
-</b>
-
-<span>
-Every vehicle you own generates income every second.
-Higher-tier vehicles require higher levels.
-</span>
-
-</div>
-
-
-<div
-class="cards"
-id="carsList"
-></div>
+  <div id="statsList"></div>
 
 </section>
 
 
+<!-- PRESTIGE -->
 
-<!-- =====================================================
-     HOUSES SCREEN
-===================================================== -->
+<section id="prestige" class="screen">
 
-<section
-class="screen"
-id="housesScreen"
->
+  <button class="back" onclick="openScreen('home')">‹ BACK</button>
 
-<div class="pageHeader">
+  <div class="screenTitle">Prestige</div>
+  <div class="screenSub">Reset your empire for permanent power.</div>
 
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
+  <div class="art prestigeArt">
+    <div class="crown"></div>
 
-<h1 class="pageTitle">
-Houses & Properties
-</h1>
+    <div class="artLabel">
+      <b>ST. LOUIS LEGEND</b>
+      <small>Start over. Come back stronger.</small>
+    </div>
+  </div>
 
-<div class="pageSub">
-Build a property empire across St. Louis.
-</div>
+  <div class="card">
+    <b>Current Prestige</b>
+    <h1 class="gold" id="prestigeBig">1.0x</h1>
 
-</div>
+    <p class="muted">
+      Prestige requires $100,000 total earned.
+      Your permanent multiplier increases each time.
+    </p>
 
-
-<div class="pageBanner">
-
-<b>
-Property Portfolio
-</b>
-
-<span>
-Properties generate passive income and become more powerful as your empire grows.
-</span>
-
-</div>
-
-
-<div
-class="cards"
-id="housesList"
-></div>
+    <button class="work" onclick="prestigeNow()">
+      PRESTIGE
+    </button>
+  </div>
 
 </section>
 
-
-
-<!-- =====================================================
-     BUSINESSES SCREEN
-===================================================== -->
-
-<section
-class="screen"
-id="businessScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Businesses
-</h1>
-
-<div class="pageSub">
-Build your St. Louis business empire.
-</div>
-
-</div>
-
-
-<div
-class="cards"
-id="businessList"
-></div>
-
-</section>
-
-
-
-<!-- =====================================================
-     JOBS SCREEN
-===================================================== -->
-
-<section
-class="screen"
-id="jobsScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Jobs
-</h1>
-
-<div class="pageSub">
-Your grind starts here.
-</div>
-
-</div>
-
-
-<div class="cards">
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-Warehouse Worker
-</b>
-
-<div class="sub">
-Basic job. Builds your experience.
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="jobReward(25)"
->
-WORK
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-Press Operator
-</b>
-
-<div class="sub">
-Operate production equipment.
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="jobReward(75)"
->
-WORK
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-Business Manager
-</b>
-
-<div class="sub">
-Manage multiple income streams.
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="jobReward(200)"
->
-WORK
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-CEO
-</b>
-
-<div class="sub">
-Run your entire empire.
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="jobReward(500)"
->
-WORK
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     STATS SCREEN
-===================================================== -->
-
-<section
-class="screen"
-id="statsScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Empire Stats
-</h1>
-
-<div class="pageSub">
-Track everything you've built.
-</div>
-
-</div>
-
-
-<div
-class="bigStats"
-id="bigStats"
-></div>
-
-
-<div class="pageBanner">
-
-<b>
-Empire Progress
-</b>
-
-<span id="statsSummary">
-Building your empire...
-</span>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     INVESTMENTS SCREEN
-===================================================== -->
-
-<section
-class="screen"
-id="investmentsScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Investments
-</h1>
-
-<div class="pageSub">
-Put your money to work.
-</div>
-
-</div>
-
-
-<div class="cards">
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-STL Index Fund
-</b>
-
-<div class="sub">
-Entry: $5,000<br>
-Passive return: +$100/s
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="buyInvestment(5000,100,'STL Index Fund')"
->
-$5K
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-Downtown Development
-</b>
-
-<div class="sub">
-Entry: $25,000<br>
-Passive return: +$600/s
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="buyInvestment(25000,600,'Downtown Development')"
->
-$25K
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-St. Louis Market Fund
-</b>
-
-<div class="sub">
-Entry: $100,000<br>
-Passive return: +$3,000/s
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="buyInvestment(100000,3000,'St. Louis Market Fund')"
->
-$100K
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     RARE BUSINESSES
-===================================================== -->
-
-<section
-class="screen"
-id="rareScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Rare Businesses
-</h1>
-
-<div class="pageSub">
-Legendary assets for serious players.
-</div>
-
-</div>
-
-
-<div class="pageBanner">
-
-<b>
-Rare Asset Market
-</b>
-
-<span>
-These businesses are expensive, powerful and difficult to obtain.
-</span>
-
-</div>
-
-
-<div class="cards">
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-Gold District Business
-</b>
-
-<div class="sub">
-Cost: $500,000<br>
-Income: +$8,000/s
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="buyRare(500000,8000,'Gold District Business')"
->
-$500K
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-Diamond Corporation
-</b>
-
-<div class="sub">
-Cost: $2,500,000<br>
-Income: +$50,000/s
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="buyRare(2500000,50000,'Diamond Corporation')"
->
-$2.5M
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-STL Legacy Holdings
-</b>
-
-<div class="sub">
-Cost: $10,000,000<br>
-Income: +$250,000/s
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="buyRare(10000000,250000,'STL Legacy Holdings')"
->
-$10M
-</button>
-
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     MAP SCREEN
-===================================================== -->
-
-<section
-class="screen"
-id="mapScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-St. Louis Map
-</h1>
-
-<div class="pageSub">
-Explore the city and unlock new districts.
-</div>
-
-</div>
-
-
-<div class="mapBox">
-
-<div class="mapRiver"></div>
-
-<div class="mapRoad r1"></div>
-<div class="mapRoad r2"></div>
-<div class="mapRoad r3"></div>
-
-<div class="archGraphic"></div>
-
-<div class="mapLabel label1">
-NORTH CITY
-</div>
-
-<div class="mapLabel label2">
-DOWNTOWN
-</div>
-
-<div class="mapLabel label3">
-SOUTH CITY
-</div>
-
-<div class="mapLabel label4">
-WEST COUNTY
-</div>
-
-</div>
-
-
-<div class="cards" style="margin-top:10px;">
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-Downtown District
-</b>
-
-<div class="sub">
-Current empire headquarters.
-</div>
-
-</div>
-
-<button
-class="btn"
-onclick="showMessage('Downtown already unlocked')"
->
-UNLOCKED
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-North City
-</b>
-
-<div class="sub">
-Unlock requirement: Level 10.
-</div>
-
-</div>
-
-<button
-class="btn"
-onclick="unlockDistrict(10,'North City')"
->
-LEVEL 10
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-South City
-</b>
-
-<div class="sub">
-Unlock requirement: Level 15.
-</div>
-
-</div>
-
-<button
-class="btn"
-onclick="unlockDistrict(15,'South City')"
->
-LEVEL 15
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-West County
-</b>
-
-<div class="sub">
-Unlock requirement: Level 20.
-</div>
-
-</div>
-
-<button
-class="btn"
-onclick="unlockDistrict(20,'West County')"
->
-LEVEL 20
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     MISSIONS
-===================================================== -->
-
-<section
-class="screen"
-id="missionsScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Missions
-</h1>
-
-<div class="pageSub">
-Complete milestones as you build your empire.
-</div>
-
-</div>
-
-
-<div
-class="cards"
-id="missionList"
-></div>
-
-</section>
-
-
-
-<!-- =====================================================
-     ACHIEVEMENTS
-===================================================== -->
-
-<section
-class="screen"
-id="achievementsScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Achievements
-</h1>
-
-<div class="pageSub">
-Earn your place among St. Louis legends.
-</div>
-
-</div>
-
-
-<div
-class="cards"
-id="achievementList"
-></div>
-
-</section>
-
-
-
-<!-- =====================================================
-     DAILY BONUS
-===================================================== -->
-
-<section
-class="screen"
-id="dailyScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Daily Bonus
-</h1>
-
-<div class="pageSub">
-Come back every day and collect your reward.
-</div>
-
-</div>
-
-
-<div class="pageBanner">
-
-<b>
-Daily Cash Drop
-</b>
-
-<span>
-Your daily reward increases as your level rises.
-</span>
-
-</div>
-
-
-<div class="cards">
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-Today's Reward
-</b>
-
-<div
-class="sub"
-id="dailyReward"
->
-Calculating...
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="daily()"
->
-CLAIM
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     CHARACTER
-===================================================== -->
-
-<section
-class="screen"
-id="characterScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Character Upgrades
-</h1>
-
-<div class="pageSub">
-Upgrade your character and become a better hustler.
-</div>
-
-</div>
-
-
-<div class="cards" id="characterList"></div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PRESTIGE
-===================================================== -->
-
-<section
-class="screen"
-id="prestigeScreen"
->
-
-<div class="pageHeader">
-
-<button
-class="back"
-onclick="openScreen('homeScreen')"
->
-BACK TO HOME
-</button>
-
-<h1 class="pageTitle">
-Prestige
-</h1>
-
-<div class="pageSub">
-Reset your empire for a permanent multiplier.
-</div>
-
-</div>
-
-
-<div class="pageBanner">
-
-<b>
-St. Louis Legend
-</b>
-
-<span>
-Reach $100K total earnings to prestige. Your businesses, vehicles and properties reset, but your prestige multiplier remains permanently.
-</span>
-
-</div>
-
-
-<div class="cards">
-
-<div class="card">
-
-<div class="row">
-
-<div>
-
-<b>
-Current Prestige
-</b>
-
-<div
-class="sub"
-id="prestigePage"
->
-1.0×
-</div>
-
-</div>
-
-<button
-class="btn buy"
-onclick="prestige()"
->
-PRESTIGE
-</button>
-
-</div>
-
-</div>
-
 </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     BOTTOM NAVIGATION
-===================================================== -->
-
-<nav class="bottom">
-
-
-<button
-class="nav active"
-id="navHome"
-onclick="openScreen('homeScreen')"
->
-
-<svg viewBox="0 0 24 24">
-
-<path
-d="M4 11 12 4l8 7v8H4z"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-/>
-
-<path
-d="M9 19v-5h6v5"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-/>
-
-</svg>
-
-HOME
-
-</button>
-
-
-<button
-class="nav"
-id="navStats"
-onclick="openScreen('statsScreen')"
->
-
-<svg viewBox="0 0 24 24">
-
-<path
-d="M5 19V10M12 19V5M19 19v-8"
-stroke="currentColor"
-stroke-width="3"
-/>
-
-</svg>
-
-STATS
-
-</button>
-
-
-<button
-class="nav"
-id="navMap"
-onclick="openScreen('mapScreen')"
->
-
-<svg viewBox="0 0 24 24">
-
-<path
-d="M4 6l6-2 8 2 2-1v13l-4 2-8-2-4 1z"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-/>
-
-<path
-d="M10 4v14M18 6v12"
-stroke="currentColor"
-stroke-width="2"
-/>
-
-</svg>
-
-MAP
-
-</button>
-
-
-<button
-class="nav"
-id="navAwards"
-onclick="openScreen('achievementsScreen')"
->
-
-<svg viewBox="0 0 24 24">
-
-<path
-d="M7 4h10v8a5 5 0 0 1-10 0z"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-/>
-
-<path
-d="M7 7H3v2a4 4 0 0 0 4 4M17 7h4v2a4 4 0 0 1-4 4M12 17v4M8 21h8"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-/>
-
-</svg>
-
-AWARDS
-
-</button>
-
-
-<button
-class="nav"
-id="navMissions"
-onclick="openScreen('missionsScreen')"
->
-
-<svg viewBox="0 0 24 24">
-
-<circle
-cx="12"
-cy="12"
-r="8"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-/>
-
-<circle
-cx="12"
-cy="12"
-r="3"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-/>
-
-</svg>
-
-MISSIONS
-
-</button>
 
 
-<button
-class="nav"
-id="navStore"
-onclick="openScreen('carsScreen')"
->
+<!-- NAV -->
 
-<svg viewBox="0 0 24 24">
+<nav class="bottomNav">
 
-<path
-d="M3 7h18v13H3z"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-/>
+  <button class="navBtn active" onclick="openScreen('home')">
+    <div class="navShape"></div>
+    HOME
+  </button>
 
-<path
-d="M7 7V4h10v3M3 12h18"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-/>
+  <button class="navBtn" onclick="openScreen('stats')">
+    <div class="navShape"></div>
+    STATS
+  </button>
 
-</svg>
+  <button class="navBtn" onclick="openScreen('map')">
+    <div class="navShape"></div>
+    MAP
+  </button>
 
-STORE
+  <button class="navBtn" onclick="openScreen('achievements')">
+    <div class="navShape"></div>
+    AWARDS
+  </button>
 
-</button>
+  <button class="navBtn" onclick="openScreen('missions')">
+    <div class="navShape"></div>
+    MISSIONS
+  </button>
 
+  <button class="navBtn" onclick="openScreen('cars')">
+    <div class="navShape"></div>
+    STORE
+  </button>
 
 </nav>
 
-
-<div
-class="toast"
-id="toast"
-></div>
-
-
-</div>
-
+<div id="toast" class="toast"></div>
 
 
 <script>
 
 /* =========================================================
-   SAVE SYSTEM
-========================================================= */
+   GRIND TO RICHES — ST. LOUIS EDITION V5
+   ========================================================= */
 
 const KEY = "gtr_stl_v3";
 
+const defaultState = {
+  cash:100,
+  earned:0,
+  xp:0,
+  level:1,
+  prestige:0,
 
-const B = [
+  businesses:[0,0,0,0,0,0,0],
+  cars:[0,0,0,0,0],
+  houses:[0,0,0,0,0],
 
-  ["Lemonade Stand",50,1],
+  investments:[0,0,0],
+  rareIncome:[0],
 
-  ["Food Truck",500,10],
+  up:{
+    hard:0,
+    business:0,
+    hustle:0
+  },
 
-  ["Curb Store",5000,100],
+  jobLevel:1,
+  jobXP:0,
+  job:0,
 
-  ["STL Restaurant",25000,500],
+  missions:[],
+  achievements:[],
 
-  ["Downtown Building",100000,2000],
+  dailyClaimed:0,
+  lastSave:Date.now()
+};
 
-  ["Factory",500000,10000],
+let s = JSON.parse(localStorage.getItem(KEY)) || structuredClone(defaultState);
 
-  ["STL Corporation",2500000,50000]
+function fixState(){
 
+  if(!s.businesses) s.businesses=[0,0,0,0,0,0,0];
+  if(!s.cars) s.cars=[0,0,0,0,0];
+  if(!s.houses) s.houses=[0,0,0,0,0];
+  if(!s.investments) s.investments=[0,0,0];
+  if(!s.rareIncome) s.rareIncome=[0];
+
+  if(!s.up) s.up={hard:0,business:0,hustle:0};
+
+  if(s.jobLevel===undefined) s.jobLevel=1;
+  if(s.jobXP===undefined) s.jobXP=0;
+  if(s.job===undefined) s.job=0;
+
+  if(s.prestige===undefined) s.prestige=0;
+
+  if(s.dailyClaimed===undefined) s.dailyClaimed=0;
+}
+
+fixState();
+
+
+/* DATA */
+
+const BUSINESSES = [
+  ["Lemonade Stand",50,1,1],
+  ["Food Truck",500,10,2],
+  ["Curb Store",5000,100,5],
+  ["STL Restaurant",25000,500,10],
+  ["Downtown Building",100000,2000,15],
+  ["Factory",500000,10000,20],
+  ["STL Corporation",2500000,50000,30]
 ];
-
 
 const CARS = [
-
   ["Used Sedan",2500,25,2],
-
   ["Muscle Car",15000,175,5],
-
   ["Luxury SUV",50000,650,10],
-
   ["Sports Car",150000,2500,15],
-
   ["Supercar",1000000,20000,20]
-
 ];
-
 
 const HOUSES = [
-
   ["Starter House",5000,50,2],
-
   ["Duplex",25000,300,5],
-
   ["Apartment Building",100000,1500,10],
-
   ["Luxury Home",500000,8000,15],
-
   ["Downtown Tower",2000000,40000,20]
+];
 
+const INVESTMENTS = [
+  ["STL Index Fund",5000,100,5],
+  ["Downtown Development",25000,600,10],
+  ["St. Louis Market Fund",100000,3000,15]
+];
+
+const RARE = [
+  ["Gold District Business",500000,8000,25],
+  ["Diamond Corporation",2500000,50000,40],
+  ["STL Legacy Holdings",10000000,250000,60]
+];
+
+const JOBS = [
+  ["Warehouse Worker",25,1],
+  ["Press Operator",75,5],
+  ["Business Manager",200,10],
+  ["Executive",500,20],
+  ["CEO",1500,30]
+];
+
+const DISTRICTS = [
+  ["Downtown District",1],
+  ["North City",10],
+  ["South City",15],
+  ["West County",20]
 ];
 
 
-let s;
-
-
-try{
-
-  s = JSON.parse(
-    localStorage.getItem(KEY) || "null"
-  );
-
-}catch(error){
-
-  s = null;
-
-}
-
-
-if(!s || typeof s !== "object"){
-
-  s = {
-
-    cash:100,
-
-    earned:0,
-
-    level:1,
-
-    xp:0,
-
-    prestige:0,
-
-    owned:Array(B.length).fill(0),
-
-    up:Array(3).fill(0),
-
-    cars:Array(CARS.length).fill(0),
-
-    houses:Array(HOUSES.length).fill(0),
-
-    investments:0,
-
-    rareIncome:0,
-
-    daily:0
-
-  };
-
-}
-
-
-/* SAFETY */
-
-if(!Array.isArray(s.owned) ||
-   s.owned.length !== B.length){
-
-  s.owned = Array(B.length).fill(0);
-
-}
-
-
-if(!Array.isArray(s.up) ||
-   s.up.length !== 3){
-
-  s.up = Array(3).fill(0);
-
-}
-
-
-if(!Array.isArray(s.cars) ||
-   s.cars.length !== CARS.length){
-
-  s.cars = Array(CARS.length).fill(0);
-
-}
-
-
-if(!Array.isArray(s.houses) ||
-   s.houses.length !== HOUSES.length){
-
-  s.houses = Array(HOUSES.length).fill(0);
-
-}
-
-
-s.cash = Number(s.cash) || 100;
-
-s.earned = Number(s.earned) || 0;
-
-s.level = Number(s.level) || 1;
-
-s.xp = Number(s.xp) || 0;
-
-s.prestige = Number(s.prestige) || 0;
-
-s.investments = Number(s.investments) || 0;
-
-s.rareIncome = Number(s.rareIncome) || 0;
-
-s.daily = Number(s.daily) || 0;
-
-
-
-/* =========================================================
-   MONEY FORMAT
-========================================================= */
+/* FORMAT */
 
 function money(n){
+  if(n>=1e12) return "$"+(n/1e12).toFixed(2)+"T";
+  if(n>=1e9) return "$"+(n/1e9).toFixed(2)+"B";
+  if(n>=1e6) return "$"+(n/1e6).toFixed(2)+"M";
+  if(n>=1e3) return "$"+(n/1e3).toFixed(1)+"K";
+  return "$"+Math.floor(n);
+}
 
-  n = Number(n) || 0;
-
-
-  if(n >= 1000000000000)
-
-    return "$" +
-      (n / 1000000000000)
-      .toFixed(2) +
-      "T";
-
-
-  if(n >= 1000000000)
-
-    return "$" +
-      (n / 1000000000)
-      .toFixed(2) +
-      "B";
-
-
-  if(n >= 1000000)
-
-    return "$" +
-      (n / 1000000)
-      .toFixed(2) +
-      "M";
-
-
-  if(n >= 1000)
-
-    return "$" +
-      (n / 1000)
-      .toFixed(1) +
-      "K";
-
-
-  return "$" +
-    Math.floor(n);
-
+function prestigeMultiplier(){
+  return 1 + s.prestige*.5;
 }
 
 
-
-/* =========================================================
-   INCOME
-========================================================= */
+/* INCOME */
 
 function businessIncome(){
 
-  return B.reduce(
-    (total,b,i)=>{
+  let total=0;
 
-      return total +
-        b[2] *
-        Number(s.owned[i] || 0);
+  BUSINESSES.forEach((b,i)=>{
+    total += s.businesses[i]*b[2];
+  });
 
-    },
-    0
-  );
+  total *= 1 + s.up.business*.1;
 
+  return total;
 }
-
 
 function carIncome(){
 
-  return CARS.reduce(
-    (total,car,i)=>{
+  let total=0;
 
-      return total +
-        car[2] *
-        Number(s.cars[i] || 0);
+  CARS.forEach((c,i)=>{
+    total += s.cars[i]*c[2];
+  });
 
-    },
-    0
-  );
-
+  return total;
 }
-
 
 function houseIncome(){
 
-  return HOUSES.reduce(
-    (total,house,i)=>{
+  let total=0;
 
-      return total +
-        house[2] *
-        Number(s.houses[i] || 0);
+  HOUSES.forEach((h,i)=>{
+    total += s.houses[i]*h[2];
+  });
 
-    },
-    0
-  );
-
+  return total;
 }
 
+function investmentIncome(){
+
+  let total=0;
+
+  INVESTMENTS.forEach((x,i)=>{
+    total += s.investments[i]*x[2];
+  });
+
+  return total;
+}
+
+function rareIncome(){
+
+  let total=0;
+
+  RARE.forEach((x,i)=>{
+    total += s.rareIncome[i]*x[2];
+  });
+
+  return total;
+}
 
 function income(){
 
-  const base =
+  let total =
+    businessIncome()+
+    carIncome()+
+    houseIncome()+
+    investmentIncome()+
+    rareIncome();
 
-    businessIncome() +
-
-    carIncome() +
-
-    houseIncome() +
-
-    Number(s.investments || 0) +
-
-    Number(s.rareIncome || 0);
-
-
-  return base *
-
-    (1 + s.prestige * .5) *
-
-    (1 + s.up[1] * .25);
-
+  return total*prestigeMultiplier();
 }
 
 
-
-/* =========================================================
-   SAVE
-========================================================= */
+/* SAVE */
 
 function save(){
-
-  try{
-
-    localStorage.setItem(
-      KEY,
-      JSON.stringify(s)
-    );
-
-  }catch(error){
-
-    console.warn(
-      "Save failed",
-      error
-    );
-
-  }
-
+  s.lastSave=Date.now();
+  localStorage.setItem(KEY,JSON.stringify(s));
 }
 
 
+/* TOAST */
 
-/* =========================================================
-   SCREEN SYSTEM
-========================================================= */
+let toastTimer;
+
+function toast(text){
+
+  const el=document.getElementById("toast");
+
+  el.textContent=text;
+  el.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer=setTimeout(()=>{
+    el.classList.remove("show");
+  },1800);
+}
+
+
+/* NAVIGATION */
 
 function openScreen(id){
 
-  const screens =
-    document.querySelectorAll(".screen");
-
-
-  screens.forEach(screen=>{
-
-    screen.classList.remove(
-      "active"
-    );
-
+  document.querySelectorAll(".screen").forEach(x=>{
+    x.classList.remove("active");
   });
 
+  const screen=document.getElementById(id);
 
-  const target =
-    document.getElementById(id);
-
-
-  if(target){
-
-    target.classList.add(
-      "active"
-    );
-
+  if(screen){
+    screen.classList.add("active");
   }
 
-
-  window.scrollTo({
-    top:0,
-    behavior:"instant"
+  document.querySelectorAll(".navBtn").forEach(x=>{
+    x.classList.remove("active");
   });
 
+  if(id==="home"){
+    document.querySelectorAll(".navBtn")[0].classList.add("active");
+  }
 
-  updateNav(id);
+  if(id==="stats"){
+    document.querySelectorAll(".navBtn")[1].classList.add("active");
+  }
+
+  if(id==="map"){
+    document.querySelectorAll(".navBtn")[2].classList.add("active");
+  }
+
+  if(id==="achievements"){
+    document.querySelectorAll(".navBtn")[3].classList.add("active");
+  }
+
+  if(id==="missions"){
+    document.querySelectorAll(".navBtn")[4].classList.add("active");
+  }
+
+  if(["cars","houses","businesses","investments","rare"].includes(id)){
+    document.querySelectorAll(".navBtn")[5].classList.add("active");
+  }
+
+  window.scrollTo(0,0);
 
   render();
-
 }
 
 
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function updateNav(id){
-
-  document
-    .querySelectorAll(".nav")
-    .forEach(nav=>{
-
-      nav.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  if(id === "homeScreen")
-
-    document
-      .getElementById("navHome")
-      .classList.add("active");
-
-
-  if(id === "statsScreen")
-
-    document
-      .getElementById("navStats")
-      .classList.add("active");
-
-
-  if(id === "mapScreen")
-
-    document
-      .getElementById("navMap")
-      .classList.add("active");
-
-
-  if(id === "achievementsScreen")
-
-    document
-      .getElementById("navAwards")
-      .classList.add("active");
-
-
-  if(id === "missionsScreen")
-
-    document
-      .getElementById("navMissions")
-      .classList.add("active");
-
-
-  if(
-    id === "carsScreen" ||
-    id === "housesScreen" ||
-    id === "businessScreen"
-  )
-
-    document
-      .getElementById("navStore")
-      .classList.add("active");
-
-}
-
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-function updateStats(){
-
-  document.getElementById(
-    "cash"
-  ).textContent =
-    money(s.cash);
-
-
-  document.getElementById(
-    "income"
-  ).textContent =
-    money(income()) +
-    "/s";
-
-
-  document.getElementById(
-    "level"
-  ).textContent =
-    s.level;
-
-
-  document.getElementById(
-    "prestige"
-  ).textContent =
-    (1 + s.prestige * .5)
-      .toFixed(1) +
-    "×";
-
-
-  let goal;
-
-
-  if(s.cash < 1000)
-
-    goal =
-      "$1,000 CASH";
-
-
-  else if(s.cash < 10000)
-
-    goal =
-      "$10,000 CASH";
-
-
-  else if(s.cash < 100000)
-
-    goal =
-      "$100,000 CASH";
-
-
-  else
-
-    goal =
-      "$1,000,000 CASH";
-
-
-  document.getElementById(
-    "goal"
-  ).textContent =
-    goal;
-
-
-  const totalBusinesses =
-    s.owned.reduce(
-      (a,b)=>a+b,
-      0
-    );
-
-
-  document.getElementById(
-    "owned"
-  ).textContent =
-    totalBusinesses +
-    " owned";
-
-
-  let achievements = 0;
-
-
-  if(s.earned >= 100)
-    achievements++;
-
-
-  if(totalBusinesses >= 1)
-    achievements++;
-
-
-  if(
-    s.cars.reduce(
-      (a,b)=>a+b,
-      0
-    ) >= 1
-  )
-    achievements++;
-
-
-  if(
-    s.houses.reduce(
-      (a,b)=>a+b,
-      0
-    ) >= 1
-  )
-    achievements++;
-
-
-  if(s.earned >= 1000)
-    achievements++;
-
-
-  if(s.level >= 10)
-    achievements++;
-
-
-  if(s.earned >= 100000)
-    achievements++;
-
-
-  document.getElementById(
-    "ach"
-  ).textContent =
-    achievements +
-    " unlocked";
-
-}
-
-
-
-/* =========================================================
-   WORK
-========================================================= */
+/* WORK */
 
 function work(){
 
-  const amount =
+  let amount=10*(1+s.up.hard*.15);
 
-    10 *
-    (1 + s.up[0] * .2);
+  s.cash+=amount;
+  s.earned+=amount;
 
+  gainXP(5);
 
-  earn(
-    amount,
-    true
-  );
+  toast("Worked +"+money(amount));
 
-
-  showMessage(
-    "Grind complete +" +
-    money(amount)
-  );
-
+  save();
+  render();
 }
 
 
+/* XP */
 
-/* =========================================================
-   EARN
-========================================================= */
+function gainXP(amount){
 
-function earn(
-  amount,
-  renderPage = true
-){
+  s.xp+=amount;
 
-  amount =
-    Number(amount) || 0;
+  while(s.xp>=100){
 
-
-  if(amount <= 0)
-    return;
-
-
-  s.cash += amount;
-
-  s.earned += amount;
-
-
-  s.xp += Math.max(
-    1,
-    Math.floor(
-      amount / 10
-    )
-  );
-
-
-  let leveledUp = false;
-
-
-  while(s.xp >= 100){
-
-    s.xp -= 100;
-
+    s.xp-=100;
     s.level++;
 
-    leveledUp = true;
-
+    toast("LEVEL UP! Level "+s.level);
   }
-
-
-  save();
-
-  updateStats();
-
-
-  if(renderPage)
-    render();
-
-
-  if(leveledUp){
-
-    showMessage(
-      "LEVEL UP! Level " +
-      s.level
-    );
-
-  }
-
 }
 
 
+/* JOBS */
 
-/* =========================================================
-   BUSINESSES
-========================================================= */
+function jobWork(){
 
-function buyBusiness(i){
+  const j=JOBS[s.job];
 
-  const b = B[i];
-
-  if(!b)
+  if(s.level<j[2]){
+    toast("You need level "+j[2]);
     return;
-
-
-  const cost = Math.floor(
-
-    b[1] *
-
-    Math.pow(
-      1.15,
-      s.owned[i]
-    )
-
-  );
-
-
-  if(s.cash < cost){
-
-    showMessage(
-      "Not enough cash"
-    );
-
-    return;
-
   }
 
+  let pay=j[1]*(1+s.up.hustle*.1);
 
-  s.cash -= cost;
+  s.cash+=pay;
+  s.earned+=pay;
 
-  s.owned[i]++;
+  s.jobXP+=10;
 
+  if(s.jobXP>=100){
+
+    s.jobXP=0;
+
+    if(s.jobLevel<30){
+      s.jobLevel++;
+      toast("Job level increased!");
+    }
+  }
+
+  gainXP(4);
 
   save();
-
   render();
-
-
-  showMessage(
-    b[0] +
-    " acquired"
-  );
-
 }
 
+function chooseJob(i){
 
-
-/* =========================================================
-   CARS
-========================================================= */
-
-function buyCar(i){
-
-  const car =
-    CARS[i];
-
-
-  if(!car)
+  if(s.level<JOBS[i][2]){
+    toast("Requires level "+JOBS[i][2]);
     return;
-
-
-  if(s.level < car[3]){
-
-    showMessage(
-      "Reach Level " +
-      car[3] +
-      " to unlock " +
-      car[0]
-    );
-
-    return;
-
   }
 
+  s.job=i;
 
-  const cost = Math.floor(
-
-    car[1] *
-
-    Math.pow(
-      1.15,
-      s.cars[i]
-    )
-
-  );
-
-
-  if(s.cash < cost){
-
-    showMessage(
-      "Not enough cash"
-    );
-
-    return;
-
-  }
-
-
-  s.cash -= cost;
-
-  s.cars[i]++;
-
+  toast(JOBS[i][0]+" selected");
 
   save();
-
   render();
-
-
-  showMessage(
-    car[0] +
-    " added to fleet"
-  );
-
 }
 
 
+/* BUY GENERIC */
 
-/* =========================================================
-   HOUSES
-========================================================= */
+function buyItem(type,index){
 
-function buyHouse(i){
+  let data;
+  let owned;
 
-  const house =
-    HOUSES[i];
-
-
-  if(!house)
-    return;
-
-
-  if(s.level < house[3]){
-
-    showMessage(
-      "Reach Level " +
-      house[3] +
-      " to unlock " +
-      house[0]
-    );
-
-    return;
-
+  if(type==="business"){
+    data=BUSINESSES[index];
+    owned=s.businesses[index];
   }
 
-
-  const cost = Math.floor(
-
-    house[1] *
-
-    Math.pow(
-      1.15,
-      s.houses[i]
-    )
-
-  );
-
-
-  if(s.cash < cost){
-
-    showMessage(
-      "Not enough cash"
-    );
-
-    return;
-
+  if(type==="car"){
+    data=CARS[index];
+    owned=s.cars[index];
   }
 
+  if(type==="house"){
+    data=HOUSES[index];
+    owned=s.houses[index];
+  }
 
-  s.cash -= cost;
+  if(type==="investment"){
+    data=INVESTMENTS[index];
+    owned=s.investments[index];
+  }
 
-  s.houses[i]++;
+  if(type==="rare"){
+    data=RARE[index];
+    owned=s.rareIncome[index];
+  }
 
+  if(s.level<data[3]){
+    toast("Requires level "+data[3]);
+    return;
+  }
+
+  let price=data[1]*Math.pow(1.15,owned);
+
+  if(s.cash<price){
+    toast("Not enough cash");
+    return;
+  }
+
+  s.cash-=price;
+
+  if(type==="business") s.businesses[index]++;
+  if(type==="car") s.cars[index]++;
+  if(type==="house") s.houses[index]++;
+  if(type==="investment") s.investments[index]++;
+  if(type==="rare") s.rareIncome[index]++;
+
+  toast(data[0]+" purchased!");
+
+  gainXP(10);
 
   save();
-
   render();
-
-
-  showMessage(
-    house[0] +
-    " purchased"
-  );
-
 }
 
 
+/* DAILY */
 
-/* =========================================================
-   JOBS
-========================================================= */
+function claimDaily(){
 
-function jobReward(amount){
+  const today=new Date().toDateString();
 
-  const reward =
-    amount *
-    (1 + s.up[0] * .15);
-
-
-  earn(
-    reward,
-    false
-  );
-
-
-  showMessage(
-    "Job complete +" +
-    money(reward)
-  );
-
-}
-
-
-
-/* =========================================================
-   INVESTMENTS
-========================================================= */
-
-function buyInvestment(
-  cost,
-  reward,
-  name
-){
-
-  if(s.cash < cost){
-
-    showMessage(
-      "Not enough cash"
-    );
-
+  if(s.dailyClaimed===today){
+    toast("Daily reward already claimed");
     return;
-
   }
 
+  let reward=100+s.level*25;
 
-  s.cash -= cost;
+  s.cash+=reward;
+  s.earned+=reward;
 
-  s.investments += reward;
+  s.dailyClaimed=today;
 
+  toast("Daily bonus +"+money(reward));
 
   save();
-
   render();
-
-
-  showMessage(
-    name +
-    " purchased"
-  );
-
 }
 
 
+/* PRESTIGE */
 
-/* =========================================================
-   RARE ASSETS
-========================================================= */
+function prestigeNow(){
 
-function buyRare(
-  cost,
-  reward,
-  name
-){
+  if(s.earned<100000){
 
-  if(s.cash < cost){
-
-    showMessage(
-      "Not enough cash"
-    );
+    toast("Earn $100,000 first");
 
     return;
-
   }
 
+  if(!confirm("Prestige will reset your current empire for a permanent multiplier. Continue?")){
+    return;
+  }
 
-  s.cash -= cost;
+  s.cash=100;
+  s.earned=0;
+  s.xp=0;
+  s.level=1;
 
-  s.rareIncome += reward;
+  s.businesses=[0,0,0,0,0,0,0];
+  s.cars=[0,0,0,0,0];
+  s.houses=[0,0,0,0,0];
 
+  s.investments=[0,0,0];
+  s.rareIncome=[0];
+
+  s.up={
+    hard:0,
+    business:0,
+    hustle:0
+  };
+
+  s.prestige++;
+
+  toast("PRESTIGE COMPLETE!");
 
   save();
-
   render();
-
-
-  showMessage(
-    name +
-    " acquired"
-  );
-
 }
 
 
+/* UPGRADES */
 
-/* =========================================================
-   DAILY BONUS
-========================================================= */
+function upgrade(id){
 
-function daily(){
+  const costs={
+    hard:500,
+    business:1000,
+    hustle:2500
+  };
 
-  const today =
-    Math.floor(
-      Date.now() /
-      86400000
-    );
+  const cost=costs[id]*Math.pow(2,s.up[id]);
 
-
-  if(s.daily === today){
-
-    showMessage(
-      "Daily bonus already claimed"
-    );
-
+  if(s.cash<cost){
+    toast("Not enough cash");
     return;
-
   }
 
+  s.cash-=cost;
+  s.up[id]++;
 
-  s.daily =
-    today;
-
-
-  const bonus =
-    100 +
-    s.level * 25;
-
-
-  earn(
-    bonus,
-    true
-  );
-
-
-  showMessage(
-    "Daily bonus +" +
-    money(bonus)
-  );
-
-}
-
-
-
-/* =========================================================
-   DISTRICTS
-========================================================= */
-
-function unlockDistrict(
-  level,
-  name
-){
-
-  if(s.level < level){
-
-    showMessage(
-      "Reach Level " +
-      level +
-      " first"
-    );
-
-    return;
-
-  }
-
-
-  showMessage(
-    name +
-    " unlocked!"
-  );
-
-}
-
-
-
-/* =========================================================
-   UPGRADES
-========================================================= */
-
-function upgrade(i){
-
-  const names = [
-
-    "Hard Worker",
-
-    "Better Business",
-
-    "Street Hustle"
-
-  ];
-
-
-  const bases = [
-
-    250,
-
-    2500,
-
-    15000
-
-  ];
-
-
-  const cost = Math.floor(
-
-    bases[i] *
-
-    Math.pow(
-      2,
-      s.up[i]
-    )
-
-  );
-
-
-  if(s.cash < cost){
-
-    showMessage(
-      "Not enough cash"
-    );
-
-    return;
-
-  }
-
-
-  s.cash -= cost;
-
-  s.up[i]++;
-
+  toast("Upgrade purchased!");
 
   save();
-
   render();
+}
 
 
-  showMessage(
-    names[i] +
-    " upgraded"
-  );
+/* RENDER TOP */
+
+function renderTop(){
+
+  document.getElementById("cash").textContent=money(s.cash);
+  document.getElementById("income").textContent=money(income())+"/s";
+  document.getElementById("level").textContent=s.level;
+  document.getElementById("prestige").textContent=prestigeMultiplier().toFixed(1)+"x";
 
 }
 
 
+/* RENDER CARS */
 
-/* =========================================================
-   PRESTIGE
-========================================================= */
+function renderCars(){
 
-function prestige(){
+  document.getElementById("carIncome").textContent=money(carIncome())+"/s";
 
-  if(s.earned < 100000){
+  let total=s.cars.reduce((a,b)=>a+b,0);
 
-    showMessage(
-      "Earn $100K total first"
-    );
+  document.getElementById("carOwned").textContent=
+    "Vehicles owned: "+total;
 
-    return;
+  document.getElementById("carsList").innerHTML=
+    CARS.map((x,i)=>{
 
-  }
+      let price=x[1]*Math.pow(1.15,s.cars[i]);
 
+      return `
+      <div class="item">
 
-  const oldPrestige =
-    s.prestige;
+        <div class="itemArt tileCar">
+          <div class="tileShape"></div>
+        </div>
 
+        <div class="itemInfo">
+          <b>${x[0]}</b>
+          <span>${money(price)}</span>
+          <span class="money">+${money(x[2])}/s</span>
+          <span>Level ${x[3]} • Owned ${s.cars[i]}</span>
+        </div>
 
-  s.cash = 100;
+        <button class="buy"
+          onclick="buyItem('car',${i})"
+          ${s.level<x[3]||s.cash<price?"disabled":""}>
+          BUY
+        </button>
 
-  s.earned = 0;
-
-  s.xp = 0;
-
-  s.level = 1;
-
-
-  s.owned =
-    Array(B.length)
-    .fill(0);
-
-
-  s.up =
-    Array(3)
-    .fill(0);
-
-
-  s.cars =
-    Array(CARS.length)
-    .fill(0);
-
-
-  s.houses =
-    Array(HOUSES.length)
-    .fill(0);
-
-
-  s.investments = 0;
-
-  s.rareIncome = 0;
-
-
-  s.prestige =
-    oldPrestige + 1;
-
-
-  save();
-
-  render();
-
-
-  showMessage(
-    "PRESTIGE COMPLETE!"
-  );
-
+      </div>`;
+    }).join("");
 }
 
 
+/* HOUSES */
 
-/* =========================================================
-   RENDER
-========================================================= */
+function renderHouses(){
 
-function render(){
+  document.getElementById("houseIncome").textContent=
+    money(houseIncome())+"/s";
 
-  updateStats();
+  let total=s.houses.reduce((a,b)=>a+b,0);
 
+  document.getElementById("houseOwned").textContent=
+    "Properties owned: "+total;
 
-  /* =====================
-     CARS
-  ===================== */
+  document.getElementById("housesList").innerHTML=
+    HOUSES.map((x,i)=>{
 
-  const carsEl =
-    document.getElementById(
-      "carsList"
-    );
+      let price=x[1]*Math.pow(1.15,s.houses[i]);
 
+      return `
+      <div class="item">
 
-  if(carsEl){
+        <div class="itemArt tileHouse">
+          <div class="tileShape"></div>
+        </div>
 
-    carsEl.innerHTML =
+        <div class="itemInfo">
+          <b>${x[0]}</b>
+          <span>${money(price)}</span>
+          <span class="money">+${money(x[2])}/s</span>
+          <span>Level ${x[3]} • Owned ${s.houses[i]}</span>
+        </div>
 
-      CARS.map(
-        (car,i)=>{
+        <button class="buy"
+          onclick="buyItem('house',${i})"
+          ${s.level<x[3]||s.cash<price?"disabled":""}>
+          BUY
+        </button>
 
-          const cost =
-            Math.floor(
-
-              car[1] *
-
-              Math.pow(
-                1.15,
-                s.cars[i]
-              )
-
-            );
-
-
-          const unlocked =
-            s.level >= car[3];
+      </div>`;
+    }).join("");
+}
 
 
-          return `
+/* BUSINESSES */
 
-          <div class="card">
+function renderBusinesses(){
 
-            <div class="row">
+  document.getElementById("businessList").innerHTML=
+    BUSINESSES.map((x,i)=>{
 
-              <div>
+      let price=x[1]*Math.pow(1.15,s.businesses[i]);
 
-                <b>
-                  ${car[0]}
-                </b>
+      return `
+      <div class="card">
 
-                <div class="sub">
+        <div class="item">
 
-                  Owned:
-                  ${s.cars[i]}
-
-                  <br>
-
-                  Income:
-                  +${money(car[2])}/s each
-
-                  <br>
-
-                  Required Level:
-                  ${car[3]}
-
-                </div>
-
-              </div>
-
-
-              <button
-                class="btn buy"
-                onclick="buyCar(${i})"
-                ${unlocked ? "" : "disabled"}
-              >
-
-                ${
-                  unlocked
-                  ? money(cost)
-                  : "LOCKED"
-                }
-
-              </button>
-
-            </div>
-
+          <div class="itemArt tileBusiness">
+            <div class="tileShape"></div>
           </div>
 
-          `;
-
-        }
-      ).join("");
-
-  }
-
-
-
-  /* =====================
-     HOUSES
-  ===================== */
-
-  const housesEl =
-    document.getElementById(
-      "housesList"
-    );
-
-
-  if(housesEl){
-
-    housesEl.innerHTML =
-
-      HOUSES.map(
-        (house,i)=>{
-
-          const cost =
-            Math.floor(
-
-              house[1] *
-
-              Math.pow(
-                1.15,
-                s.houses[i]
-              )
-
-            );
-
-
-          const unlocked =
-            s.level >= house[3];
-
-
-          return `
-
-          <div class="card">
-
-            <div class="row">
-
-              <div>
-
-                <b>
-                  ${house[0]}
-                </b>
-
-                <div class="sub">
-
-                  Owned:
-                  ${s.houses[i]}
-
-                  <br>
-
-                  Income:
-                  +${money(house[2])}/s each
-
-                  <br>
-
-                  Required Level:
-                  ${house[3]}
-
-                </div>
-
-              </div>
-
-
-              <button
-                class="btn buy"
-                onclick="buyHouse(${i})"
-                ${unlocked ? "" : "disabled"}
-              >
-
-                ${
-                  unlocked
-                  ? money(cost)
-                  : "LOCKED"
-                }
-
-              </button>
-
-            </div>
-
+          <div class="itemInfo">
+            <b>${x[0]}</b>
+            <span>Owned ${s.businesses[i]}</span>
+            <span class="money">+${money(x[2])}/s</span>
+            <span>Requires level ${x[3]}</span>
           </div>
 
-          `;
-
-        }
-      ).join("");
-
-  }
-
-
-
-  /* =====================
-     BUSINESSES
-  ===================== */
-
-  const businessEl =
-    document.getElementById(
-      "businessList"
-    );
-
-
-  if(businessEl){
-
-    businessEl.innerHTML =
-
-      B.map(
-        (b,i)=>{
-
-          const cost =
-            Math.floor(
-
-              b[1] *
-
-              Math.pow(
-                1.15,
-                s.owned[i]
-              )
-
-            );
-
-
-          return `
-
-          <div class="card">
-
-            <div class="row">
-
-              <div>
-
-                <b>
-                  ${b[0]}
-                </b>
-
-                <div class="sub">
-
-                  Owned:
-                  ${s.owned[i]}
-
-                  <br>
-
-                  Income:
-                  +${money(b[2])}/s each
-
-                </div>
-
-              </div>
-
-
-              <button
-                class="btn buy"
-                onclick="buyBusiness(${i})"
-              >
-
-                ${money(cost)}
-
-              </button>
-
-            </div>
-
-          </div>
-
-          `;
-
-        }
-      ).join("");
-
-  }
-
-
-
-  /* =====================
-     STATS
-  ===================== */
-
-  const totalBusinesses =
-    s.owned.reduce(
-      (a,b)=>a+b,
-      0
-    );
-
-
-  const totalCars =
-    s.cars.reduce(
-      (a,b)=>a+b,
-      0
-    );
-
-
-  const totalHouses =
-    s.houses.reduce(
-      (a,b)=>a+b,
-      0
-    );
-
-
-  const statsEl =
-    document.getElementById(
-      "bigStats"
-    );
-
-
-  if(statsEl){
-
-    statsEl.innerHTML = `
-
-      <div class="bigStat">
-
-        <small>
-          Total Earned
-        </small>
-
-        <b>
-          ${money(s.earned)}
-        </b>
-
-      </div>
-
-
-      <div class="bigStat">
-
-        <small>
-          Passive Income
-        </small>
-
-        <b>
-          ${money(income())}/s
-        </b>
-
-      </div>
-
-
-      <div class="bigStat">
-
-        <small>
-          Businesses
-        </small>
-
-        <b>
-          ${totalBusinesses}
-        </b>
-
-      </div>
-
-
-      <div class="bigStat">
-
-        <small>
-          Vehicles
-        </small>
-
-        <b>
-          ${totalCars}
-        </b>
-
-      </div>
-
-
-      <div class="bigStat">
-
-        <small>
-          Properties
-        </small>
-
-        <b>
-          ${totalHouses}
-        </b>
-
-      </div>
-
-
-      <div class="bigStat">
-
-        <small>
-          Prestige
-        </small>
-
-        <b>
-          ${s.prestige}
-        </b>
-
-      </div>
-
-    `;
-
-  }
-
-
-  const statsSummary =
-    document.getElementById(
-      "statsSummary"
-    );
-
-
-  if(statsSummary){
-
-    statsSummary.textContent =
-
-      "You currently own " +
-
-      totalBusinesses +
-
-      " businesses, " +
-
-      totalCars +
-
-      " vehicles and " +
-
-      totalHouses +
-
-      " properties. Your empire generates " +
-
-      money(income()) +
-
-      " every second.";
-
-  }
-
-
-
-  /* =====================
-     MISSIONS
-  ===================== */
-
-  const missionsEl =
-    document.getElementById(
-      "missionList"
-    );
-
-
-  if(missionsEl){
-
-    const missions = [
-
-      [
-        "First Hustle",
-        s.earned,
-        100
-      ],
-
-      [
-        "First Business",
-        totalBusinesses,
-        1
-      ],
-
-      [
-        "First Vehicle",
-        totalCars,
-        1
-      ],
-
-      [
-        "First Property",
-        totalHouses,
-        1
-      ],
-
-      [
-        "First $1K",
-        s.earned,
-        1000
-      ],
-
-      [
-        "Getting Serious",
-        s.level,
-        10
-      ],
-
-      [
-        "Big Player",
-        s.earned,
-        100000
-      ]
-
-    ];
-
-
-    missionsEl.innerHTML =
-
-      missions.map(
-        m=>{
-
-          const percent =
-
-            Math.min(
-              100,
-              (m[1] / m[2]) * 100
-            );
-
-
-          return `
-
-          <div class="card">
-
-            <div class="row">
-
-              <b>
-                ${m[0]}
-              </b>
-
-              <span>
-                ${Math.floor(percent)}%
-              </span>
-
-            </div>
-
-
-            <div class="bar">
-
-              <i
-                style="width:${percent}%"
-              ></i>
-
-            </div>
-
-
-            <div class="sub">
-
-              ${money(m[1])}
-              /
-              ${money(m[2])}
-
-            </div>
-
-          </div>
-
-          `;
-
-        }
-      ).join("");
-
-  }
-
-
-
-  /* =====================
-     ACHIEVEMENTS
-  ===================== */
-
-  const achievementEl =
-    document.getElementById(
-      "achievementList"
-    );
-
-
-  if(achievementEl){
-
-    const achievements = [
-
-      [
-        "First $100",
-        s.earned >= 100
-      ],
-
-      [
-        "First Business",
-        totalBusinesses >= 1
-      ],
-
-      [
-        "First Vehicle",
-        totalCars >= 1
-      ],
-
-      [
-        "First Property",
-        totalHouses >= 1
-      ],
-
-      [
-        "Money Maker",
-        s.earned >= 1000
-      ],
-
-      [
-        "Level 10",
-        s.level >= 10
-      ],
-
-      [
-        "St. Louis Legend",
-        s.earned >= 100000
-      ]
-
-    ];
-
-
-    achievementEl.innerHTML =
-
-      achievements.map(
-        a=>`
-
-        <div class="card">
-
-          <div class="row">
-
-            <div>
-
-              <b>
-                ${a[0]}
-              </b>
-
-              <div class="sub">
-
-                ${
-                  a[1]
-                  ? "Achievement unlocked"
-                  : "Keep grinding to unlock"
-                }
-
-              </div>
-
-            </div>
-
-
-            <button
-              class="btn"
-              disabled
-            >
-
-              ${
-                a[1]
-                ? "UNLOCKED"
-                : "LOCKED"
-              }
-
-            </button>
-
-          </div>
+          <button class="buy"
+            onclick="buyItem('business',${i})"
+            ${s.level<x[3]||s.cash<price?"disabled":""}>
+            ${money(price)}
+          </button>
 
         </div>
 
-        `
-      ).join("");
-
-  }
-
+      </div>`;
+    }).join("");
+}
 
 
-  /* =====================
-     DAILY
-  ===================== */
+/* INVESTMENTS */
 
-  const dailyReward =
-    document.getElementById(
-      "dailyReward"
-    );
+function renderInvestments(){
 
+  document.getElementById("portfolioIncome").textContent=
+    money(investmentIncome())+"/s passive income";
 
-  if(dailyReward){
+  document.getElementById("investmentList").innerHTML=
+    INVESTMENTS.map((x,i)=>{
 
-    const today =
-      Math.floor(
-        Date.now() /
-        86400000
-      );
+      let price=x[1]*Math.pow(1.15,s.investments[i]);
 
+      return `
+      <div class="item">
 
-    const reward =
-      100 +
-      s.level * 25;
+        <div class="itemArt tileInvest">
+          <div class="tileShape"></div>
+        </div>
 
+        <div class="itemInfo">
+          <b>${x[0]}</b>
+          <span>Owned ${s.investments[i]}</span>
+          <span class="money">+${money(x[2])}/s</span>
+          <span>Level ${x[3]}</span>
+        </div>
 
-    if(s.daily === today){
+        <button class="buy"
+          onclick="buyItem('investment',${i})"
+          ${s.level<x[3]||s.cash<price?"disabled":""}>
+          INVEST
+        </button>
 
-      dailyReward.textContent =
-        "Already claimed today.";
-
-    }else{
-
-      dailyReward.textContent =
-        "Available reward: " +
-        money(reward);
-
-    }
-
-  }
+      </div>`;
+    }).join("");
+}
 
 
+/* RARE */
 
-  /* =====================
-     CHARACTER
-  ===================== */
+function renderRare(){
 
-  const characterEl =
-    document.getElementById(
-      "characterList"
-    );
+  document.getElementById("rareList").innerHTML=
+    RARE.map((x,i)=>{
 
+      let price=x[1]*Math.pow(1.15,s.rareIncome[i]);
 
-  if(characterEl){
+      return `
+      <div class="card">
 
-    const upgrades = [
+        <div class="item">
 
-      [
-        "Hard Worker",
-        "Increase manual work income by 20% per level.",
-        250,
-        0
-      ],
-
-      [
-        "Better Business",
-        "Increase business income by 25% per level.",
-        2500,
-        1
-      ],
-
-      [
-        "Street Hustle",
-        "Improve future grind bonuses.",
-        15000,
-        2
-      ]
-
-    ];
-
-
-    characterEl.innerHTML =
-
-      upgrades.map(
-        u=>{
-
-          const cost =
-
-            Math.floor(
-
-              u[2] *
-
-              Math.pow(
-                2,
-                s.up[u[3]]
-              )
-
-            );
-
-
-          return `
-
-          <div class="card">
-
-            <div class="row">
-
-              <div>
-
-                <b>
-                  ${u[0]}
-                  · Lv ${s.up[u[3]]}
-                </b>
-
-                <div class="sub">
-                  ${u[1]}
-                </div>
-
-              </div>
-
-
-              <button
-                class="btn buy"
-                onclick="upgrade(${u[3]})"
-              >
-
-                ${money(cost)}
-
-              </button>
-
-            </div>
-
+          <div class="itemArt tileRare">
+            <div class="tileShape"></div>
           </div>
 
-          `;
+          <div class="itemInfo">
+            <b>${x[0]}</b>
+            <span>Owned ${s.rareIncome[i]}</span>
+            <span class="money">+${money(x[2])}/s</span>
+            <span>Level ${x[3]}</span>
+          </div>
 
-        }
-      ).join("");
+          <button class="buy goldBtn"
+            onclick="buyItem('rare',${i})"
+            ${s.level<x[3]||s.cash<price?"disabled":""}>
+            BUY
+          </button>
 
+        </div>
+
+      </div>`;
+    }).join("");
+}
+
+
+/* JOBS */
+
+function renderJobs(){
+
+  const current=JOBS[s.job];
+
+  document.getElementById("jobTitle").textContent=current[0];
+  document.getElementById("jobLevel").textContent=s.jobLevel;
+
+  document.getElementById("jobProgress").style.width=
+    s.jobXP+"%";
+
+  document.getElementById("jobList").innerHTML=
+    JOBS.map((j,i)=>{
+
+      let locked=s.level<j[2];
+
+      return `
+      <div class="item">
+
+        <div class="itemArt tileJob">
+          <div class="tileShape"></div>
+        </div>
+
+        <div class="itemInfo">
+          <b>${j[0]}</b>
+          <span>Level ${j[2]}</span>
+          <span class="money">${money(j[1])} per work</span>
+        </div>
+
+        <button class="buy"
+          onclick="chooseJob(${i})"
+          ${locked?"disabled":""}>
+          ${locked?"LOCKED":"SELECT"}
+        </button>
+
+      </div>`;
+    }).join("");
+}
+
+
+/* MAP */
+
+function renderMap(){
+
+  document.getElementById("mapList").innerHTML=
+    DISTRICTS.map((d,i)=>{
+
+      let unlocked=s.level>=d[1];
+
+      return `
+      <div class="card">
+
+        <div class="cardHead">
+
+          <div>
+            <b>${d[0]}</b>
+            <div class="muted">
+              ${unlocked?"District unlocked":"Requires level "+d[1]}
+            </div>
+          </div>
+
+          <button class="buy ${unlocked?"greenBtn":""}" disabled>
+            ${unlocked?"UNLOCKED":"LOCKED"}
+          </button>
+
+        </div>
+
+      </div>`;
+    }).join("");
+}
+
+
+/* MISSIONS */
+
+function renderMissions(){
+
+  const missions=[
+    ["First $1,000","Earn $1,000 total",s.earned>=1000,500],
+    ["First Business","Own 1 business",s.businesses.reduce((a,b)=>a+b,0)>=1,1000],
+    ["First Vehicle","Own 1 vehicle",s.cars.reduce((a,b)=>a+b,0)>=1,750],
+    ["First Property","Own 1 property",s.houses.reduce((a,b)=>a+b,0)>=1,1000],
+    ["Level Up","Reach level 10",s.level>=10,2500],
+    ["Big Spender","Spend your way to $100K earned",s.earned>=100000,5000]
+  ];
+
+  document.getElementById("missionList").innerHTML=
+    missions.map(m=>`
+
+      <div class="card">
+
+        <div class="cardHead">
+          <div>
+            <b>${m[0]}</b>
+            <div class="muted">${m[1]}</div>
+          </div>
+
+          <span class="${m[2]?"money":"muted"}">
+            ${m[2]?"COMPLETED":"IN PROGRESS"}
+          </span>
+        </div>
+
+        <div class="money">Reward ${money(m[3])}</div>
+
+      </div>
+
+    `).join("");
+}
+
+
+/* ACHIEVEMENTS */
+
+function renderAchievements(){
+
+  const achievements=[
+    ["First $100","Earn $100",s.earned>=100],
+    ["First Business","Own a business",s.businesses.some(x=>x>0)],
+    ["First Vehicle","Own a vehicle",s.cars.some(x=>x>0)],
+    ["First Property","Own property",s.houses.some(x=>x>0)],
+    ["Money Maker","Earn $10,000",s.earned>=10000],
+    ["Level 10","Reach level 10",s.level>=10],
+    ["St. Louis Legend","Earn $100,000",s.earned>=100000]
+  ];
+
+  document.getElementById("achievementList").innerHTML=
+    achievements.map(a=>`
+
+      <div class="card">
+
+        <div class="cardHead">
+          <div>
+            <b>${a[0]}</b>
+            <div class="muted">${a[1]}</div>
+          </div>
+
+          <button class="buy ${a[2]?"greenBtn":""}" disabled>
+            ${a[2]?"UNLOCKED":"LOCKED"}
+          </button>
+        </div>
+
+      </div>
+
+    `).join("");
+}
+
+
+/* CHARACTER */
+
+function renderCharacter(){
+
+  document.getElementById("charLevel").textContent=s.level;
+  document.getElementById("xp").textContent=s.xp;
+  document.getElementById("xpBar").style.width=s.xp+"%";
+
+  const upgrades=[
+    ["Hard Worker","Increase work pay","hard",500],
+    ["Better Business","Increase business income","business",1000],
+    ["Street Hustle","Increase job pay","hustle",2500]
+  ];
+
+  document.getElementById("upgradeList").innerHTML=
+    upgrades.map(u=>{
+
+      let cost=u[3]*Math.pow(2,s.up[u[2]]);
+
+      return `
+      <div class="card">
+
+        <div class="cardHead">
+
+          <div>
+            <b>${u[0]}</b>
+            <div class="muted">${u[1]}</div>
+            <div class="money">Level ${s.up[u[2]]}</div>
+          </div>
+
+          <button class="buy"
+            onclick="upgrade('${u[2]}')"
+            ${s.cash<cost?"disabled":""}>
+            ${money(cost)}
+          </button>
+
+        </div>
+
+      </div>`;
+    }).join("");
+}
+
+
+/* STATS */
+
+function renderStats(){
+
+  let businesses=s.businesses.reduce((a,b)=>a+b,0);
+  let cars=s.cars.reduce((a,b)=>a+b,0);
+  let houses=s.houses.reduce((a,b)=>a+b,0);
+  let investments=s.investments.reduce((a,b)=>a+b,0);
+  let rare=s.rareIncome.reduce((a,b)=>a+b,0);
+
+  document.getElementById("statsList").innerHTML=`
+
+    <div class="card">
+      <div class="cardHead">
+        <b>Total Earned</b>
+        <span class="gold">${money(s.earned)}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardHead">
+        <b>Passive Income</b>
+        <span class="money">${money(income())}/s</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardHead">
+        <b>Businesses</b>
+        <span>${businesses}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardHead">
+        <b>Vehicles</b>
+        <span>${cars}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardHead">
+        <b>Properties</b>
+        <span>${houses}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardHead">
+        <b>Investments</b>
+        <span>${investments}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardHead">
+        <b>Rare Assets</b>
+        <span>${rare}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardHead">
+        <b>Prestige</b>
+        <span class="gold">${prestigeMultiplier().toFixed(1)}x</span>
+      </div>
+    </div>
+
+  `;
+}
+
+
+/* DAILY */
+
+function renderDaily(){
+
+  let reward=100+s.level*25;
+
+  document.getElementById("dailyReward").textContent=
+    money(reward);
+
+  const today=new Date().toDateString();
+
+  if(s.dailyClaimed===today){
+
+    document.getElementById("dailyButton").disabled=true;
+    document.getElementById("dailyButton").textContent="CLAIMED";
+
+    document.getElementById("dailyStatus").textContent=
+      "Come back tomorrow.";
+
+  }else{
+
+    document.getElementById("dailyButton").disabled=false;
+    document.getElementById("dailyButton").textContent="CLAIM REWARD";
+
+    document.getElementById("dailyStatus").textContent=
+      "Your reward is ready.";
   }
+}
 
 
+/* PRESTIGE */
 
-  /* =====================
-     PRESTIGE PAGE
-  ===================== */
+function renderPrestige(){
 
-  const prestigePage =
-    document.getElementById(
-      "prestigePage"
-    );
+  document.getElementById("prestigeBig").textContent=
+    prestigeMultiplier().toFixed(1)+"x";
+}
 
 
-  if(prestigePage){
+/* ALL RENDER */
 
-    prestigePage.textContent =
+function render(){
 
-      "Current multiplier: " +
-
-      (1 + s.prestige * .5)
-        .toFixed(1) +
-
-      "×";
-
-  }
+  renderTop();
+  renderCars();
+  renderHouses();
+  renderBusinesses();
+  renderJobs();
+  renderInvestments();
+  renderRare();
+  renderMap();
+  renderMissions();
+  renderAchievements();
+  renderCharacter();
+  renderStats();
+  renderDaily();
+  renderPrestige();
 
 }
 
 
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showMessage(text){
-
-  const box =
-    document.getElementById(
-      "toast"
-    );
-
-
-  box.textContent =
-    text;
-
-
-  box.classList.add(
-    "show"
-  );
-
-
-  clearTimeout(
-    window.toastTimer
-  );
-
-
-  window.toastTimer =
-
-    setTimeout(
-      ()=>{
-
-        box.classList.remove(
-          "show"
-        );
-
-      },
-      1700
-    );
-
-}
-
-
-
-/* =========================================================
-   PASSIVE INCOME
-========================================================= */
-
-let lastIncomeTick =
-  Date.now();
-
-
-let incomeSaveTimer =
-  0;
-
+/* PASSIVE INCOME */
 
 setInterval(()=>{
 
-  const now =
-    Date.now();
+  const inc=income();
 
+  if(inc>0){
 
-  const elapsed =
-
-    Math.min(
-      2,
-      (now - lastIncomeTick) / 1000
-    );
-
-
-  lastIncomeTick =
-    now;
-
-
-  const rate =
-    income();
-
-
-  if(rate <= 0)
-    return;
-
-
-  const amount =
-    rate * elapsed;
-
-
-  s.cash += amount;
-
-  s.earned += amount;
-
-
-  s.xp += Math.max(
-    1,
-    Math.floor(
-      amount / 10
-    )
-  );
-
-
-  let leveledUp =
-    false;
-
-
-  while(s.xp >= 100){
-
-    s.xp -= 100;
-
-    s.level++;
-
-    leveledUp =
-      true;
+    s.cash+=inc;
+    s.earned+=inc;
 
   }
 
-
-  updateStats();
-
-
-  incomeSaveTimer +=
-    elapsed;
-
-
-  if(incomeSaveTimer >= 5){
-
-    save();
-
-    incomeSaveTimer = 0;
-
-  }
-
-
-  if(leveledUp){
-
-    render();
-
-    showMessage(
-      "LEVEL UP! Level " +
-      s.level
-    );
-
-  }
-
+  renderTop();
 
 },1000);
 
 
+/* AUTOSAVE */
 
-/* =========================================================
-   SAVE WHEN LEAVING
-========================================================= */
-
-window.addEventListener(
-  "pagehide",
-  save
-);
+setInterval(()=>{
+  save();
+},5000);
 
 
-document.addEventListener(
-  "visibilitychange",
-  ()=>{
-
-    if(
-      document.visibilityState ===
-      "hidden"
-    ){
-
-      save();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   START GAME
-========================================================= */
+/* START */
 
 render();
 
